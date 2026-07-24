@@ -1,0 +1,213 @@
+{
+  "profile": {
+    "name": "Nebiyu Mekonnen",
+    "location": "Washington State, USA",
+    "credly": "https://www.credly.com/users/nebiyu-mekonnen",
+    "github": "https://github.com/nebiyumekonnen17",
+    "email": null,
+    "linkedin": null,
+    "resumeUrl": null,
+    "portrait": "/assets/profile/nebiyu_primary_portrait.png"
+  },
+  "positioning": [
+    "Full Stack Software Engineer",
+    "AWS Cloud Builder",
+    "AI Engineering",
+    "Product and System Architecture"
+  ],
+  "projects": [
+    {
+      "slug": "degissnap",
+      "name": "DegisSnap",
+      "status": "Production",
+      "category": [
+        "AWS",
+        "SaaS",
+        "Full Stack"
+      ],
+      "summary": "Event photo sharing platform with QR guest uploads, private galleries, moderation, slideshow, guestbook, engagement, analytics, and host management.",
+      "thumbnail": "/assets/projects/DegisSnap-thumbnail.png",
+      "technologies": [
+        "React",
+        "Vite",
+        "AWS Amplify",
+        "Amazon Cognito",
+        "AWS AppSync",
+        "Amazon DynamoDB",
+        "Amazon S3",
+        "GraphQL"
+      ],
+      "liveUrl": "https://oregon-production.dul3f7qusupwk.amplifyapp.com",
+      "repositoryUrl": "https://github.com/nebiyumekonnen17/DegisSnap",
+      "aws": {
+        "productionRegion": "us-west-2",
+        "services": [
+          "AWS Amplify",
+          "Amazon Cognito",
+          "AWS AppSync",
+          "Amazon DynamoDB",
+          "Amazon S3"
+        ]
+      },
+      "evidence": [
+        "Production AWS deployment",
+        "Reported milestone of 164 passing tests"
+      ]
+    },
+    {
+      "slug": "naep",
+      "name": "NAEP",
+      "status": "Active Build",
+      "category": [
+        "AI",
+        "Engineering Platform"
+      ],
+      "summary": "Provider agnostic, local first AI engineering platform for working across local and cloud model providers, workflows, knowledge, tools, and engineering automation.",
+      "thumbnail": "/assets/projects/NAEP-thumbnail.png",
+      "technologies": [
+        "TypeScript",
+        "Python",
+        "Ollama",
+        "AI orchestration"
+      ],
+      "liveUrl": null,
+      "repositoryUrl": null,
+      "evidence": [
+        "Reported milestone of 121 passing tests"
+      ]
+    },
+    {
+      "slug": "nehas-digital-signage",
+      "name": "Nehas Digital Signage",
+      "status": "Active Build",
+      "category": [
+        "AWS",
+        "Enterprise SaaS",
+        "Digital Signage"
+      ],
+      "summary": "New AWS native digital signage platform for screen fleets, content, scheduling, publishing, monitoring, device operations, and configurable enterprise workflows.",
+      "thumbnail": "/assets/projects/Nehas-Digital-Signage-thumbnail.png",
+      "technologies": [
+        "AWS",
+        "AWS AppConfig",
+        "Digital signage architecture"
+      ],
+      "liveUrl": null,
+      "repositoryUrl": null,
+      "notes": "New AWS native build in us west 2. Old Supabase system is reference only."
+    },
+    {
+      "slug": "fsss-limat-pos",
+      "name": "FSSS Limat POS",
+      "status": "Built",
+      "category": [
+        "Business Software",
+        "POS",
+        "Inventory"
+      ],
+      "summary": "Point of sale and inventory system with barcode scanning, loyalty, receipts, reporting, roles, inventory history, hold sales, and offline POS queue support.",
+      "thumbnail": "/assets/projects/FSSS-Limat-POS-thumbnail.png",
+      "technologies": [
+        "Node.js",
+        "MariaDB",
+        "PWA"
+      ],
+      "liveUrl": null,
+      "repositoryUrl": null
+    },
+    {
+      "slug": "tibeb-market",
+      "name": "Tibeb Market",
+      "status": "Development",
+      "category": [
+        "Marketplace",
+        "Ecommerce",
+        "Product Architecture"
+      ],
+      "summary": "Global multi vendor marketplace connecting Ethiopian designers, artisans, boutiques, and tailors with customers worldwide.",
+      "thumbnail": "/assets/projects/Tibeb-Market-thumbnail.png",
+      "technologies": [
+        "Marketplace architecture",
+        "Multilingual product design"
+      ],
+      "liveUrl": null,
+      "repositoryUrl": null
+    },
+    {
+      "slug": "aradacart",
+      "name": "AradaCart",
+      "status": "Architecture",
+      "category": [
+        "Telegram",
+        "Commerce",
+        "SaaS"
+      ],
+      "summary": "Telegram first B2B commerce platform designed around Mini App storefronts, merchant dashboards, catalog, orders, payments, inventory, subscriptions, and analytics.",
+      "thumbnail": "/assets/projects/AradaCart-thumbnail.png",
+      "technologies": [
+        "Telegram Mini App",
+        "AWS architecture",
+        "Commerce platform"
+      ],
+      "liveUrl": null,
+      "repositoryUrl": null
+    }
+  ],
+  "credentials": [
+    {
+      "name": "AWS re/Start Graduate",
+      "issuer": "Amazon Web Services",
+      "featured": true
+    },
+    {
+      "name": "AWS Skills Center Cloud Practitioner Foundations",
+      "issuer": "Amazon Web Services",
+      "featured": true
+    },
+    {
+      "name": "Career Management Essentials",
+      "issuer": "IBM SkillsBuild",
+      "featured": false
+    },
+    {
+      "name": "Computer Hardware Basics",
+      "issuer": "Cisco",
+      "featured": false
+    },
+    {
+      "name": "Explore Emerging Tech",
+      "issuer": "IBM SkillsBuild",
+      "featured": false
+    },
+    {
+      "name": "IBM Cloud Essentials",
+      "issuer": "IBM SkillsBuild",
+      "featured": true
+    },
+    {
+      "name": "Introduction to Cybersecurity",
+      "issuer": "Cisco",
+      "featured": true
+    },
+    {
+      "name": "Operating Systems Basics",
+      "issuer": "Cisco",
+      "featured": false
+    },
+    {
+      "name": "Project Management Fundamentals",
+      "issuer": "IBM SkillsBuild",
+      "featured": true
+    },
+    {
+      "name": "Python Essentials 1",
+      "issuer": "Cisco",
+      "featured": true
+    }
+  ],
+  "awsTrainingCertificates": [
+    "AWS Skills Centers: Becoming a Cloud Practitioner Part 2, Compute, Networking, and Account Strategies",
+    "AWS Skills Centers: Becoming a Cloud Practitioner Part 3, Identities, Security, and Monitoring the AWS Cloud",
+    "AWS Skills Centers: Becoming a Cloud Practitioner Part 4, Advanced Cloud Services"
+  ]
+}
