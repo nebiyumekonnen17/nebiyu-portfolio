@@ -8,7 +8,7 @@ export function ScreenshotGallery({ screenshots }: { screenshots: ScreenshotItem
     <div className="grid gap-4 sm:grid-cols-2">
       {screenshots.map((shot) => (
         <figure key={shot.src + shot.caption} className="rounded-xl border border-border overflow-hidden bg-surface">
-          <div className="relative aspect-[16/10]">
+          <div className="relative aspect-square">
             <Image src={shot.src} alt={shot.alt} fill sizes="(min-width: 640px) 50vw, 100vw" className="object-cover" />
           </div>
           <figcaption className="px-4 py-3 text-xs text-fg-muted leading-relaxed">{shot.caption}</figcaption>

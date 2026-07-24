@@ -18,7 +18,7 @@ export function ProjectCard({ project, priority = false }: { project: Project; p
         accent.hoverBorder
       )}
     >
-      <div className="relative aspect-[16/10] overflow-hidden bg-surface">
+      <div className="relative aspect-square overflow-hidden bg-surface">
         <Image
           src={project.thumbnail}
           alt={project.thumbnailAlt}

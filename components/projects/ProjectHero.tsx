@@ -72,7 +72,7 @@ export function ProjectHero({ project }: { project: Project }) {
             </div>
           </div>
 
-          <div className={`relative aspect-[4/3] w-full overflow-hidden rounded-2xl border ${accent.borderSoft}`}>
+          <div className={`relative aspect-square w-full overflow-hidden rounded-2xl border ${accent.borderSoft}`}>
             <Image
               src={project.thumbnail}
               alt={project.thumbnailAlt}
