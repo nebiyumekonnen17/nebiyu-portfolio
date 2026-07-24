@@ -1,0 +1,306 @@
+{
+  "notice": "These are AI-generated concept UI gallery assets created for Nebiyu Mekonnen's portfolio. They are not verified screenshots of live products. Label them as Concept UI or replace them with real screenshots before presenting them as product evidence.",
+  "source_sheet": "a_high_resolution_mockup_collage_image_of_multiple.png",
+  "projects": {
+    "DegisSnap": [
+      {
+        "file": "DegisSnap/01-guest-landing-qr-scan-concept.png",
+        "title": "Guest Landing QR Scan",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "DegisSnap concept UI showing guest landing qr scan"
+      },
+      {
+        "file": "DegisSnap/02-event-gallery-concept.png",
+        "title": "Event Gallery",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "DegisSnap concept UI showing event gallery"
+      },
+      {
+        "file": "DegisSnap/03-upload-photos-guest-concept.png",
+        "title": "Upload Photos Guest",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "DegisSnap concept UI showing upload photos guest"
+      },
+      {
+        "file": "DegisSnap/04-slideshow-view-concept.png",
+        "title": "Slideshow View",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "DegisSnap concept UI showing slideshow view"
+      },
+      {
+        "file": "DegisSnap/05-guestbook-and-messages-concept.png",
+        "title": "Guestbook and Messages",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "DegisSnap concept UI showing guestbook and messages"
+      },
+      {
+        "file": "DegisSnap/06-host-dashboard-overview-concept.png",
+        "title": "Host Dashboard Overview",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "DegisSnap concept UI showing host dashboard overview"
+      },
+      {
+        "file": "DegisSnap/07-media-management-concept.png",
+        "title": "Media Management",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "DegisSnap concept UI showing media management"
+      },
+      {
+        "file": "DegisSnap/08-analytics-and-insights-concept.png",
+        "title": "Analytics and Insights",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "DegisSnap concept UI showing analytics and insights"
+      }
+    ],
+    "NAEP": [
+      {
+        "file": "NAEP/01-dashboard-overview-concept.png",
+        "title": "Dashboard Overview",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "NAEP concept UI showing dashboard overview"
+      },
+      {
+        "file": "NAEP/02-ai-orchestrator-concept.png",
+        "title": "AI Orchestrator",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "NAEP concept UI showing ai orchestrator"
+      },
+      {
+        "file": "NAEP/03-chat-with-ai-multi-model-concept.png",
+        "title": "Chat with AI Multi Model",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "NAEP concept UI showing chat with ai multi model"
+      },
+      {
+        "file": "NAEP/04-workflows-concept.png",
+        "title": "Workflows",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "NAEP concept UI showing workflows"
+      },
+      {
+        "file": "NAEP/05-knowledge-base-concept.png",
+        "title": "Knowledge Base",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "NAEP concept UI showing knowledge base"
+      },
+      {
+        "file": "NAEP/06-agents-concept.png",
+        "title": "Agents",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "NAEP concept UI showing agents"
+      },
+      {
+        "file": "NAEP/07-model-providers-concept.png",
+        "title": "Model Providers",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "NAEP concept UI showing model providers"
+      },
+      {
+        "file": "NAEP/08-settings-and-preferences-concept.png",
+        "title": "Settings and Preferences",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "NAEP concept UI showing settings and preferences"
+      }
+    ],
+    "Nehas Digital Signage": [
+      {
+        "file": "Nehas-Digital-Signage/01-overview-dashboard-concept.png",
+        "title": "Overview Dashboard",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "Nehas Digital Signage concept UI showing overview dashboard"
+      },
+      {
+        "file": "Nehas-Digital-Signage/02-screen-map-and-floor-plan-concept.png",
+        "title": "Screen Map and Floor Plan",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "Nehas Digital Signage concept UI showing screen map and floor plan"
+      },
+      {
+        "file": "Nehas-Digital-Signage/03-screen-details-concept.png",
+        "title": "Screen Details",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "Nehas Digital Signage concept UI showing screen details"
+      },
+      {
+        "file": "Nehas-Digital-Signage/04-media-library-concept.png",
+        "title": "Media Library",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "Nehas Digital Signage concept UI showing media library"
+      },
+      {
+        "file": "Nehas-Digital-Signage/05-playlists-concept.png",
+        "title": "Playlists",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "Nehas Digital Signage concept UI showing playlists"
+      },
+      {
+        "file": "Nehas-Digital-Signage/06-campaigns-concept.png",
+        "title": "Campaigns",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "Nehas Digital Signage concept UI showing campaigns"
+      },
+      {
+        "file": "Nehas-Digital-Signage/07-schedules-concept.png",
+        "title": "Schedules",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "Nehas Digital Signage concept UI showing schedules"
+      },
+      {
+        "file": "Nehas-Digital-Signage/08-publishing-and-monitoring-concept.png",
+        "title": "Publishing and Monitoring",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "Nehas Digital Signage concept UI showing publishing and monitoring"
+      }
+    ],
+    "FSSS Limat POS": [
+      {
+        "file": "FSSS-Limat-POS/01-pos-checkout-concept.png",
+        "title": "POS Checkout",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "FSSS Limat POS concept UI showing pos checkout"
+      },
+      {
+        "file": "FSSS-Limat-POS/02-product-search-and-scan-concept.png",
+        "title": "Product Search and Scan",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "FSSS Limat POS concept UI showing product search and scan"
+      },
+      {
+        "file": "FSSS-Limat-POS/03-inventory-management-concept.png",
+        "title": "Inventory Management",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "FSSS Limat POS concept UI showing inventory management"
+      },
+      {
+        "file": "FSSS-Limat-POS/04-sales-history-concept.png",
+        "title": "Sales History",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "FSSS Limat POS concept UI showing sales history"
+      },
+      {
+        "file": "FSSS-Limat-POS/05-reports-and-analytics-concept.png",
+        "title": "Reports and Analytics",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "FSSS Limat POS concept UI showing reports and analytics"
+      },
+      {
+        "file": "FSSS-Limat-POS/06-customers-and-loyalty-concept.png",
+        "title": "Customers and Loyalty",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "FSSS Limat POS concept UI showing customers and loyalty"
+      },
+      {
+        "file": "FSSS-Limat-POS/07-held-sales-concept.png",
+        "title": "Held Sales",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "FSSS Limat POS concept UI showing held sales"
+      },
+      {
+        "file": "FSSS-Limat-POS/08-user-management-concept.png",
+        "title": "User Management",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "FSSS Limat POS concept UI showing user management"
+      }
+    ],
+    "Tibeb Market": [
+      {
+        "file": "Tibeb-Market/01-homepage-concept.png",
+        "title": "Homepage",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "Tibeb Market concept UI showing homepage"
+      },
+      {
+        "file": "Tibeb-Market/02-product-listing-concept.png",
+        "title": "Product Listing",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "Tibeb Market concept UI showing product listing"
+      },
+      {
+        "file": "Tibeb-Market/03-product-details-concept.png",
+        "title": "Product Details",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "Tibeb Market concept UI showing product details"
+      },
+      {
+        "file": "Tibeb-Market/04-seller-dashboard-concept.png",
+        "title": "Seller Dashboard",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "Tibeb Market concept UI showing seller dashboard"
+      },
+      {
+        "file": "Tibeb-Market/05-orders-and-tracking-concept.png",
+        "title": "Orders and Tracking",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "Tibeb Market concept UI showing orders and tracking"
+      },
+      {
+        "file": "Tibeb-Market/06-returns-and-refunds-concept.png",
+        "title": "Returns and Refunds",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "Tibeb Market concept UI showing returns and refunds"
+      },
+      {
+        "file": "Tibeb-Market/07-measurements-family-concept.png",
+        "title": "Measurements Family",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "Tibeb Market concept UI showing measurements family"
+      },
+      {
+        "file": "Tibeb-Market/08-account-settings-concept.png",
+        "title": "Account Settings",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "Tibeb Market concept UI showing account settings"
+      }
+    ],
+    "AradaCart": [
+      {
+        "file": "AradaCart/01-telegram-mini-app-shop-concept.png",
+        "title": "Telegram Mini App Shop",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "AradaCart concept UI showing telegram mini app shop"
+      },
+      {
+        "file": "AradaCart/02-product-catalog-concept.png",
+        "title": "Product Catalog",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "AradaCart concept UI showing product catalog"
+      },
+      {
+        "file": "AradaCart/03-cart-and-checkout-concept.png",
+        "title": "Cart and Checkout",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "AradaCart concept UI showing cart and checkout"
+      },
+      {
+        "file": "AradaCart/04-merchant-dashboard-concept.png",
+        "title": "Merchant Dashboard",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "AradaCart concept UI showing merchant dashboard"
+      },
+      {
+        "file": "AradaCart/05-orders-management-concept.png",
+        "title": "Orders Management",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "AradaCart concept UI showing orders management"
+      },
+      {
+        "file": "AradaCart/06-inventory-management-concept.png",
+        "title": "Inventory Management",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "AradaCart concept UI showing inventory management"
+      },
+      {
+        "file": "AradaCart/07-subscriptions-and-plans-concept.png",
+        "title": "Subscriptions and Plans",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "AradaCart concept UI showing subscriptions and plans"
+      },
+      {
+        "file": "AradaCart/08-analytics-and-reports-concept.png",
+        "title": "Analytics and Reports",
+        "type": "AI-generated concept UI",
+        "recommended_alt": "AradaCart concept UI showing analytics and reports"
+      }
+    ]
+  }
+}

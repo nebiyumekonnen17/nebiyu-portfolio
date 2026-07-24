@@ -75,9 +75,6 @@ export const projects: Project[] = [
       regionLabel: "Oregon",
       services: ["AWS Amplify", "Amazon Cognito", "AWS AppSync", "Amazon DynamoDB", "Amazon S3"],
     },
-    screenshots: [
-      { src: "/assets/projects/DegisSnap-thumbnail.png", alt: "DegisSnap gallery and guestbook interface", caption: "Guest gallery with story view and guestbook, shown on the primary reference mockup." },
-    ],
     challenges: [
       {
         title: "Letting guests contribute without an account",
@@ -145,9 +142,6 @@ export const projects: Project[] = [
       { title: "Workflows and agents", description: "Composable workflows and agents for engineering automation tasks." },
       { title: "Developer tooling", description: "Tooling aimed at developers building and debugging AI backed features." },
       { title: "Governance", description: "Controls over how engineering workflows are allowed to act, rather than open ended automation." },
-    ],
-    screenshots: [
-      { src: "/assets/projects/NAEP-thumbnail.png", alt: "NAEP dashboard with chat, agents, workflows, tools, and models navigation", caption: "NAEP dashboard, shown on the primary reference mockup." },
     ],
     challenges: [
       {
@@ -229,9 +223,6 @@ export const projects: Project[] = [
       regionLabel: "Oregon",
       services: ["AWS AppConfig"],
     },
-    screenshots: [
-      { src: "/assets/projects/Nehas-Digital-Signage-thumbnail.png", alt: "Nehas Digital Signage dashboard with screen counts, world map, and alerts", caption: "Fleet dashboard concept, shown on the primary reference mockup." },
-    ],
     challenges: [
       {
         title: "Designing for fleet scale from day one",
@@ -297,9 +288,6 @@ export const projects: Project[] = [
       { title: "Held sales", description: "Pause a transaction and resume it later without losing the cart." },
       { title: "Offline POS queue", description: "Sales continue during a connection drop and sync once it is back." },
     ],
-    screenshots: [
-      { src: "/assets/projects/FSSS-Limat-POS-thumbnail.png", alt: "FSSS Limat POS new sale screen with cart and payment button", caption: "Point of sale screen, shown on the primary reference mockup." },
-    ],
     challenges: [
       {
         title: "Keeping the register usable without internet",
@@ -363,9 +351,6 @@ export const projects: Project[] = [
       { title: "English and Amharic MVP", description: "Bilingual from the first release, with room for more Ethiopian languages later." },
       { title: "Dark mode and light mode", description: "Both themes supported from the start." },
     ],
-    screenshots: [
-      { src: "/assets/projects/Tibeb-Market-thumbnail.png", alt: "Tibeb Market product listing for traditional Ethiopian clothing", caption: "Storefront concept, shown on the primary reference mockup." },
-    ],
     challenges: [
       {
         title: "Designing sizing that actually works for traditional wear",
@@ -422,9 +407,6 @@ export const projects: Project[] = [
       { title: "Orders and payments", description: "Handles the transaction lifecycle for B2B purchases." },
       { title: "Subscriptions", description: "Merchant access to the platform is subscription based." },
       { title: "Analytics", description: "Gives merchants visibility into how their store is performing." },
-    ],
-    screenshots: [
-      { src: "/assets/projects/AradaCart-thumbnail.png", alt: "AradaCart Telegram Mini App storefront with product categories", caption: "Telegram Mini App concept, shown on the primary reference mockup." },
     ],
     challenges: [
       {

@@ -3,12 +3,13 @@ import { notFound } from "next/navigation";
 import { Lightbulb, Wrench, GraduationCap, Award } from "lucide-react";
 import { projects, getProjectBySlug, getAdjacentProjects } from "@/data/projects";
 import { credentials } from "@/data/credentials";
+import { getProjectGallery } from "@/data/galleries";
 import { ProjectHero } from "@/components/projects/ProjectHero";
 import { CaseStudySection } from "@/components/projects/CaseStudySection";
 import { FeatureGrid } from "@/components/projects/FeatureGrid";
 import { ArchitectureLayerCards } from "@/components/projects/ArchitectureLayerCards";
 import { ArchitectureDiagram } from "@/components/aws/ArchitectureDiagram";
-import { ScreenshotGallery } from "@/components/projects/ScreenshotGallery";
+import { ProjectGallery } from "@/components/projects/gallery/ProjectGallery";
 import { ProjectNav } from "@/components/projects/ProjectNav";
 import { TechChip } from "@/components/ui/TechChip";
 import { CredentialCard } from "@/components/credentials/CredentialCard";
@@ -45,6 +46,11 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
 
   const { previous, next } = getAdjacentProjects(slug);
   const relatedCredentials = credentials.filter((c) => project.relatedCredentialNames.includes(c.name));
+  const gallery = getProjectGallery(slug);
+  const galleryIntro =
+    project.status === "Production"
+      ? `These are AI generated concept UI images, not screenshots captured from the live production application. They illustrate the product direction alongside the real production evidence above.`
+      : `These are AI generated concept UI images showing how the ${project.name} experience is being designed. They are not screenshots of a finished product.`;
 
   return (
     <>
@@ -137,9 +143,10 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
         </CaseStudySection>
       )}
 
-      {project.screenshots.length > 0 && (
-        <CaseStudySection title="Screenshots and Evidence" muted>
-          <ScreenshotGallery screenshots={project.screenshots} />
+      {gallery.length > 0 && (
+        <CaseStudySection title="Product Gallery" muted>
+          <p className="text-sm text-fg-muted leading-relaxed mb-6">{galleryIntro}</p>
+          <ProjectGallery items={gallery} projectName={project.name} />
         </CaseStudySection>
       )}
 

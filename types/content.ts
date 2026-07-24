@@ -54,15 +54,27 @@ export interface ProjectAws {
   services: string[];
 }
 
-export interface ScreenshotItem {
-  src: string;
-  alt: string;
-  caption: string;
-}
-
 export interface ProjectChallenge {
   title: string;
   description: string;
+}
+
+export type GalleryAssetType =
+  | "Real Screenshot"
+  | "Concept UI"
+  | "Architecture"
+  | "Mobile View"
+  | "Dashboard"
+  | "Workflow";
+
+export interface ProjectGalleryItem {
+  src: string;
+  title: string;
+  alt: string;
+  caption: string;
+  type: GalleryAssetType;
+  isConcept: boolean;
+  isRealScreenshot: boolean;
 }
 
 export interface Project {
@@ -89,7 +101,6 @@ export interface Project {
   architecture?: ArchitectureLayer[];
   architectureNote?: string;
   aws?: ProjectAws;
-  screenshots: ScreenshotItem[];
   challenges: ProjectChallenge[];
   results: string[];
   learnings: string[];
