@@ -1,4 +1,4 @@
-export const profile = {
+﻿export const profile = {
   name: "Nebiyu Mekonnen",
   location: "Washington State, USA",
   positioning: [
@@ -29,7 +29,7 @@ export const profile = {
     "Solutions Engineer",
     "Technical Product Engineer",
   ],
-  portrait: "/assets/profile/nebiyu_primary_portrait.png",
+  portrait: "/nebiyu-portfolio/assets/profile/nebiyu_primary_portrait.png",
 };
 
 export const quickCredibility = [
@@ -38,3 +38,4 @@ export const quickCredibility = [
   { label: "Credentials & Certificates", value: "10+" },
   { label: "Full Stack, Cloud & AI Work", value: "3 Domains" },
 ];
+
