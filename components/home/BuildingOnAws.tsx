@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Rocket, ShieldCheck, Network, Database, Image as ImageIcon, Settings2, ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
+import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
 
 const services = [
   {
@@ -45,7 +46,7 @@ export function BuildingOnAws() {
   return (
     <section className="border-b border-border bg-surface">
       <Container className="py-14 md:py-16">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
+        <Reveal className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.14em] text-aws mb-2">
               Building on AWS
@@ -60,13 +61,13 @@ export function BuildingOnAws() {
           >
             Explore my AWS work <ArrowRight size={15} />
           </Link>
-        </div>
+        </Reveal>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+        <RevealGroup className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
           {services.map((service) => (
-            <div
+            <RevealItem
               key={service.name}
-              className="flex flex-col gap-2.5 rounded-xl border border-border bg-surface-elevated p-4"
+              className="flex flex-col gap-2.5 rounded-xl border border-border bg-surface-elevated p-4 transition-colors hover:border-border-strong"
             >
               <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-aws/15 text-aws">
                 <service.icon size={17} />
@@ -78,9 +79,9 @@ export function BuildingOnAws() {
               <span className="text-[10px] font-semibold uppercase tracking-wide text-fg-subtle mt-auto pt-1">
                 {service.tag}
               </span>
-            </div>
+            </RevealItem>
           ))}
-        </div>
+        </RevealGroup>
       </Container>
     </section>
   );

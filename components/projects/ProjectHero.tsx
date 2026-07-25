@@ -7,6 +7,7 @@ import { StatusBadge } from "@/components/ui/StatusBadge";
 import { TechChip } from "@/components/ui/TechChip";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { Reveal } from "@/components/ui/Reveal";
 import { accentClasses } from "@/lib/accent";
 
 export function ProjectHero({ project }: { project: Project }) {
@@ -22,7 +23,7 @@ export function ProjectHero({ project }: { project: Project }) {
           <ArrowLeft size={15} /> Back to Projects
         </Link>
 
-        <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+        <Reveal className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <div>
             <div className="flex items-center gap-3 mb-4">
               <StatusBadge status={project.status} />
@@ -82,7 +83,7 @@ export function ProjectHero({ project }: { project: Project }) {
               className="object-cover"
             />
           </div>
-        </div>
+        </Reveal>
       </Container>
     </section>
   );

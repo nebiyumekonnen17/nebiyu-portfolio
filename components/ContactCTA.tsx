@@ -2,6 +2,7 @@ import { ArrowRight, Mail, ExternalLink, MapPin } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/BrandIcons";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
+import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
 import { profile } from "@/data/profile";
 import { siteConfig } from "@/lib/config";
 
@@ -9,7 +10,7 @@ export function ContactBanner() {
   return (
     <section className="py-16 md:py-20">
       <Container>
-        <div className="rounded-3xl border border-gold/25 bg-gradient-to-br from-surface-elevated to-surface p-10 md:p-14 text-center">
+        <Reveal className="rounded-3xl border border-gold/25 bg-gradient-to-br from-surface-elevated to-surface p-10 md:p-14 text-center">
           <h2 className="text-2xl md:text-[32px] font-bold text-fg mb-3">
             Let&apos;s build something useful.
           </h2>
@@ -25,7 +26,7 @@ export function ContactBanner() {
               See my work
             </Button>
           </div>
-        </div>
+        </Reveal>
       </Container>
     </section>
   );
@@ -60,34 +61,37 @@ export function ContactChannels() {
   ].filter(Boolean) as { icon: React.ElementType; label: string; value: string; href: string }[];
 
   return (
-    <div className="grid gap-3 sm:grid-cols-2">
+    <RevealGroup className="grid gap-3 sm:grid-cols-2">
       {channels.map((channel) => (
-        <a
-          key={channel.label}
-          href={channel.href}
-          target={channel.href.startsWith("http") ? "_blank" : undefined}
-          rel={channel.href.startsWith("http") ? "noopener noreferrer" : undefined}
-          className="flex items-center gap-3 rounded-2xl border border-border bg-surface-elevated p-4 hover:border-gold/40 hover:bg-surface-elevated-hover transition-colors"
-        >
-          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gold/15 text-gold">
-            <channel.icon size={18} />
-          </span>
-          <div className="min-w-0">
-            <p className="text-xs text-fg-subtle">{channel.label}</p>
-            <p className="text-sm font-medium text-fg truncate">{channel.value}</p>
-          </div>
-        </a>
+        <RevealItem key={channel.label}>
+          <a
+            href={channel.href}
+            target={channel.href.startsWith("http") ? "_blank" : undefined}
+            rel={channel.href.startsWith("http") ? "noopener noreferrer" : undefined}
+            className="flex items-center gap-3 rounded-2xl border border-border bg-surface-elevated p-4 hover:border-gold/40 hover:bg-surface-elevated-hover transition-colors"
+          >
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-gold/15 text-gold">
+              <channel.icon size={18} />
+            </span>
+            <div className="min-w-0">
+              <p className="text-xs text-fg-subtle">{channel.label}</p>
+              <p className="text-sm font-medium text-fg truncate">{channel.value}</p>
+            </div>
+          </a>
+        </RevealItem>
       ))}
-      <div className="flex items-center gap-3 rounded-2xl border border-border bg-surface p-4 sm:col-span-2">
-        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-surface-elevated text-fg-muted">
-          <MapPin size={18} />
-        </span>
-        <div>
-          <p className="text-xs text-fg-subtle">Location</p>
-          <p className="text-sm font-medium text-fg">{profile.location}</p>
+      <RevealItem className="sm:col-span-2">
+        <div className="flex items-center gap-3 rounded-2xl border border-border bg-surface p-4">
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-surface-elevated text-fg-muted">
+            <MapPin size={18} />
+          </span>
+          <div>
+            <p className="text-xs text-fg-subtle">Location</p>
+            <p className="text-sm font-medium text-fg">{profile.location}</p>
+          </div>
         </div>
-      </div>
-    </div>
+      </RevealItem>
+    </RevealGroup>
   );
 }
 

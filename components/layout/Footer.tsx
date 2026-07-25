@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUp, ExternalLink } from "lucide-react";
+import { ArrowUp, ExternalLink, Mail, MapPin } from "lucide-react";
 import { GithubIcon } from "@/components/ui/BrandIcons";
 import { Container } from "@/components/ui/Container";
 import { primaryNav } from "@/data/nav";
@@ -12,7 +12,7 @@ export function Footer() {
   return (
     <footer className="border-t border-border bg-surface mt-24">
       <Container className="py-14">
-        <div className="grid gap-10 md:grid-cols-[1.3fr_1fr_1fr]">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.2fr_0.8fr_1fr_1fr]">
           <div>
             <div className="flex items-center gap-3 mb-4">
               <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-gold text-on-gold font-bold text-base">
@@ -47,6 +47,39 @@ export function Footer() {
 
           <div>
             <h3 className="text-xs font-semibold uppercase tracking-wider text-fg-subtle mb-4">
+              Contact
+            </h3>
+            <ul className="space-y-3">
+              {siteConfig.email && (
+                <li>
+                  <a
+                    href={`mailto:${siteConfig.email}`}
+                    className="flex items-center gap-2 text-sm text-fg-muted hover:text-fg transition-colors break-all"
+                  >
+                    <Mail size={15} className="shrink-0" /> {siteConfig.email}
+                  </a>
+                </li>
+              )}
+              {siteConfig.linkedin && (
+                <li>
+                  <a
+                    href={siteConfig.linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 text-sm text-fg-muted hover:text-fg transition-colors"
+                  >
+                    <ExternalLink size={15} className="shrink-0" /> LinkedIn
+                  </a>
+                </li>
+              )}
+              <li className="flex items-center gap-2 text-sm text-fg-subtle">
+                <MapPin size={15} className="shrink-0" /> {profile.location}
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-fg-subtle mb-4">
               Elsewhere
             </h3>
             <ul className="space-y-3">
@@ -70,7 +103,6 @@ export function Footer() {
                   <ExternalLink size={15} /> Credly
                 </a>
               </li>
-              <li className="text-sm text-fg-subtle">{profile.location}</li>
             </ul>
           </div>
         </div>

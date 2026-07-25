@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Search, ClipboardList, Palette, Hammer, FlaskConical, Rocket, RefreshCw } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
+import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
 import { profile } from "@/data/profile";
 
 export const metadata: Metadata = {
@@ -26,7 +27,7 @@ export default function AboutPage() {
   return (
     <div className="py-14 md:py-16">
       <Container>
-        <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start mb-16">
+        <Reveal className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start mb-16">
           <div className="relative aspect-[4/5] w-full max-w-sm mx-auto lg:mx-0 overflow-hidden rounded-3xl border border-border-strong">
             <Image src={profile.portrait} alt={profile.name} fill priority sizes="(min-width: 1024px) 380px, 80vw" className="object-cover" />
           </div>
@@ -56,18 +57,20 @@ export default function AboutPage() {
               <Button href="/contact" variant="secondary">Get in touch</Button>
             </div>
           </div>
-        </div>
+        </Reveal>
 
         <div>
-          <h2 className="text-2xl font-bold text-fg mb-2">How I approach building software</h2>
-          <p className="text-fg-muted mb-8 max-w-2xl">
-            The same rough process shows up across every project, whether it is a production AWS
-            app or something still in architecture.
-          </p>
+          <Reveal>
+            <h2 className="text-2xl font-bold text-fg mb-2">How I approach building software</h2>
+            <p className="text-fg-muted mb-8 max-w-2xl">
+              The same rough process shows up across every project, whether it is a production AWS
+              app or something still in architecture.
+            </p>
+          </Reveal>
 
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <RevealGroup className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {approach.map((step, i) => (
-              <div key={step.title} className="rounded-2xl border border-border bg-surface-elevated p-5">
+              <RevealItem key={step.title} className="rounded-2xl border border-border bg-surface-elevated p-5">
                 <div className="flex items-center gap-2.5 mb-3">
                   <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-gold/15 text-gold text-sm font-bold">
                     {i + 1}
@@ -76,12 +79,12 @@ export default function AboutPage() {
                 </div>
                 <p className="text-sm font-semibold text-fg mb-1.5">{step.title}</p>
                 <p className="text-xs text-fg-muted leading-relaxed">{step.description}</p>
-              </div>
+              </RevealItem>
             ))}
-          </div>
+          </RevealGroup>
         </div>
 
-        <div className="mt-16 rounded-2xl border border-border bg-surface p-6 md:p-8">
+        <Reveal className="mt-16 rounded-2xl border border-border bg-surface p-6 md:p-8">
           <h2 className="text-xl font-bold text-fg mb-4">Roles I am interested in</h2>
           <div className="flex flex-wrap gap-2">
             {profile.targetRoles.map((role) => (
@@ -93,7 +96,7 @@ export default function AboutPage() {
               </span>
             ))}
           </div>
-        </div>
+        </Reveal>
       </Container>
     </div>
   );

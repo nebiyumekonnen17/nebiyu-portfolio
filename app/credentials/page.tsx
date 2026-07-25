@@ -4,6 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { CredentialCard } from "@/components/credentials/CredentialCard";
 import { Button } from "@/components/ui/Button";
+import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
 import { credentials, credlyProfileUrl, awsTrainingCertificates } from "@/data/credentials";
 import type { CredentialCategory } from "@/types/content";
 
@@ -27,7 +28,7 @@ export default function CredentialsPage() {
   return (
     <div className="py-14 md:py-16">
       <Container>
-        <div className="mb-10 max-w-2xl">
+        <Reveal className="mb-10 max-w-2xl">
           <h1 className="text-[32px] md:text-[40px] font-bold text-fg mb-3">Credentials and Learning</h1>
           <p className="text-lg text-fg-muted leading-relaxed">
             Badges, course completions, and training certificates. Not every item here is a formal
@@ -41,7 +42,7 @@ export default function CredentialsPage() {
           >
             View verified badges on Credly <ExternalLink size={14} />
           </a>
-        </div>
+        </Reveal>
 
         {categories.map((category) => {
           const items = credentials.filter((c) => c.category === category);
@@ -49,23 +50,23 @@ export default function CredentialsPage() {
           return (
             <div key={category} className="mb-12">
               <h2 className="text-sm font-semibold text-fg-muted uppercase tracking-wide mb-4">{category}</h2>
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <RevealGroup className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {items.map((credential) => (
-                  <div key={credential.name} className="flex flex-col gap-3">
+                  <RevealItem key={credential.name} className="flex flex-col gap-3">
                     <CredentialCard credential={credential} />
                     {credential.connectionNote && (
                       <p className="text-xs text-fg-subtle leading-relaxed px-1">
                         {credential.connectionNote}
                       </p>
                     )}
-                  </div>
+                  </RevealItem>
                 ))}
-              </div>
+              </RevealGroup>
             </div>
           );
         })}
 
-        <div className="mt-4 rounded-2xl border border-border bg-surface-elevated p-6 md:p-8">
+        <Reveal className="mt-4 rounded-2xl border border-border bg-surface-elevated p-6 md:p-8">
           <SectionHeading
             eyebrow="Additional Training"
             title="AWS Skills Centers course certificates"
@@ -89,7 +90,7 @@ export default function CredentialsPage() {
               </a>
             ))}
           </div>
-        </div>
+        </Reveal>
 
         <div className="mt-10 flex justify-center">
           <Button href={credlyProfileUrl} variant="secondary">

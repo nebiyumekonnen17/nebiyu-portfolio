@@ -4,6 +4,7 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { StatusBadge } from "@/components/ui/StatusBadge";
 import { ArchitectureDiagram } from "@/components/aws/ArchitectureDiagram";
+import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
 import { getProjectBySlug } from "@/data/projects";
 
 const degissnap = getProjectBySlug("degissnap")!;
@@ -31,10 +32,12 @@ export function AwsInPractice() {
   return (
     <section className="border-y border-border bg-surface py-16 md:py-20">
       <Container>
-        <SectionHeading eyebrow="AWS in Practice" title="Production experience on AWS" />
+        <Reveal>
+          <SectionHeading eyebrow="AWS in Practice" title="Production experience on AWS" />
+        </Reveal>
 
-        <div className="grid gap-6 lg:grid-cols-[1fr_1fr_1.1fr]">
-          <div className="rounded-2xl border border-border bg-surface-elevated p-6 flex flex-col">
+        <RevealGroup className="grid gap-6 lg:grid-cols-[1fr_1fr_1.1fr]">
+          <RevealItem className="rounded-2xl border border-border bg-surface-elevated p-6 flex flex-col">
             <div className="flex items-center justify-between mb-3">
               <StatusBadge status={degissnap.status} />
             </div>
@@ -56,9 +59,9 @@ export function AwsInPractice() {
             >
               View AWS architecture <ArrowRight size={15} />
             </Link>
-          </div>
+          </RevealItem>
 
-          <div className="rounded-2xl border border-border bg-surface-elevated p-6 flex flex-col">
+          <RevealItem className="rounded-2xl border border-border bg-surface-elevated p-6 flex flex-col">
             <div className="flex items-center justify-between mb-3">
               <StatusBadge status={nehas.status} />
             </div>
@@ -78,10 +81,12 @@ export function AwsInPractice() {
             >
               View project <ArrowRight size={15} />
             </Link>
-          </div>
+          </RevealItem>
 
-          <ArchitectureDiagram compact />
-        </div>
+          <RevealItem>
+            <ArchitectureDiagram compact />
+          </RevealItem>
+        </RevealGroup>
       </Container>
     </section>
   );

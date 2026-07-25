@@ -3,25 +3,31 @@ import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Button } from "@/components/ui/Button";
+import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
 import { skillCategories } from "@/data/skills";
 
 export function SkillsInPractice() {
   return (
     <section className="py-16 md:py-20">
       <Container>
-        <SectionHeading
-          eyebrow="Skills in Practice"
-          title="Not a list of buzzwords. Skills tied to real projects."
-          action={
-            <Button href="/skills" variant="secondary" size="sm" className="shrink-0">
-              See all skills <ArrowRight size={15} />
-            </Button>
-          }
-        />
+        <Reveal>
+          <SectionHeading
+            eyebrow="Skills in Practice"
+            title="Not a list of buzzwords. Skills tied to real projects."
+            action={
+              <Button href="/skills" variant="secondary" size="sm" className="shrink-0">
+                See all skills <ArrowRight size={15} />
+              </Button>
+            }
+          />
+        </Reveal>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        <RevealGroup className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {skillCategories.map((category) => (
-            <div key={category.title} className="rounded-2xl border border-border bg-surface-elevated p-5">
+            <RevealItem
+              key={category.title}
+              className="rounded-2xl border border-border bg-surface-elevated p-5 transition-colors hover:border-border-strong"
+            >
               <h3 className="text-sm font-semibold text-gold mb-3">{category.title}</h3>
               <ul className="space-y-2.5">
                 {category.skills.slice(0, 4).map((skill) => (
@@ -38,9 +44,9 @@ export function SkillsInPractice() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </RevealItem>
           ))}
-        </div>
+        </RevealGroup>
       </Container>
     </section>
   );

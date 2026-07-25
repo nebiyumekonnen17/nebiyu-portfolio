@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { Search } from "lucide-react";
 import type { Project } from "@/types/content";
 import { ProjectCard } from "@/components/projects/ProjectCard";
+import { RevealGroup, RevealItem } from "@/components/ui/Reveal";
 import { cn } from "@/lib/utils";
 
 const filters = [
@@ -72,11 +73,13 @@ export function ProjectFilterGrid({ projects }: { projects: Project[] }) {
       </div>
 
       {visible.length > 0 ? (
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <RevealGroup className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {visible.map((project) => (
-            <ProjectCard key={project.slug} project={project} />
+            <RevealItem key={project.slug}>
+              <ProjectCard project={project} />
+            </RevealItem>
           ))}
-        </div>
+        </RevealGroup>
       ) : (
         <p className="text-center text-fg-muted py-16">No projects match that search or filter.</p>
       )}

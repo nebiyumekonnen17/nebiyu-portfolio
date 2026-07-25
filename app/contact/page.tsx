@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { ContactChannels, ContactNote } from "@/components/ContactCTA";
+import { Reveal } from "@/components/ui/Reveal";
 import { ArrowUpRight } from "lucide-react";
 import { siteConfig } from "@/lib/config";
 
@@ -15,13 +16,13 @@ export default function ContactPage() {
   return (
     <div className="py-14 md:py-20">
       <Container>
-        <div className="max-w-2xl mb-10">
+        <Reveal className="max-w-2xl mb-10">
           <h1 className="text-[32px] md:text-[40px] font-bold text-fg mb-4">Let&apos;s build something useful.</h1>
           <p className="text-lg text-fg-muted leading-relaxed">
             I&apos;m open to full stack, cloud, and AI engineering roles. If you want to talk about a
             role, a project, or something you&apos;re building, reach out through any of these.
           </p>
-        </div>
+        </Reveal>
 
         <ContactChannels />
         <ContactNote />

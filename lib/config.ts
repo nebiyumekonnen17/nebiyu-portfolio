@@ -5,7 +5,7 @@
  */
 export const siteConfig = {
   siteUrl: "https://nebiyumekonnen.dev",
-  email: null as string | null,
+  email: "nebiyumekonnen17@gmail.com" as string | null,
   linkedin: null as string | null,
   resumeUrl: null as string | null, // e.g. "/resume/Nebiyu_Mekonnen_Resume.pdf" once added to public/resume
   github: "https://github.com/nebiyumekonnen17",

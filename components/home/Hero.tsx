@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { ArrowRight, ArrowUpRight, Mail, Code2, Cloud, Sparkles, Boxes, Lightbulb } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
@@ -7,6 +10,7 @@ import { profile, quickCredibility } from "@/data/profile";
 import { siteConfig } from "@/lib/config";
 
 const roleIcons = [Code2, Cloud, Sparkles, Boxes, Lightbulb];
+const easeOut = [0.16, 1, 0.3, 1] as const;
 
 export function Hero() {
   return (
@@ -21,7 +25,11 @@ export function Hero() {
       />
       <Container className="relative py-14 md:py-20 lg:py-24">
         <div className="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16 items-center">
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: easeOut }}
+          >
             {profile.openToOpportunities && (
               <div className="inline-flex items-center gap-2 rounded-full border border-status-production/30 bg-status-production/10 px-3 py-1.5 mb-6">
                 <span className="h-1.5 w-1.5 rounded-full bg-status-production" aria-hidden="true" />
@@ -72,9 +80,14 @@ export function Hero() {
                 <Mail size={16} />
               </Button>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="flex flex-col gap-5">
+          <motion.div
+            className="flex flex-col gap-5"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.15, ease: easeOut }}
+          >
             <div className="relative mx-auto w-full max-w-[340px] lg:max-w-none">
               <div
                 className="pointer-events-none absolute -inset-4 rounded-[28px] opacity-70"
@@ -101,7 +114,7 @@ export function Hero() {
                 <StatCard key={stat.label} value={stat.value} label={stat.label} />
               ))}
             </div>
-          </div>
+          </motion.div>
         </div>
       </Container>
     </section>
