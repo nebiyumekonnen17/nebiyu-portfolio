@@ -1,3 +1,5 @@
+﻿export const dynamic = "force-static";
+
 import { ImageResponse } from "next/og";
 import { profile } from "@/data/profile";
 
@@ -69,3 +71,4 @@ export default async function Image() {
     { ...size }
   );
 }
+

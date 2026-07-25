@@ -1,3 +1,5 @@
+﻿export const dynamic = "force-static";
+
 import { ImageResponse } from "next/og";
 
 export const size = { width: 64, height: 64 };
@@ -27,3 +29,4 @@ export default function Icon() {
     { ...size }
   );
 }
+
