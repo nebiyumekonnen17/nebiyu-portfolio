@@ -237,13 +237,13 @@ export const projectGalleries: Record<string, ProjectGalleryItem[]> = {
       `${tibebBase}/01-homepage-concept.png`,
       "Homepage",
       "Tibeb Market concept UI showing the marketplace homepage",
-      "The marketplace homepage connecting customers with Ethiopian designers, artisans, boutiques, and tailors."
+      "Concept for a marketplace homepage connecting customers with Ethiopian designers, artisans, boutiques, and tailors."
     ),
     concept(
       `${tibebBase}/02-product-listing-concept.png`,
       "Product Listing",
       "Tibeb Market concept UI showing product listings",
-      "Browsing the shared catalog across multiple independent sellers."
+      "Concept for browsing a planned shared catalog across multiple independent sellers."
     ),
     concept(
       `${tibebBase}/03-product-details-concept.png`,
@@ -255,13 +255,13 @@ export const projectGalleries: Record<string, ProjectGalleryItem[]> = {
       `${tibebBase}/04-seller-dashboard-concept.png`,
       "Seller Dashboard",
       "Tibeb Market concept UI showing the seller dashboard",
-      "Where a designer, artisan, boutique, or tailor manages their storefront."
+      "Concept for how a designer, artisan, boutique, or tailor could manage a storefront."
     ),
     concept(
       `${tibebBase}/05-orders-and-tracking-concept.png`,
       "Orders and Tracking",
       "Tibeb Market concept UI showing order tracking",
-      "The order lifecycle a customer follows after checkout."
+      "Concept for the planned customer order lifecycle after checkout."
     ),
     concept(
       `${tibebBase}/06-returns-and-refunds-concept.png`,
@@ -273,13 +273,13 @@ export const projectGalleries: Record<string, ProjectGalleryItem[]> = {
       `${tibebBase}/07-measurements-family-concept.png`,
       "Measurements, Family",
       "Tibeb Market concept UI showing family measurement profiles",
-      "Universal and family measurement profiles, so a customer can order for themselves or people they shop for."
+      "Concept for universal and family measurement profiles that could support shopping for oneself or family members."
     ),
     concept(
       `${tibebBase}/08-account-settings-concept.png`,
       "Account Settings",
       "Tibeb Market concept UI showing account settings",
-      "Account level settings, including language and theme."
+      "Concept for planned account settings, including language and theme."
     ),
   ],
   aradacart: [
