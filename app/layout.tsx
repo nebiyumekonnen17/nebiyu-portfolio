@@ -5,7 +5,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MotionProvider } from "@/components/MotionProvider";
 import { profile } from "@/data/profile";
-import { siteConfig } from "@/lib/config";
+import { absoluteUrl, siteConfig } from "@/lib/config";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -40,18 +40,21 @@ export const metadata: Metadata = {
     title: "Nebiyu Mekonnen | Full Stack Software Engineer & AWS Cloud Builder",
     description:
       "Full stack software engineer and AWS cloud builder. Real projects, production AWS experience, and a clear engineering story.",
-    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "Nebiyu Mekonnen" }],
+    images: [{ url: absoluteUrl("/opengraph-image"), width: 1200, height: 630, alt: "Nebiyu Mekonnen" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Nebiyu Mekonnen | Full Stack Software Engineer & AWS Cloud Builder",
     description:
       "Full stack software engineer and AWS cloud builder. Real projects, production AWS experience, and a clear engineering story.",
-    images: ["/opengraph-image"],
+    images: [absoluteUrl("/opengraph-image")],
   },
   robots: {
     index: true,
     follow: true,
+  },
+  icons: {
+    icon: absoluteUrl("/icon"),
   },
 };
 

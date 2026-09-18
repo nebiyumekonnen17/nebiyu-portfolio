@@ -3,12 +3,13 @@ import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
 import { skillCategories } from "@/data/skills";
+import { absoluteUrl } from "@/lib/config";
 
 export const metadata: Metadata = {
   title: "Skills",
   description:
     "Skills tied to real projects rather than percentage bars: cloud and AWS, software engineering, AI and data, cybersecurity, and product and project management.",
-  alternates: { canonical: "/skills" },
+  alternates: { canonical: absoluteUrl("/skills") },
 };
 
 export default function SkillsPage() {

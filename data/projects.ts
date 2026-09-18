@@ -9,7 +9,7 @@ export const projects: Project[] = [
     category: ["AWS", "SaaS", "Full Stack"],
     summary:
       "Event photo sharing platform with QR guest uploads, private galleries, moderation, slideshow, guestbook, engagement, analytics, and host management.",
-    thumbnail: "/nebiyu-portfolio/assets/projects/DegisSnap-thumbnail.png",
+    thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH ?? "/nebiyu-portfolio"}/assets/projects/DegisSnap-thumbnail.png`,
     thumbnailAlt: "DegisSnap event photo sharing app interface showing a photo gallery and guestbook",
     accent: "violet",
     technologies: [
@@ -108,7 +108,7 @@ export const projects: Project[] = [
     category: ["AI", "Engineering Platform"],
     summary:
       "Provider agnostic, local first AI engineering platform for working across local and cloud model providers, workflows, knowledge, tools, and engineering automation.",
-    thumbnail: "/nebiyu-portfolio/assets/projects/NAEP-thumbnail.png",
+    thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH ?? "/nebiyu-portfolio"}/assets/projects/NAEP-thumbnail.png`,
     thumbnailAlt: "NAEP AI engineering platform dashboard showing agents, workflows, and models",
     accent: "blue",
     technologies: ["TypeScript", "Python", "Ollama", "AI orchestration"],
@@ -169,7 +169,7 @@ export const projects: Project[] = [
     category: ["AWS", "Enterprise SaaS", "Digital Signage"],
     summary:
       "New AWS native digital signage platform for screen fleets, content, scheduling, publishing, monitoring, device operations, and configurable enterprise workflows.",
-    thumbnail: "/nebiyu-portfolio/assets/projects/Nehas-Digital-Signage-thumbnail.png",
+    thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH ?? "/nebiyu-portfolio"}/assets/projects/Nehas-Digital-Signage-thumbnail.png`,
     thumbnailAlt: "Nehas Digital Signage dashboard showing screen status, a world map, and alerts",
     accent: "teal",
     technologies: ["AWS", "AWS AppConfig", "Digital signage architecture"],
@@ -249,7 +249,7 @@ export const projects: Project[] = [
     category: ["Business Software", "POS", "Inventory"],
     summary:
       "Point of sale and inventory system with barcode scanning, loyalty, receipts, reporting, roles, inventory history, hold sales, and offline POS queue support.",
-    thumbnail: "/nebiyu-portfolio/assets/projects/FSSS-Limat-POS-thumbnail.png",
+    thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH ?? "/nebiyu-portfolio"}/assets/projects/FSSS-Limat-POS-thumbnail.png`,
     thumbnailAlt: "FSSS Limat POS interface showing a new sale screen with cart and payment",
     accent: "green",
     technologies: ["Node.js", "MariaDB", "PWA"],
@@ -313,7 +313,7 @@ export const projects: Project[] = [
     category: ["Marketplace", "Ecommerce", "Product Architecture"],
     summary:
       "Global multi vendor marketplace connecting Ethiopian designers, artisans, boutiques, and tailors with customers worldwide.",
-    thumbnail: "/nebiyu-portfolio/assets/projects/Tibeb-Market-thumbnail.png",
+    thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH ?? "/nebiyu-portfolio"}/assets/projects/Tibeb-Market-thumbnail.png`,
     thumbnailAlt: "Tibeb Market storefront showing traditional Ethiopian clothing for sale",
     accent: "amber",
     technologies: ["Marketplace architecture", "Multilingual product design"],
@@ -376,7 +376,7 @@ export const projects: Project[] = [
     category: ["Telegram", "Commerce", "SaaS"],
     summary:
       "Telegram first B2B commerce platform designed around Mini App storefronts, merchant dashboards, catalog, orders, payments, inventory, subscriptions, and analytics.",
-    thumbnail: "/nebiyu-portfolio/assets/projects/AradaCart-thumbnail.png",
+    thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH ?? "/nebiyu-portfolio"}/assets/projects/AradaCart-thumbnail.png`,
     thumbnailAlt: "AradaCart Telegram Mini App showing a product catalog and categories",
     accent: "telegram",
     technologies: ["Telegram Mini App", "AWS architecture", "Commerce platform"],
@@ -436,4 +436,3 @@ export function getAdjacentProjects(slug: string) {
 }
 
 export const featuredProjectSlugs = projects.map((project) => project.slug);
-

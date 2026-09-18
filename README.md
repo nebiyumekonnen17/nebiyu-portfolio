@@ -75,12 +75,10 @@ page markup.
 Push additional objects into that project's `screenshots` array in `data/projects.ts`
 (`{ src, alt, caption }`). `ScreenshotGallery` and the layout already support any number of screenshots.
 
-### Adding the real resume
+### Updating the resume
 
-Drop the PDF at `public/resume/Nebiyu_Mekonnen_Resume.pdf` (or any path) and set `resumeUrl` in
-`lib/config.ts` to that path. The header, mobile nav, hero, and contact page all pick it up
-automatically; until it's set, the resume affordances stay hidden or disabled rather than linking to
-nothing.
+Replace `public/resume/Nebiyu_Mekonnen_Resume.pdf`. The header, mobile nav, hero, and contact page all
+use the configured public resume URL automatically.
 
 ### Adding email or LinkedIn
 
@@ -122,5 +120,5 @@ npm run start
 ## SEO
 
 Per-route metadata, Open Graph/Twitter cards, a dynamic OG image (`app/opengraph-image.tsx`),
-`sitemap.xml`, `robots.txt`, and Person/WebSite JSON-LD are all wired up. Update `siteConfig.siteUrl` in
-`lib/config.ts` before deploying to a real domain.
+`sitemap.xml`, `robots.txt`, and Person/WebSite JSON-LD are all wired up. Deployment URLs and the
+optional base path are controlled by `NEXT_PUBLIC_SITE_URL` and `NEXT_PUBLIC_BASE_PATH`.

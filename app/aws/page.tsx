@@ -13,12 +13,13 @@ import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
 import { getProjectBySlug } from "@/data/projects";
 import { awsServiceEntries } from "@/data/aws";
 import { credentials } from "@/data/credentials";
+import { absoluteUrl } from "@/lib/config";
 
 export const metadata: Metadata = {
   title: "AWS Experience",
   description:
     "How Nebiyu Mekonnen uses AWS in real projects: a production application on Amplify, Cognito, AppSync, DynamoDB, and S3, plus a new AWS native platform in active build.",
-  alternates: { canonical: "/aws" },
+  alternates: { canonical: absoluteUrl("/aws") },
 };
 
 const degissnap = getProjectBySlug("degissnap")!;

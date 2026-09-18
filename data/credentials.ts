@@ -31,7 +31,7 @@ export const credentials: Credential[] = [
     featured: false,
     category: "Career & Project Management",
     dateEarned: "2026-04-25",
-    certificateFile: "/nebiyu-portfolio/credentials/ibm-skillsbuild-career-management-essentials-completion.pdf",
+    certificateFile: `${process.env.NEXT_PUBLIC_BASE_PATH ?? "/nebiyu-portfolio"}/credentials/ibm-skillsbuild-career-management-essentials-completion.pdf`,
     connectionNote: "Supports how I plan and communicate my own career direction alongside the engineering work.",
   },
   {
@@ -57,7 +57,7 @@ export const credentials: Credential[] = [
     featured: true,
     category: "Cloud",
     dateEarned: "2026-04-24",
-    certificateFile: "/nebiyu-portfolio/credentials/ibm-cloud-essentials-certificate.pdf",
+    certificateFile: `${process.env.NEXT_PUBLIC_BASE_PATH ?? "/nebiyu-portfolio"}/credentials/ibm-cloud-essentials-certificate.pdf`,
     connectedProjectSlugs: ["degissnap"],
     connectionNote: "General cloud computing concepts that carry over directly into AWS architecture work.",
   },
@@ -102,19 +102,18 @@ export const awsTrainingCertificates: TrainingCertificate[] = [
   {
     name: "Becoming a Cloud Practitioner, Part 2: Compute, Networking, and Account Strategies",
     issuer: "AWS Skills Centers",
-    file: "/nebiyu-portfolio/credentials/aws-cloud-practitioner-part-2-compute-networking-account-strategies.pdf",
+    file: `${process.env.NEXT_PUBLIC_BASE_PATH ?? "/nebiyu-portfolio"}/credentials/aws-cloud-practitioner-part-2-compute-networking-account-strategies.pdf`,
   },
   {
     name: "Becoming a Cloud Practitioner, Part 3: Identities, Security, and Monitoring the AWS Cloud",
     issuer: "AWS Skills Centers",
-    file: "/nebiyu-portfolio/credentials/aws-cloud-practitioner-part-3-identities-security-monitoring.pdf",
+    file: `${process.env.NEXT_PUBLIC_BASE_PATH ?? "/nebiyu-portfolio"}/credentials/aws-cloud-practitioner-part-3-identities-security-monitoring.pdf`,
   },
   {
     name: "Becoming a Cloud Practitioner, Part 4: Advanced Cloud Services",
     issuer: "AWS Skills Centers",
-    file: "/nebiyu-portfolio/credentials/aws-cloud-practitioner-part-4-advanced-cloud-services.pdf",
+    file: `${process.env.NEXT_PUBLIC_BASE_PATH ?? "/nebiyu-portfolio"}/credentials/aws-cloud-practitioner-part-4-advanced-cloud-services.pdf`,
   },
 ];
 
 export const featuredCredentials = credentials.filter((c) => c.featured);
-
