@@ -55,7 +55,7 @@ export default function AwsPage() {
               I did not just study AWS. I used it to ship a production application.
             </h1>
             <p className="text-lg text-fg-muted max-w-2xl leading-relaxed">
-              DegisSnap runs in production on Amazon Cognito, AWS AppSync, Amazon DynamoDB, Amazon S3,
+              Visual Tizita runs in production on Amazon Cognito, AWS AppSync, Amazon DynamoDB, Amazon S3,
               and AWS Amplify. That hands on experience is what I am now applying to a larger AWS
               native platform, Nehas Digital Signage.
             </p>
@@ -66,7 +66,7 @@ export default function AwsPage() {
       <section id="degissnap" className="py-14 md:py-16 border-b border-border scroll-mt-20">
         <Container>
           <Reveal>
-            <SectionHeading eyebrow="Production AWS Experience" title="DegisSnap: the deep dive" />
+            <SectionHeading eyebrow="Production AWS Experience" title="Visual Tizita: the deep dive" />
           </Reveal>
 
           <RevealGroup className="grid gap-6 lg:grid-cols-[1fr_1.1fr] items-start">

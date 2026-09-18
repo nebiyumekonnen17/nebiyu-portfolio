@@ -36,49 +36,49 @@ export const projectGalleries: Record<string, ProjectGalleryItem[]> = {
     concept(
       `${degissnapBase}/01-guest-landing-qr-scan-concept.png`,
       "Guest Landing and QR Scan",
-      "DegisSnap concept UI showing the guest landing screen and QR scan entry point",
+      "Visual Tizita concept UI showing the guest landing screen and QR scan entry point",
       "Guests reach an event gallery by scanning a QR code or opening a shared link, with no account required."
     ),
     concept(
       `${degissnapBase}/02-event-gallery-concept.png`,
       "Event Gallery",
-      "DegisSnap concept UI showing the shared event photo gallery",
+      "Visual Tizita concept UI showing the shared event photo gallery",
       "The shared gallery where every guest photo appears for the event, organized for easy browsing."
     ),
     concept(
       `${degissnapBase}/03-upload-photos-guest-concept.png`,
       "Upload Photos, Guest",
-      "DegisSnap concept UI showing the guest photo upload flow",
+      "Visual Tizita concept UI showing the guest photo upload flow",
       "Guests add photos directly from their phone without signing up or installing an app."
     ),
     concept(
       `${degissnapBase}/04-slideshow-view-concept.png`,
       "Slideshow View",
-      "DegisSnap concept UI showing the event slideshow view",
+      "Visual Tizita concept UI showing the event slideshow view",
       "A running slideshow view designed for screens at the event itself."
     ),
     concept(
       `${degissnapBase}/05-guestbook-and-messages-concept.png`,
       "Guestbook and Messages",
-      "DegisSnap concept UI showing the guestbook and message wall",
+      "Visual Tizita concept UI showing the guestbook and message wall",
       "Guests can leave messages and react to photos, giving the gallery a social layer alongside the images."
     ),
     concept(
       `${degissnapBase}/06-host-dashboard-overview-concept.png`,
       "Host Dashboard Overview",
-      "DegisSnap concept UI showing the host dashboard overview",
+      "Visual Tizita concept UI showing the host dashboard overview",
       "The host dashboard where an event owner manages their gallery, guests, and settings after signing in with Cognito."
     ),
     concept(
       `${degissnapBase}/07-media-management-concept.png`,
       "Media Management",
-      "DegisSnap concept UI showing host media management tools",
+      "Visual Tizita concept UI showing host media management tools",
       "Hosts review, organize, and moderate uploaded photos from one place."
     ),
     concept(
       `${degissnapBase}/08-analytics-and-insights-concept.png`,
       "Analytics and Insights",
-      "DegisSnap concept UI showing event analytics and insights",
+      "Visual Tizita concept UI showing event analytics and insights",
       "Hosts can see engagement across their event, including uploads and guest activity."
     ),
   ],

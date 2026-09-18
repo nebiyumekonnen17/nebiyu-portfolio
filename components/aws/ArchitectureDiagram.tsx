@@ -43,7 +43,7 @@ export function ArchitectureDiagram({ compact = false }: { compact?: boolean }) 
     <div className="rounded-2xl border border-border bg-surface-elevated p-5 md:p-6">
       <div className="flex items-center justify-between mb-5">
         <p className="text-sm font-semibold text-fg">
-          DegisSnap Architecture {compact && <span className="text-fg-muted font-normal">(Simplified)</span>}
+          Visual Tizita Architecture {compact && <span className="text-fg-muted font-normal">(Simplified)</span>}
         </p>
       </div>
 

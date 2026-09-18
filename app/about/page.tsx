@@ -20,7 +20,7 @@ const approach = [
   { icon: Palette, title: "Design the experience", description: "I care about how it feels to use, not just whether it works." },
   { icon: Hammer, title: "Build", description: "I build in working slices instead of trying to finish everything at once." },
   { icon: FlaskConical, title: "Test", description: "I write tests as I go so I trust the system as it grows, not just at the end." },
-  { icon: Rocket, title: "Deploy", description: "Shipping is part of the job. DegisSnap running in production on AWS is the clearest example of that." },
+  { icon: Rocket, title: "Deploy", description: "Shipping is part of the job. Visual Tizita running in production on AWS is the clearest example of that." },
   { icon: RefreshCw, title: "Improve", description: "Real usage teaches you things planning never does, so I keep adjusting after launch." },
 ];
 
@@ -42,7 +42,7 @@ export default function AboutPage() {
               <p>{profile.intro}</p>
               <p>
                 My projects span event technology, AWS cloud applications, AI engineering, digital
-                signage, business software, and marketplaces. DegisSnap, an event photo sharing
+                signage, business software, and marketplaces. Visual Tizita, an event photo sharing
                 platform, is running in production on AWS. NAEP is an AI engineering platform I am
                 actively building. The rest range from a point of sale system already built for a
                 real business to marketplace and commerce platforms still in architecture and

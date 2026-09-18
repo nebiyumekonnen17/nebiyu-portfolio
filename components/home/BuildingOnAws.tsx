@@ -7,32 +7,32 @@ const services = [
   {
     icon: Rocket,
     name: "AWS Amplify",
-    description: "Hosts and deploys DegisSnap, including the production environment.",
-    tag: "DegisSnap · Production",
+    description: "Hosts and deploys Visual Tizita, including the production environment.",
+    tag: "Visual Tizita · Production",
   },
   {
     icon: ShieldCheck,
     name: "Amazon Cognito",
     description: "Authentication and identity management for hosts.",
-    tag: "DegisSnap · Production",
+    tag: "Visual Tizita · Production",
   },
   {
     icon: Network,
     name: "AWS AppSync",
     description: "GraphQL API in front of the application data.",
-    tag: "DegisSnap · Production",
+    tag: "Visual Tizita · Production",
   },
   {
     icon: Database,
     name: "Amazon DynamoDB",
     description: "NoSQL database for application data.",
-    tag: "DegisSnap · Production",
+    tag: "Visual Tizita · Production",
   },
   {
     icon: ImageIcon,
     name: "Amazon S3",
     description: "Object storage for photos and media.",
-    tag: "DegisSnap · Production",
+    tag: "Visual Tizita · Production",
   },
   {
     icon: Settings2,
