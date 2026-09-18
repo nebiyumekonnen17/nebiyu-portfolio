@@ -87,49 +87,49 @@ export const projectGalleries: Record<string, ProjectGalleryItem[]> = {
       `${naepBase}/01-dashboard-overview-concept.png`,
       "Dashboard Overview",
       "NAEP concept UI showing the platform dashboard overview",
-      "The NAEP dashboard, a starting point for working across models, agents, and workflows."
+      "Product-direction concept for a future NAEP dashboard; this interface is not part of the current CLI alpha."
     ),
     concept(
       `${naepBase}/02-ai-orchestrator-concept.png`,
       "AI Orchestrator",
       "NAEP concept UI showing the AI orchestration view",
-      "The orchestration layer that coordinates multiple models and steps rather than treating AI as a single call."
+      "Roadmap concept for orchestration across models and steps; not a shipped alpha feature."
     ),
     concept(
       `${naepBase}/03-chat-with-ai-multi-model-concept.png`,
       "Chat with AI, Multi Model",
       "NAEP concept UI showing a multi model chat interface",
-      "A chat interface designed to work across local and cloud model providers rather than locking into one."
+      "Roadmap concept for a provider-independent chat interface; not a shipped alpha feature."
     ),
     concept(
       `${naepBase}/04-workflows-concept.png`,
       "Workflows",
       "NAEP concept UI showing the workflows view",
-      "Composable workflows for engineering automation tasks."
+      "Roadmap concept for composable engineering workflows."
     ),
     concept(
       `${naepBase}/05-knowledge-base-concept.png`,
       "Knowledge Base",
       "NAEP concept UI showing the knowledge base view",
-      "Structured storage and retrieval for the context AI workflows need."
+      "Roadmap concept for structured engineering-knowledge storage and retrieval."
     ),
     concept(
       `${naepBase}/06-agents-concept.png`,
       "Agents",
       "NAEP concept UI showing the agents view",
-      "Agents built on top of the model layer for specific engineering tasks."
+      "Roadmap concept for specialized engineering agents."
     ),
     concept(
       `${naepBase}/07-model-providers-concept.png`,
       "Model Providers",
       "NAEP concept UI showing model provider configuration",
-      "Where model providers, including local models through Ollama, are configured and managed."
+      "Roadmap concept for configuring local and cloud runtime providers."
     ),
     concept(
       `${naepBase}/08-settings-and-preferences-concept.png`,
       "Settings and Preferences",
       "NAEP concept UI showing settings and preferences",
-      "Platform level settings for how the engineering workflows are allowed to run."
+      "Roadmap concept for platform governance and workflow preferences."
     ),
   ],
   "nehas-digital-signage": [

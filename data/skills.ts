@@ -24,7 +24,9 @@ export const skillCategories: SkillCategory[] = [
       { name: "React", usedIn: [p("degissnap", "Visual Tizita")] },
       { name: "Vite", usedIn: [p("degissnap", "Visual Tizita")] },
       { name: "TypeScript", usedIn: [p("naep", "NAEP")] },
-      { name: "Node.js", usedIn: [p("fsss-limat-pos", "FSSS Limat POS")] },
+      { name: "Node.js", usedIn: [p("naep", "NAEP"), p("fsss-limat-pos", "FSSS Limat POS")] },
+      { name: "Command-line tool development", usedIn: [p("naep", "NAEP")] },
+      { name: "Monorepo package architecture", usedIn: [p("naep", "NAEP")] },
       { name: "GraphQL API design", usedIn: [p("degissnap", "Visual Tizita")] },
       { name: "Relational database design", usedIn: [p("fsss-limat-pos", "FSSS Limat POS")] },
       { name: "Progressive web app delivery", usedIn: [p("fsss-limat-pos", "FSSS Limat POS")] },
@@ -33,13 +35,11 @@ export const skillCategories: SkillCategory[] = [
   },
   {
     title: "AI and Data",
-    description: "Building AI systems that stay usable across providers instead of locking into one.",
+    description: "Designing the foundations for reusable, provider-independent AI-assisted engineering.",
     skills: [
-      { name: "AI orchestration", usedIn: [p("naep", "NAEP")] },
-      { name: "Local model integration with Ollama", usedIn: [p("naep", "NAEP")] },
-      { name: "Provider agnostic system design", usedIn: [p("naep", "NAEP")] },
-      { name: "Python", usedIn: [p("naep", "NAEP")] },
-      { name: "Workflow and agent architecture", usedIn: [p("naep", "NAEP")] },
+      { name: "Provider-agnostic platform architecture", usedIn: [p("naep", "NAEP")] },
+      { name: "Engineering knowledge-system design", usedIn: [p("naep", "NAEP")] },
+      { name: "AI workflow governance planning", usedIn: [p("naep", "NAEP")] },
     ],
   },
   {

@@ -93,8 +93,7 @@ export const credentials: Credential[] = [
     featured: true,
     category: "Programming",
     dateEarned: "2026-04-02",
-    connectedProjectSlugs: ["naep"],
-    connectionNote: "Python fundamentals used directly in NAEP's engineering and AI work.",
+    connectionNote: "Programming fundamentals that support broader software and automation work.",
   },
 ];
 

@@ -43,8 +43,8 @@ export default function AboutPage() {
               <p>
                 My projects span event technology, AWS cloud applications, AI engineering, digital
                 signage, business software, and marketplaces. Visual Tizita, an event photo sharing
-                platform, is running in production on AWS. NAEP is an AI engineering platform I am
-                actively building. The rest range from a point of sale system already built for a
+                platform, is running in production on AWS. NAEP is an early-alpha engineering
+                platform and CLI I am actively building. The rest range from a point of sale system already built for a
                 real business to marketplace and commerce platforms still in architecture and
                 development.
               </p>
