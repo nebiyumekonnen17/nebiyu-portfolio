@@ -28,7 +28,6 @@ const degissnapBase = "/images/projects/degissnap/gallery";
 const naepBase = "/images/projects/naep/gallery";
 const nehasBase = "/images/projects/nehas-digital-signage/gallery";
 const fsssBase = "/images/projects/fsss-limat-pos/gallery";
-const tibebBase = "/images/projects/tibeb-market/gallery";
 const aradaBase = "/images/projects/aradacart/gallery";
 
 export const projectGalleries: Record<string, ProjectGalleryItem[]> = {
@@ -230,56 +229,6 @@ export const projectGalleries: Record<string, ProjectGalleryItem[]> = {
       "User Management",
       "FSSS Limat POS concept UI showing user management",
       "Role based access separating staff and management permissions."
-    ),
-  ],
-  "tibeb-market": [
-    concept(
-      `${tibebBase}/01-homepage-concept.png`,
-      "Homepage",
-      "Tibeb Market concept UI showing the marketplace homepage",
-      "Concept for a marketplace homepage connecting customers with Ethiopian designers, artisans, boutiques, and tailors."
-    ),
-    concept(
-      `${tibebBase}/02-product-listing-concept.png`,
-      "Product Listing",
-      "Tibeb Market concept UI showing product listings",
-      "Concept for browsing a planned shared catalog across multiple independent sellers."
-    ),
-    concept(
-      `${tibebBase}/03-product-details-concept.png`,
-      "Product Details",
-      "Tibeb Market concept UI showing a product detail page",
-      "A single product page, planned to support sizing through saved measurement profiles."
-    ),
-    concept(
-      `${tibebBase}/04-seller-dashboard-concept.png`,
-      "Seller Dashboard",
-      "Tibeb Market concept UI showing the seller dashboard",
-      "Concept for how a designer, artisan, boutique, or tailor could manage a storefront."
-    ),
-    concept(
-      `${tibebBase}/05-orders-and-tracking-concept.png`,
-      "Orders and Tracking",
-      "Tibeb Market concept UI showing order tracking",
-      "Concept for the planned customer order lifecycle after checkout."
-    ),
-    concept(
-      `${tibebBase}/06-returns-and-refunds-concept.png`,
-      "Returns and Refunds",
-      "Tibeb Market concept UI showing returns and refunds",
-      "The planned process for resolving problems between customers and sellers."
-    ),
-    concept(
-      `${tibebBase}/07-measurements-family-concept.png`,
-      "Measurements, Family",
-      "Tibeb Market concept UI showing family measurement profiles",
-      "Concept for universal and family measurement profiles that could support shopping for oneself or family members."
-    ),
-    concept(
-      `${tibebBase}/08-account-settings-concept.png`,
-      "Account Settings",
-      "Tibeb Market concept UI showing account settings",
-      "Concept for planned account settings, including language and theme."
     ),
   ],
   aradacart: [

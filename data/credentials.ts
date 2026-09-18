@@ -84,8 +84,8 @@ export const credentials: Credential[] = [
     featured: true,
     category: "Career & Project Management",
     dateEarned: "2026-04-25",
-    connectedProjectSlugs: ["nehas-digital-signage", "tibeb-market"],
-    connectionNote: "Applied to planning multi feature platforms like Nehas Digital Signage and Tibeb Market.",
+    connectedProjectSlugs: ["nehas-digital-signage"],
+    connectionNote: "Applied to planning multi feature platforms like Nehas Digital Signage.",
   },
   {
     name: "Python Essentials 1",

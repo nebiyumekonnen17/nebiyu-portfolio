@@ -59,8 +59,6 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
         ? `These are early AI-generated product-direction concepts, not screenshots of the deployed development console. The verified implementation status and evidence are documented above.`
       : project.slug === "fsss-limat-pos"
         ? `These are AI-generated concept images illustrating the implemented POS workflows, not screenshots captured from the private local application.`
-      : project.slug === "tibeb-market"
-        ? `These are high-level, AI-generated product-direction concepts for a private project. They do not expose private source code or represent a public launch.`
       : `These are AI generated concept UI images showing how the ${project.name} experience is being designed. They are not screenshots of a finished product.`;
 
   return (

@@ -25,7 +25,6 @@ export const metadata: Metadata = {
 const degissnap = getProjectBySlug("degissnap")!;
 const nehas = getProjectBySlug("nehas-digital-signage")!;
 const aradacart = getProjectBySlug("aradacart")!;
-const tibeb = getProjectBySlug("tibeb-market")!;
 
 const groups = [
   "Authentication and Identity",
@@ -126,7 +125,7 @@ export default function AwsPage() {
           </Reveal>
 
           <RevealGroup className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {[degissnap, nehas, aradacart, tibeb].map((project) => (
+            {[degissnap, nehas, aradacart].map((project) => (
               <RevealItem key={project.slug}>
                 <Link
                   href={`/projects/${project.slug}`}
