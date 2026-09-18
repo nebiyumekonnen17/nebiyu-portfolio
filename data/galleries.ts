@@ -216,8 +216,8 @@ export const projectGalleries: Record<string, ProjectGalleryItem[]> = {
     concept(
       `${fsssBase}/06-customers-and-loyalty-concept.png`,
       "Customers and Loyalty",
-      "FSSS Limat POS concept UI showing customer and loyalty management",
-      "Customer records and loyalty points for repeat shoppers."
+      "FSSS Limat POS concept UI showing customer management",
+      "Customer records can be created and attached without losing the active cart."
     ),
     concept(
       `${fsssBase}/07-held-sales-concept.png`,

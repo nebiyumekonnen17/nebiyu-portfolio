@@ -67,7 +67,10 @@ export function ProjectHero({ project }: { project: Project }) {
               )}
               {!project.liveUrl && !project.repositoryUrl && (
                 <p className="flex items-center gap-2 text-sm text-fg-subtle">
-                  <ExternalLink size={14} /> No public link yet. This project is in {project.status.toLowerCase()}.
+                  <ExternalLink size={14} />
+                  {project.status === "Built"
+                    ? "Private local application; no public link."
+                    : `No public link yet. This project is in ${project.status.toLowerCase()}.`}
                 </p>
               )}
             </div>
