@@ -29,7 +29,7 @@
     "Solutions Engineer",
     "Technical Product Engineer",
   ],
-  portrait: `${process.env.NEXT_PUBLIC_BASE_PATH ?? "/nebiyu-portfolio"}/assets/profile/nebiyu_primary_portrait.png`,
+  portrait: `${process.env.NEXT_PUBLIC_BASE_PATH ?? "/nebiyu-portfolio"}/assets/profile/nebiyu_primary_portrait.webp`,
 };
 
 export const quickCredibility = [
