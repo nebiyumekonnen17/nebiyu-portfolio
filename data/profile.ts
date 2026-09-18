@@ -33,7 +33,7 @@
 };
 
 export const quickCredibility = [
-  { label: "Major Projects Built", value: "5+" },
+  { label: "Major Projects Featured", value: "5" },
   { label: "Production AWS Systems Deployed", value: "1" },
   { label: "Credentials & Certificates", value: "10+" },
   { label: "Full Stack, Cloud & AI Work", value: "3 Domains" },

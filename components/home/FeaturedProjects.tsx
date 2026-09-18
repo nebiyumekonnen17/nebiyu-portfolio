@@ -14,7 +14,7 @@ export function FeaturedProjects() {
           <SectionHeading
             eyebrow="Featured Projects"
             title="Real projects. Real impact."
-            description="A selection of applications I've designed, built, and shipped, spanning AWS, AI, and business software."
+            description="Production software, active builds, and architecture work spanning AWS, AI, and business systems."
             action={
               <Button href="/projects" variant="secondary" size="sm" className="shrink-0">
                 View all projects <ArrowRight size={15} />
