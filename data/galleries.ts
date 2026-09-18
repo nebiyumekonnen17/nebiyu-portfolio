@@ -236,37 +236,37 @@ export const projectGalleries: Record<string, ProjectGalleryItem[]> = {
       `${aradaBase}/01-telegram-mini-app-shop-concept.png`,
       "Telegram Mini App Shop",
       "AradaCart concept UI showing the Telegram Mini App storefront",
-      "The buyer storefront, designed to run inside Telegram as a Mini App."
+      "Concept for a buyer storefront intended to run inside Telegram as a Mini App."
     ),
     concept(
       `${aradaBase}/02-product-catalog-concept.png`,
       "Product Catalog",
       "AradaCart concept UI showing the product catalog",
-      "Product browsing shared across the buyer and merchant experiences."
+      "Concept for product browsing shared across planned buyer and merchant experiences."
     ),
     concept(
       `${aradaBase}/03-cart-and-checkout-concept.png`,
       "Cart and Checkout",
       "AradaCart concept UI showing cart and checkout",
-      "The buyer checkout flow inside the Telegram Mini App."
+      "Concept for a planned buyer checkout flow inside the Telegram Mini App."
     ),
     concept(
       `${aradaBase}/04-merchant-dashboard-concept.png`,
       "Merchant Dashboard",
       "AradaCart concept UI showing the merchant dashboard",
-      "The web dashboard where a merchant manages their store."
+      "Concept for a web dashboard where a merchant could manage a store."
     ),
     concept(
       `${aradaBase}/05-orders-management-concept.png`,
       "Orders Management",
       "AradaCart concept UI showing orders management",
-      "Where merchants track and manage incoming orders."
+      "Concept for planned merchant order tracking and management."
     ),
     concept(
       `${aradaBase}/06-inventory-management-concept.png`,
       "Inventory Management",
       "AradaCart concept UI showing inventory management",
-      "Stock and product management from the merchant side."
+      "Concept for planned stock and product management from the merchant side."
     ),
     concept(
       `${aradaBase}/07-subscriptions-and-plans-concept.png`,
@@ -278,7 +278,7 @@ export const projectGalleries: Record<string, ProjectGalleryItem[]> = {
       `${aradaBase}/08-analytics-and-reports-concept.png`,
       "Analytics and Reports",
       "AradaCart concept UI showing analytics and reports",
-      "Gives merchants visibility into how their store is performing."
+      "Concept for planned merchant performance reporting."
     ),
   ],
 };

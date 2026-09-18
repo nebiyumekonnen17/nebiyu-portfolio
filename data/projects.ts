@@ -397,11 +397,11 @@ export const projects: Project[] = [
   {
     slug: "aradacart",
     name: "AradaCart",
-    tagline: "A Telegram first B2B commerce platform built for Ethiopia",
+    tagline: "A Telegram-first B2B commerce platform concept for Ethiopia",
     status: "Architecture",
     category: ["Telegram", "Commerce", "SaaS"],
     summary:
-      "Telegram first B2B commerce platform designed around Mini App storefronts, merchant dashboards, catalog, orders, payments, inventory, subscriptions, and analytics.",
+      "Product and architecture concept for a Telegram-first B2B commerce platform spanning a Mini App storefront and merchant web dashboard.",
     thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH ?? "/nebiyu-portfolio"}/assets/projects/AradaCart-thumbnail.png`,
     thumbnailAlt: "AradaCart Telegram Mini App showing a product catalog and categories",
     accent: "telegram",
@@ -413,7 +413,7 @@ export const projects: Project[] = [
     liveUrl: null,
     repositoryUrl: null,
     role: "Product design and system architecture",
-    platformType: "B2B commerce SaaS, delivered through Telegram Mini Apps and a web dashboard",
+    platformType: "Planned B2B commerce SaaS using a Telegram Mini App and web dashboard",
     servesWho: "Buyers who shop through Telegram, merchants who sell through a web dashboard, and platform administrators who run the SaaS",
     problem: [
       "In markets where Telegram is already how people communicate and discover businesses, asking buyers to download a separate shopping app is friction that does not need to exist. Merchants still need a real dashboard to manage catalog, orders, and payments.",
@@ -423,16 +423,16 @@ export const projects: Project[] = [
       "The architecture direction is AWS hosted, covering catalog, orders, payments, inventory, merchant subscriptions, and analytics.",
     ],
     contribution: [
-      { label: "Product planning", description: "Defined the three role model: buyer, merchant, and platform administrator." },
-      { label: "System architecture", description: "Designed the Telegram Mini App storefront alongside a separate merchant web dashboard, with an AWS hosted architecture direction." },
+      { label: "Product planning", description: "Defined a proposed three-role model: buyer, merchant, and platform administrator." },
+      { label: "Architecture direction", description: "Mapped a Telegram Mini App storefront alongside a separate merchant web dashboard, with AWS as the intended hosting direction." },
     ],
     features: [
-      { title: "Telegram Mini App storefront", description: "Buyers browse and order without leaving Telegram." },
-      { title: "Merchant dashboard", description: "Web based management of catalog, orders, and store settings." },
-      { title: "Catalog and inventory", description: "Product management shared across the buyer and merchant experiences." },
-      { title: "Orders and payments", description: "Handles the transaction lifecycle for B2B purchases." },
-      { title: "Subscriptions", description: "Merchant access to the platform is subscription based." },
-      { title: "Analytics", description: "Gives merchants visibility into how their store is performing." },
+      { title: "Telegram Mini App storefront", description: "Planned buyer flow for browsing and ordering without leaving Telegram." },
+      { title: "Merchant dashboard", description: "Proposed web-based management of catalog, orders, and store settings." },
+      { title: "Catalog and inventory", description: "A shared product-management concept for the buyer and merchant experiences." },
+      { title: "Orders and payments", description: "A planned transaction lifecycle for B2B purchases." },
+      { title: "Subscriptions", description: "A proposed subscription model for merchant access." },
+      { title: "Analytics", description: "Planned reporting to give merchants visibility into store performance." },
     ],
     challenges: [
       {
@@ -445,8 +445,8 @@ export const projects: Project[] = [
       "Planning for a chat native storefront alongside a traditional dashboard has been a useful exercise in designing one data model that serves genuinely different interfaces well.",
     ],
     relatedCredentialNames: ["AWS Skills Center Cloud Practitioner Foundations"],
-    evidence: [],
-    notes: "Architecture and early development stage. AWS hosted deployment is the intended direction, not a confirmed production deployment.",
+    evidence: ["Three-role product model", "Telegram Mini App and merchant-dashboard architecture concept", "Commerce workflow definitions", "Concept UI explorations"],
+    notes: "Architecture concept only. No implementation repository, live application, payment integration, Telegram integration, or AWS deployment is presented as complete. Gallery images are product-direction concepts, not screenshots of working software.",
   },
 ];
 
