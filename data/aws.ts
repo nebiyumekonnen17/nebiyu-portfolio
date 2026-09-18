@@ -53,7 +53,7 @@ export const awsServiceEntries: AwsServiceEntry[] = [
     icon: "settings",
     group: "Deployment and Environment Management",
     usedIn: { projectSlug: "nehas-digital-signage", projectName: "Nehas Digital Signage", status: "Active Build" },
-    purpose: "Centralized configuration for rollout rules, feature availability, and content behavior.",
-    problemSolved: "A signage fleet needs to change behavior, rollout rules, content rules, feature flags, without redeploying every screen. AppConfig style patterns are the planned mechanism for that.",
+    purpose: "Centralized configuration and kill switches for platform behavior.",
+    problemSolved: "A signage fleet needs controlled feature and integration behavior without redeploying every screen. The development platform uses AppConfig-backed controls for operational configuration and kill switches.",
   },
 ];

@@ -143,7 +143,7 @@ export const projectGalleries: Record<string, ProjectGalleryItem[]> = {
       `${nehasBase}/02-screen-map-and-floor-plan-concept.png`,
       "Screen Map and Floor Plan",
       "Nehas Digital Signage concept UI showing a screen map and floor plan",
-      "A visual layout of where screens are physically located, part of the planned fleet management tools."
+      "Early product-direction concept for visualizing physical screen locations."
     ),
     concept(
       `${nehasBase}/03-screen-details-concept.png`,
@@ -173,13 +173,13 @@ export const projectGalleries: Record<string, ProjectGalleryItem[]> = {
       `${nehasBase}/07-schedules-concept.png`,
       "Schedules",
       "Nehas Digital Signage concept UI showing the scheduling view",
-      "The planned scheduling view for coordinating content across the fleet."
+      "Concept interface for the scheduling and priority-resolution capabilities implemented in the development platform."
     ),
     concept(
       `${nehasBase}/08-publishing-and-monitoring-concept.png`,
       "Publishing and Monitoring",
       "Nehas Digital Signage concept UI showing publishing and monitoring",
-      "Publishing simulation and monitoring, designed to confirm a rollout before it goes live."
+      "Concept interface for preload readiness, publishing status, proof of play, and fleet monitoring."
     ),
   ],
   "fsss-limat-pos": [

@@ -12,7 +12,7 @@ export const skillCategories: SkillCategory[] = [
       { name: "AWS AppSync", usedIn: [p("degissnap", "Visual Tizita")] },
       { name: "Amazon DynamoDB", usedIn: [p("degissnap", "Visual Tizita")] },
       { name: "Amazon S3", usedIn: [p("degissnap", "Visual Tizita")] },
-      { name: "AWS AppConfig patterns", usedIn: [p("nehas-digital-signage", "Nehas Digital Signage")] },
+      { name: "AWS AppConfig operational controls", usedIn: [p("nehas-digital-signage", "Nehas Digital Signage")] },
       { name: "Regional deployment and environment management", usedIn: [p("degissnap", "Visual Tizita")] },
       { name: "AWS hosted architecture planning", usedIn: [p("aradacart", "AradaCart")] },
     ],

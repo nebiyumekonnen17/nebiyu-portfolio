@@ -16,14 +16,14 @@ const degissnapPoints = [
   "Application data with DynamoDB",
   "Media storage with Amazon S3",
   "Hosted and deployed with AWS Amplify",
-  "164 automated tests passing (reported milestone)",
+  "974 automated tests across 72 files at the NACLASSU milestone",
 ];
 
 const nehasPoints = [
   "Screen fleet management",
   "Content delivery and scheduling",
   "Remote device operations",
-  "Configuration with AWS AppConfig patterns",
+  "Development backend, console, and player live in us-west-2",
   "Proof of play and health monitoring",
   "Emergency broadcast and alerts",
 ];
@@ -66,7 +66,7 @@ export function AwsInPractice() {
               <StatusBadge status={nehas.status} />
             </div>
             <h3 className="text-xl font-bold text-fg mb-1">Nehas Digital Signage</h3>
-            <p className="text-sm text-fg-muted mb-4">Building a new AWS native platform</p>
+            <p className="text-sm text-fg-muted mb-4">Development environment deployed on AWS</p>
             <ul className="space-y-2.5 mb-5">
               {nehasPoints.map((point) => (
                 <li key={point} className="flex items-start gap-2 text-sm text-fg-muted">
