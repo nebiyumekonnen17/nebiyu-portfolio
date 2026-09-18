@@ -77,7 +77,7 @@ export default function RootLayout({
           addressRegion: "Washington",
           addressCountry: "US",
         },
-        sameAs: [siteConfig.github, siteConfig.credly].filter(Boolean),
+        sameAs: [siteConfig.github, siteConfig.linkedin, siteConfig.credly].filter(Boolean),
       },
       {
         "@type": "WebSite",
