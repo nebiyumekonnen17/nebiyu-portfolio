@@ -41,6 +41,12 @@ export async function generateMetadata({
       description: project.summary,
       images: [{ url: absoluteUrl(thumbnailPath) }],
     },
+    twitter: {
+      card: "summary_large_image",
+      title: `${project.name} | Nebiyu Mekonnen`,
+      description: project.summary,
+      images: [absoluteUrl(thumbnailPath)],
+    },
   };
 }
 

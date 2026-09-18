@@ -40,14 +40,14 @@ export const metadata: Metadata = {
     title: "Nebiyu Mekonnen | Full Stack Software Engineer & AWS Cloud Builder",
     description:
       "Full stack software engineer and AWS cloud builder. Real projects, production AWS experience, and a clear engineering story.",
-    images: [{ url: absoluteUrl("/opengraph-image"), width: 1200, height: 630, alt: "Nebiyu Mekonnen" }],
+    images: [{ url: absoluteUrl("/opengraph-image.png"), width: 1200, height: 630, alt: "Nebiyu Mekonnen — Full Stack Software Engineer and AWS Cloud Builder" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Nebiyu Mekonnen | Full Stack Software Engineer & AWS Cloud Builder",
     description:
       "Full stack software engineer and AWS cloud builder. Real projects, production AWS experience, and a clear engineering story.",
-    images: [absoluteUrl("/opengraph-image")],
+    images: [absoluteUrl("/opengraph-image.png")],
   },
   robots: {
     index: true,
@@ -72,6 +72,8 @@ export default function RootLayout({
         url: siteConfig.siteUrl,
         jobTitle: "Full Stack Software Engineer",
         description: profile.subheadline,
+        image: absoluteUrl("/opengraph-image.png"),
+        knowsAbout: ["Full stack software engineering", "AWS cloud architecture", "AI engineering", "Product architecture"],
         address: {
           "@type": "PostalAddress",
           addressRegion: "Washington",
