@@ -12,7 +12,7 @@ export const siteConfig = {
   siteUrl,
   basePath,
   email: "nebiyumekonnen10@gmail.com" as string | null,
-  linkedin: null as string | null,
+  linkedin: "https://www.linkedin.com/in/nebiyumekonnen/" as string | null,
   resumeUrl: `${siteUrl.replace(/\/$/, "")}/resume/Nebiyu_Mekonnen_Resume.pdf` as string | null,
   github: "https://github.com/nebiyumekonnen17",
   credly: "https://www.credly.com/users/nebiyu-mekonnen",
