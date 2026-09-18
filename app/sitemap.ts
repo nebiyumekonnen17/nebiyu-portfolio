@@ -2,7 +2,7 @@
 
 import type { MetadataRoute } from "next";
 import { projects } from "@/data/projects";
-import { siteConfig } from "@/lib/config";
+import { absoluteUrl } from "@/lib/config";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
@@ -14,14 +14,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/about",
     "/contact",
   ].map((path) => ({
-    url: `${siteConfig.siteUrl}${path}`,
+    url: absoluteUrl(path),
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
     priority: path === "" ? 1 : 0.8,
   }));
 
   const projectRoutes = projects.map((project) => ({
-    url: `${siteConfig.siteUrl}/projects/${project.slug}`,
+    url: absoluteUrl(`/projects/${project.slug}`),
     lastModified: new Date(),
     changeFrequency: "monthly" as const,
     priority: 0.7,
@@ -29,4 +29,3 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [...staticRoutes, ...projectRoutes];
 }
-

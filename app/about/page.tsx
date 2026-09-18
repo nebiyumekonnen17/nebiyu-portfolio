@@ -5,12 +5,13 @@ import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
 import { profile } from "@/data/profile";
+import { absoluteUrl } from "@/lib/config";
 
 export const metadata: Metadata = {
   title: "About",
   description:
     "Nebiyu Mekonnen builds full stack applications, AWS cloud systems, and AI platforms. Here is how he approaches building software, and the roles he is looking for.",
-  alternates: { canonical: "/about" },
+  alternates: { canonical: absoluteUrl("/about") },
 };
 
 const approach = [

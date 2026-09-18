@@ -7,12 +7,13 @@ import { Button } from "@/components/ui/Button";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/Reveal";
 import { credentials, credlyProfileUrl, awsTrainingCertificates } from "@/data/credentials";
 import type { CredentialCategory } from "@/types/content";
+import { absoluteUrl } from "@/lib/config";
 
 export const metadata: Metadata = {
   title: "Credentials and Learning",
   description:
     "Real badges, course completions, and training certificates Nebiyu Mekonnen has earned, connected to the projects they informed.",
-  alternates: { canonical: "/credentials" },
+  alternates: { canonical: absoluteUrl("/credentials") },
 };
 
 const categories: CredentialCategory[] = [

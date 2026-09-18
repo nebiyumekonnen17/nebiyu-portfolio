@@ -3,12 +3,13 @@ import { Container } from "@/components/ui/Container";
 import { ProjectFilterGrid } from "@/components/projects/ProjectFilterGrid";
 import { Reveal } from "@/components/ui/Reveal";
 import { projects } from "@/data/projects";
+import { absoluteUrl } from "@/lib/config";
 
 export const metadata: Metadata = {
   title: "Projects",
   description:
     "Real products, real impact. Explore the full stack, AWS, and AI projects Nebiyu Mekonnen has designed and built.",
-  alternates: { canonical: "/projects" },
+  alternates: { canonical: absoluteUrl("/projects") },
 };
 
 export default function ProjectsPage() {

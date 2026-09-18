@@ -4,12 +4,12 @@ import { Button } from "@/components/ui/Button";
 import { ContactChannels, ContactNote } from "@/components/ContactCTA";
 import { Reveal } from "@/components/ui/Reveal";
 import { ArrowUpRight } from "lucide-react";
-import { siteConfig } from "@/lib/config";
+import { absoluteUrl, siteConfig } from "@/lib/config";
 
 export const metadata: Metadata = {
   title: "Contact",
   description: "Get in touch with Nebiyu Mekonnen about full stack, cloud, or AI engineering roles.",
-  alternates: { canonical: "/contact" },
+  alternates: { canonical: absoluteUrl("/contact") },
 };
 
 export default function ContactPage() {

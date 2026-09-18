@@ -13,6 +13,7 @@ import { ProjectGallery } from "@/components/projects/gallery/ProjectGallery";
 import { ProjectNav } from "@/components/projects/ProjectNav";
 import { TechChip } from "@/components/ui/TechChip";
 import { CredentialCard } from "@/components/credentials/CredentialCard";
+import { absoluteUrl } from "@/lib/config";
 
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
@@ -30,7 +31,7 @@ export async function generateMetadata({
   return {
     title: `${project.name} | Case Study`,
     description: project.summary,
-    alternates: { canonical: `/projects/${project.slug}` },
+    alternates: { canonical: absoluteUrl(`/projects/${project.slug}`) },
     openGraph: {
       title: `${project.name} | Nebiyu Mekonnen`,
       description: project.summary,

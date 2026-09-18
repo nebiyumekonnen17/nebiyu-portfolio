@@ -18,6 +18,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_SITE_URL: https://nebiyumekonnen17.github.io/nebiyu-portfolio
+      NEXT_PUBLIC_BASE_PATH: /nebiyu-portfolio
 
     steps:
       - name: Checkout repository
@@ -31,6 +34,12 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Type check
+        run: npm run typecheck
 
       - name: Build static website
         run: npm run build

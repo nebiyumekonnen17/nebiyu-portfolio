@@ -29,7 +29,7 @@
     "Solutions Engineer",
     "Technical Product Engineer",
   ],
-  portrait: "/nebiyu-portfolio/assets/profile/nebiyu_primary_portrait.png",
+  portrait: `${process.env.NEXT_PUBLIC_BASE_PATH ?? "/nebiyu-portfolio"}/assets/profile/nebiyu_primary_portrait.png`,
 };
 
 export const quickCredibility = [
@@ -38,4 +38,3 @@ export const quickCredibility = [
   { label: "Credentials & Certificates", value: "10+" },
   { label: "Full Stack, Cloud & AI Work", value: "3 Domains" },
 ];
-
