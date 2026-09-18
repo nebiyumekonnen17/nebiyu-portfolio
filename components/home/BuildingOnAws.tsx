@@ -37,7 +37,7 @@ const services = [
   {
     icon: Settings2,
     name: "AWS AppConfig",
-    description: "Configuration patterns planned for fleet and content behavior.",
+    description: "Operational configuration and kill switches for Nehas fleet behavior.",
     tag: "Nehas · Active Build",
   },
 ];

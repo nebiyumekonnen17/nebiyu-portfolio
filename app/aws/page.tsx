@@ -18,7 +18,7 @@ import { absoluteUrl } from "@/lib/config";
 export const metadata: Metadata = {
   title: "AWS Experience",
   description:
-    "How Nebiyu Mekonnen uses AWS in real projects: a production application on Amplify, Cognito, AppSync, DynamoDB, and S3, plus a new AWS native platform in active build.",
+    "How Nebiyu Mekonnen uses AWS in real projects: Visual Tizita in production and the Nehas Digital Signage development platform deployed in us-west-2.",
   alternates: { canonical: absoluteUrl("/aws") },
 };
 
@@ -87,7 +87,7 @@ export default function AwsPage() {
                   "Application data in Amazon DynamoDB",
                   "Media storage in Amazon S3",
                   "Hosted and deployed with AWS Amplify",
-                  "164 automated tests passing (reported milestone)",
+                  "974 automated tests across 72 files at the NACLASSU milestone",
                   "Production deployment and regional environment management",
                 ].map((point) => (
                   <li key={point} className="flex items-start gap-2.5 text-sm text-fg-muted">
@@ -121,7 +121,7 @@ export default function AwsPage() {
             <SectionHeading
               eyebrow="AWS Projects"
               title="Where AWS shows up across my work"
-              description="Production experience and planned architecture are kept clearly separate."
+              description="Production, deployed development, and planned architecture are kept clearly separate."
             />
           </Reveal>
 
@@ -171,7 +171,7 @@ export default function AwsPage() {
             <SectionHeading
               eyebrow="AWS Native Systems in Development"
               title="Applying that experience to Nehas Digital Signage"
-              description="Nehas is a new AWS native platform, not a migration of an earlier Supabase reference build. It is currently in active build."
+              description="Nehas is a new AWS-native platform with its development backend, console, and player deployed in us-west-2. Production remains behind explicit acceptance gates."
             />
 
             <div className="rounded-2xl border border-border bg-surface-elevated p-6 md:p-8">
@@ -182,8 +182,8 @@ export default function AwsPage() {
                 {[
                   "Screen fleet management and health monitoring",
                   "Content, playlists, campaigns, and scheduling",
-                  "AWS AppConfig style configuration patterns",
-                  "Proof of play and emergency broadcast",
+                  "Private media delivery and deterministic publishing",
+                  "Proof of play, observability, and controlled releases",
                 ].map((point) => (
                   <div key={point} className="flex items-start gap-2.5 text-sm text-fg-muted">
                     <Check size={15} className="text-status-active shrink-0 mt-0.5" />

@@ -104,7 +104,7 @@ direction. Tailwind tokens implementing that system live in `app/globals.css`.
   per project in `data/projects.ts` and never inferred or upgraded automatically.
 - `Live Project` and `Repository` buttons only render when `liveUrl` / `repositoryUrl` is set.
 - AWS service usage on the `/aws` page and homepage strip is tagged with which project it's used in and
-  that project's status, so planned services (e.g. AWS AppConfig for Nehas Digital Signage) are never
+  that project's status, so development services (e.g. AWS AppConfig for Nehas Digital Signage) are never
   presented as production.
 
 ## Deployment

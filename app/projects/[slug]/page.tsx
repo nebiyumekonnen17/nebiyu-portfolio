@@ -55,6 +55,8 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
   const galleryIntro =
     project.status === "Production"
       ? `These are AI generated concept UI images, not screenshots captured from the live production application. They illustrate the product direction alongside the real production evidence above.`
+      : project.slug === "nehas-digital-signage"
+        ? `These are early AI-generated product-direction concepts, not screenshots of the deployed development console. The verified implementation status and evidence are documented above.`
       : `These are AI generated concept UI images showing how the ${project.name} experience is being designed. They are not screenshots of a finished product.`;
 
   return (
