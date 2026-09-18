@@ -17,6 +17,7 @@ interface GalleryLightboxProps {
 }
 
 export function GalleryLightbox({ items, index, projectName, onClose, onNavigate }: GalleryLightboxProps) {
+  const dialogRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const touchStartX = useRef<number | null>(null);
   const item = items[index];
@@ -25,25 +26,57 @@ export function GalleryLightbox({ items, index, projectName, onClose, onNavigate
   const goNext = () => onNavigate((index + 1) % items.length);
 
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-      if (e.key === "ArrowLeft") goPrev();
-      if (e.key === "ArrowRight") goNext();
-    };
-    document.addEventListener("keydown", onKey);
+    const previousFocus = document.activeElement as HTMLElement | null;
     document.body.style.overflow = "hidden";
     closeButtonRef.current?.focus();
     return () => {
-      document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
+      previousFocus?.focus();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [index, items.length]);
+  }, []);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        onClose();
+        return;
+      }
+      if (e.key === "ArrowLeft") {
+        onNavigate((index - 1 + items.length) % items.length);
+        return;
+      }
+      if (e.key === "ArrowRight") {
+        onNavigate((index + 1) % items.length);
+        return;
+      }
+      if (e.key !== "Tab" || !dialogRef.current) return;
+
+      const focusable = Array.from(
+        dialogRef.current.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        )
+      );
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (!first || !last) return;
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [index, items.length, onClose, onNavigate]);
 
   if (!item) return null;
 
   return createPortal(
     <div
+      ref={dialogRef}
       className="fixed inset-0 z-[60] flex flex-col bg-bg/95 backdrop-blur-sm"
       role="dialog"
       aria-modal="true"
