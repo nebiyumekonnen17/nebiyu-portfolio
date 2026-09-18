@@ -57,7 +57,6 @@ export const skillCategories: SkillCategory[] = [
     description: "Turning an idea into a scoped, buildable system, then keeping it organized as it grows.",
     skills: [
       { name: "Product architecture and system design", usedIn: [p("nehas-digital-signage", "Nehas Digital Signage")] },
-      { name: "Marketplace and multi vendor system design", usedIn: [p("tibeb-market", "Tibeb Market")] },
       { name: "Point of sale and inventory workflow design", usedIn: [p("fsss-limat-pos", "FSSS Limat POS")] },
       { name: "Multi role platform planning", usedIn: [p("aradacart", "AradaCart")] },
       { name: "Configuration driven architecture", usedIn: [p("nehas-digital-signage", "Nehas Digital Signage")] },
