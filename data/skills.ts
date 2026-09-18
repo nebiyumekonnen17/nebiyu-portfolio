@@ -30,7 +30,7 @@ export const skillCategories: SkillCategory[] = [
       { name: "GraphQL API design", usedIn: [p("degissnap", "Visual Tizita")] },
       { name: "Relational database design", usedIn: [p("fsss-limat-pos", "FSSS Limat POS")] },
       { name: "Progressive web app delivery", usedIn: [p("fsss-limat-pos", "FSSS Limat POS")] },
-      { name: "Offline first application design", usedIn: [p("fsss-limat-pos", "FSSS Limat POS")] },
+      { name: "Local-first application delivery", usedIn: [p("fsss-limat-pos", "FSSS Limat POS")] },
     ],
   },
   {
