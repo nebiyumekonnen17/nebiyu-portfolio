@@ -11,6 +11,7 @@ import { siteConfig } from "@/lib/config";
 export function MobileNav({ open, onClose }: { open: boolean; onClose: () => void }) {
   const pathname = usePathname();
   const panelRef = useRef<HTMLDivElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     onClose();
@@ -19,8 +20,30 @@ export function MobileNav({ open, onClose }: { open: boolean; onClose: () => voi
 
   useEffect(() => {
     if (!open) return;
+    previousFocusRef.current = document.activeElement as HTMLElement | null;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
+      if (e.key === "Escape") {
+        onClose();
+        return;
+      }
+      if (e.key !== "Tab" || !panelRef.current) return;
+
+      const focusable = Array.from(
+        panelRef.current.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        )
+      );
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (!first || !last) return;
+
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     };
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
@@ -28,6 +51,7 @@ export function MobileNav({ open, onClose }: { open: boolean; onClose: () => voi
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
+      previousFocusRef.current?.focus();
     };
   }, [open, onClose]);
 
@@ -37,7 +61,7 @@ export function MobileNav({ open, onClose }: { open: boolean; onClose: () => voi
   // otherwise become the containing block for this fixed-position overlay
   // and trap it inside the header's own box instead of the viewport.
   return createPortal(
-    <div className="fixed inset-0 z-50 lg:hidden" role="dialog" aria-modal="true" aria-label="Site navigation">
+    <div id="mobile-navigation" className="fixed inset-0 z-50 lg:hidden" role="dialog" aria-modal="true" aria-label="Site navigation">
       <button
         aria-label="Close menu"
         className="absolute inset-0 bg-black/70 cursor-pointer"

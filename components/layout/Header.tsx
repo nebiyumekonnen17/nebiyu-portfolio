@@ -66,6 +66,8 @@ export function Header() {
           <button
             onClick={() => setOpen(true)}
             aria-label="Open menu"
+            aria-expanded={open}
+            aria-controls="mobile-navigation"
             className="flex h-11 w-11 items-center justify-center rounded-lg text-fg lg:hidden cursor-pointer hover:bg-surface-elevated"
           >
             <Menu size={22} />
