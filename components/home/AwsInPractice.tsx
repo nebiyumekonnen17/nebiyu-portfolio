@@ -41,7 +41,7 @@ export function AwsInPractice() {
             <div className="flex items-center justify-between mb-3">
               <StatusBadge status={degissnap.status} />
             </div>
-            <h3 className="text-xl font-bold text-fg mb-1">DegisSnap</h3>
+            <h3 className="text-xl font-bold text-fg mb-1">Visual Tizita</h3>
             <p className="text-sm text-fg-muted mb-4">
               Live in production on AWS ({degissnap.aws?.productionRegion}, {degissnap.aws?.regionLabel})
             </p>

@@ -13,7 +13,7 @@ export const credentials: Credential[] = [
     dateEarned: "2026-07-24",
     connectedProjectSlugs: ["degissnap", "nehas-digital-signage"],
     connectionNote:
-      "Foundational AWS training that led into building and deploying DegisSnap, and now informs the Nehas Digital Signage architecture.",
+      "Foundational AWS training that led into building and deploying Visual Tizita, and now informs the Nehas Digital Signage architecture.",
   },
   {
     name: "AWS Skills Center Cloud Practitioner Foundations",
@@ -23,7 +23,7 @@ export const credentials: Credential[] = [
     dateEarned: "2026-06-12",
     connectedProjectSlugs: ["degissnap"],
     connectionNote:
-      "Cloud fundamentals practiced directly in DegisSnap's Amplify, Cognito, AppSync, DynamoDB, and S3 architecture.",
+      "Cloud fundamentals practiced directly in Visual Tizita's Amplify, Cognito, AppSync, DynamoDB, and S3 architecture.",
   },
   {
     name: "Career Management Essentials",
@@ -68,7 +68,7 @@ export const credentials: Credential[] = [
     category: "Security",
     dateEarned: "2026-04-03",
     connectedProjectSlugs: ["degissnap"],
-    connectionNote: "Security fundamentals applied to authentication and access control design in DegisSnap.",
+    connectionNote: "Security fundamentals applied to authentication and access control design in Visual Tizita.",
   },
   {
     name: "Operating Systems Basics",

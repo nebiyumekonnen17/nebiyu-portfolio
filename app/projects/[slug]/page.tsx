@@ -13,7 +13,7 @@ import { ProjectGallery } from "@/components/projects/gallery/ProjectGallery";
 import { ProjectNav } from "@/components/projects/ProjectNav";
 import { TechChip } from "@/components/ui/TechChip";
 import { CredentialCard } from "@/components/credentials/CredentialCard";
-import { absoluteUrl } from "@/lib/config";
+import { absoluteUrl, siteConfig } from "@/lib/config";
 
 export function generateStaticParams() {
   return projects.map((project) => ({ slug: project.slug }));
@@ -27,6 +27,10 @@ export async function generateMetadata({
   const { slug } = await params;
   const project = getProjectBySlug(slug);
   if (!project) return {};
+  const thumbnailPath =
+    siteConfig.basePath && project.thumbnail.startsWith(siteConfig.basePath)
+      ? project.thumbnail.slice(siteConfig.basePath.length)
+      : project.thumbnail;
 
   return {
     title: `${project.name} | Case Study`,
@@ -35,7 +39,7 @@ export async function generateMetadata({
     openGraph: {
       title: `${project.name} | Nebiyu Mekonnen`,
       description: project.summary,
-      images: [{ url: project.thumbnail }],
+      images: [{ url: absoluteUrl(thumbnailPath) }],
     },
   };
 }
