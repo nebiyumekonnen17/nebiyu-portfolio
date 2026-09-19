@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 export function ProjectCard({ project, priority = false }: { project: Project; priority?: boolean }) {
   const accent = accentClasses[project.accent];
   const visibleTech = project.technologies.slice(0, 4);
+  const preserveFullThumbnail = project.slug === "degissnap";
 
   return (
     <article
@@ -18,13 +19,21 @@ export function ProjectCard({ project, priority = false }: { project: Project; p
         accent.hoverBorder
       )}
     >
-      <div className="relative aspect-[4/3] overflow-hidden bg-surface">
+      <div
+        className={cn(
+          "relative aspect-[4/3] overflow-hidden bg-surface",
+          preserveFullThumbnail && "bg-[#071510]"
+        )}
+      >
         <Image
           src={project.thumbnail}
           alt={project.thumbnailAlt}
           fill
           sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-          className="object-cover object-top transition-transform duration-300 group-hover:scale-[1.025]"
+          className={cn(
+            "transition-transform duration-300 group-hover:scale-[1.025]",
+            preserveFullThumbnail ? "object-contain object-center" : "object-cover object-top"
+          )}
           priority={priority}
         />
         <div
