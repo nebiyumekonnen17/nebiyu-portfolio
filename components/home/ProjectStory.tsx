@@ -26,7 +26,6 @@ export type StoryProject = {
 
 export function ProjectStory({ projects }: { projects: StoryProject[] }) {
   const [active, setActive] = useState(0);
-  const [visuals, setVisuals] = useState<Record<string, number>>({});
   const steps = useRef<Array<HTMLElement | null>>([]);
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -69,8 +68,6 @@ export function ProjectStory({ projects }: { projects: StoryProject[] }) {
       </div>
       <aside className="project-story-visual" aria-live="polite">
         {projects.map((project, index) => {
-          const visualIndex = visuals[project.slug] ?? 0;
-          const visual = project.visuals[visualIndex] ?? project.visuals[0];
           return (
             <div
               key={project.slug}
@@ -82,47 +79,22 @@ export function ProjectStory({ projects }: { projects: StoryProject[] }) {
               </div>
               <div className="project-frame-image">
                 <Image
-                  src={visual.image}
-                  alt={visual.alt}
+                  src={project.thumbnail}
+                  alt={project.thumbnailAlt}
                   fill
                   sizes="(min-width: 1024px) 48vw, 100vw"
-                  className="object-contain"
+                  className="object-cover object-center"
                   priority={index === 0}
                 />
               </div>
               <div className="project-frame-bottom">
                 <div>
                   <strong>{project.name}</strong>
-                  <small>{visual.note}</small>
+                  <small>Product overview</small>
                 </div>
                 <span>
                   {index + 1} / {projects.length}
                 </span>
-              </div>
-              <div
-                className="project-frame-controls"
-                aria-label={`${project.name} visuals`}
-              >
-                {project.visuals.map((item, visualIndex) => (
-                  <button
-                    key={item.label}
-                    type="button"
-                    className={
-                      visuals[project.slug] === visualIndex ||
-                      (!visuals[project.slug] && visualIndex === 0)
-                        ? "is-active"
-                        : ""
-                    }
-                    onClick={() =>
-                      setVisuals((current) => ({
-                        ...current,
-                        [project.slug]: visualIndex,
-                      }))
-                    }
-                  >
-                    {item.label}
-                  </button>
-                ))}
               </div>
             </div>
           );
