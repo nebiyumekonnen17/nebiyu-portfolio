@@ -2,64 +2,70 @@ import type { SkillCategory } from "@/types/content";
 
 const p = (slug: string, name: string) => ({ projectSlug: slug, projectName: name });
 
+const visualTizita = p("degissnap", "Visual Tizita");
+const naep = p("naep", "NAEP");
+const nehas = p("nehas-digital-signage", "Nehas Digital Signage");
+const fsss = p("fsss-limat-pos", "FSSS Limat POS");
+const aradaCart = p("aradacart", "AradaCart");
+
 export const skillCategories: SkillCategory[] = [
   {
     title: "Cloud and AWS",
-    description: "Hands on AWS work, from a production deployment down to the services underneath it.",
+    description: "Hands-on AWS work, from production deployment to the services and operational controls underneath it.",
     skills: [
-      { name: "AWS Amplify", usedIn: [p("degissnap", "Visual Tizita")] },
-      { name: "Amazon Cognito", usedIn: [p("degissnap", "Visual Tizita")] },
-      { name: "AWS AppSync", usedIn: [p("degissnap", "Visual Tizita")] },
-      { name: "Amazon DynamoDB", usedIn: [p("degissnap", "Visual Tizita")] },
-      { name: "Amazon S3", usedIn: [p("degissnap", "Visual Tizita")] },
-      { name: "AWS AppConfig operational controls", usedIn: [p("nehas-digital-signage", "Nehas Digital Signage")] },
-      { name: "Regional deployment and environment management", usedIn: [p("degissnap", "Visual Tizita")] },
-      { name: "AWS hosted architecture planning", usedIn: [p("aradacart", "AradaCart")] },
+      { name: "AWS Amplify", usedIn: [visualTizita, nehas] },
+      { name: "Amazon Cognito", usedIn: [visualTizita] },
+      { name: "AWS AppSync", usedIn: [visualTizita] },
+      { name: "Amazon DynamoDB", usedIn: [visualTizita] },
+      { name: "Amazon S3", usedIn: [visualTizita, nehas] },
+      { name: "AWS AppConfig operational controls", usedIn: [nehas] },
+      { name: "Regional deployment and environment management", usedIn: [visualTizita, nehas] },
+      { name: "AWS-hosted architecture planning", usedIn: [visualTizita, nehas, aradaCart] },
     ],
   },
   {
     title: "Software Engineering",
-    description: "Full stack application development across React, backend services, and databases.",
+    description: "Full-stack application development across modern frontends, backend services, developer tooling, and databases.",
     skills: [
-      { name: "React", usedIn: [p("degissnap", "Visual Tizita")] },
-      { name: "Vite", usedIn: [p("degissnap", "Visual Tizita")] },
-      { name: "TypeScript", usedIn: [p("naep", "NAEP")] },
-      { name: "Node.js", usedIn: [p("naep", "NAEP"), p("fsss-limat-pos", "FSSS Limat POS")] },
-      { name: "Command-line tool development", usedIn: [p("naep", "NAEP")] },
-      { name: "Monorepo package architecture", usedIn: [p("naep", "NAEP")] },
-      { name: "GraphQL API design", usedIn: [p("degissnap", "Visual Tizita")] },
-      { name: "Relational database design", usedIn: [p("fsss-limat-pos", "FSSS Limat POS")] },
-      { name: "Progressive web app delivery", usedIn: [p("fsss-limat-pos", "FSSS Limat POS")] },
-      { name: "Local-first application delivery", usedIn: [p("fsss-limat-pos", "FSSS Limat POS")] },
+      { name: "React", usedIn: [visualTizita, nehas, fsss] },
+      { name: "Vite", usedIn: [visualTizita, nehas, fsss] },
+      { name: "TypeScript", usedIn: [naep, nehas] },
+      { name: "Node.js", usedIn: [naep, fsss] },
+      { name: "Command-line tool development", usedIn: [naep] },
+      { name: "Monorepo package architecture", usedIn: [naep] },
+      { name: "GraphQL API design", usedIn: [visualTizita] },
+      { name: "Relational database design", usedIn: [fsss] },
+      { name: "Progressive web app delivery", usedIn: [fsss] },
+      { name: "Local-first application delivery", usedIn: [fsss] },
     ],
   },
   {
     title: "AI and Data",
     description: "Designing the foundations for reusable, provider-independent AI-assisted engineering.",
     skills: [
-      { name: "Provider-agnostic platform architecture", usedIn: [p("naep", "NAEP")] },
-      { name: "Engineering knowledge-system design", usedIn: [p("naep", "NAEP")] },
-      { name: "AI workflow governance planning", usedIn: [p("naep", "NAEP")] },
+      { name: "Provider-agnostic platform architecture", usedIn: [naep] },
+      { name: "Engineering knowledge-system design", usedIn: [naep] },
+      { name: "AI workflow governance planning", usedIn: [naep] },
     ],
   },
   {
     title: "Cybersecurity and Infrastructure",
-    description: "Access control, identity, and system fundamentals underneath the applications I build.",
+    description: "Identity, permissions, tenant boundaries, and system fundamentals underneath the applications I build.",
     skills: [
-      { name: "Authentication and identity design", usedIn: [p("degissnap", "Visual Tizita")] },
-      { name: "Authorization and ownership rules", usedIn: [p("degissnap", "Visual Tizita")] },
-      { name: "Role based access control", usedIn: [p("fsss-limat-pos", "FSSS Limat POS")] },
-      { name: "Security fundamentals", usedIn: [p("degissnap", "Visual Tizita")] },
+      { name: "Authentication and identity design", usedIn: [visualTizita, fsss] },
+      { name: "Authorization and ownership rules", usedIn: [visualTizita, nehas, fsss] },
+      { name: "Role-based access control", usedIn: [nehas, fsss] },
+      { name: "Security fundamentals", usedIn: [visualTizita, nehas, fsss] },
     ],
   },
   {
     title: "Product and Project Management",
-    description: "Turning an idea into a scoped, buildable system, then keeping it organized as it grows.",
+    description: "Turning an idea into a scoped, buildable system, then keeping the product organized as it grows.",
     skills: [
-      { name: "Product architecture and system design", usedIn: [p("nehas-digital-signage", "Nehas Digital Signage")] },
-      { name: "Point of sale and inventory workflow design", usedIn: [p("fsss-limat-pos", "FSSS Limat POS")] },
-      { name: "Multi role platform planning", usedIn: [p("aradacart", "AradaCart")] },
-      { name: "Configuration driven architecture", usedIn: [p("nehas-digital-signage", "Nehas Digital Signage")] },
+      { name: "Product architecture and system design", usedIn: [visualTizita, naep, nehas, fsss, aradaCart] },
+      { name: "Point-of-sale and inventory workflow design", usedIn: [fsss] },
+      { name: "Multi-role platform planning", usedIn: [visualTizita, nehas, fsss, aradaCart] },
+      { name: "Configuration-driven architecture", usedIn: [nehas, fsss] },
     ],
   },
 ];
