@@ -6,7 +6,7 @@ import { CredentialCard } from "@/components/credentials/CredentialCard";
 import { getProjectBySlug, projects } from "@/data/projects";
 import { credentials } from "@/data/credentials";
 import { profile } from "@/data/profile";
-import { siteConfig } from "@/lib/config";
+import { assetUrl, siteConfig } from "@/lib/config";
 import {
   ProjectStory,
   type StoryProject,
@@ -30,22 +30,25 @@ const projectStoryInputs: Array<
     [
       {
         label: "Guest entry",
-        image:
+        image: assetUrl(
           "/images/projects/degissnap/gallery/01-guest-landing-qr-scan-concept.png",
+        ),
         alt: "Visual Tizita guest QR entry experience",
         note: "A guest-first entry point",
       },
       {
         label: "Host view",
-        image:
+        image: assetUrl(
           "/images/projects/degissnap/gallery/06-host-dashboard-overview-concept.png",
+        ),
         alt: "Visual Tizita host dashboard",
         note: "Host controls and activity",
       },
       {
         label: "Gallery",
-        image:
+        image: assetUrl(
           "/images/projects/degissnap/gallery/02-event-gallery-concept.png",
+        ),
         alt: "Visual Tizita private event gallery",
         note: "A shared event memory",
       },
@@ -60,22 +63,25 @@ const projectStoryInputs: Array<
     [
       {
         label: "Control room",
-        image:
+        image: assetUrl(
           "/images/projects/nehas-digital-signage/gallery/01-overview-dashboard-concept.png",
+        ),
         alt: "Nehas digital signage dashboard",
         note: "One view of the fleet",
       },
       {
         label: "Schedules",
-        image:
+        image: assetUrl(
           "/images/projects/nehas-digital-signage/gallery/07-schedules-concept.png",
+        ),
         alt: "Nehas digital signage schedules",
         note: "Content at the right time",
       },
       {
         label: "Monitoring",
-        image:
+        image: assetUrl(
           "/images/projects/nehas-digital-signage/gallery/08-publishing-and-monitoring-concept.png",
+        ),
         alt: "Nehas publishing and monitoring",
         note: "Operational visibility",
       },
@@ -90,22 +96,25 @@ const projectStoryInputs: Array<
     [
       {
         label: "Checkout",
-        image:
+        image: assetUrl(
           "/images/projects/fsss-limat-pos/gallery/01-pos-checkout-concept.png",
+        ),
         alt: "FSSS Limat POS checkout screen",
         note: "The counter workflow",
       },
       {
         label: "Scan & search",
-        image:
+        image: assetUrl(
           "/images/projects/fsss-limat-pos/gallery/02-product-search-and-scan-concept.png",
+        ),
         alt: "FSSS Limat POS product search and scan",
         note: "Fast product discovery",
       },
       {
         label: "Held sales",
-        image:
+        image: assetUrl(
           "/images/projects/fsss-limat-pos/gallery/07-held-sales-concept.png",
+        ),
         alt: "FSSS Limat POS held sales",
         note: "Pick up where you left off",
       },
