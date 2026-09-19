@@ -18,6 +18,7 @@ import { WorkflowMap } from "./WorkflowMap";
 import "./story.css";
 import "./story-interactions.css";
 import "./story-autoplay.css";
+import "./story-film.css";
 
 const projectStoryInputs: Array<
   [string, string, string, string, string, StoryVisual[]]
