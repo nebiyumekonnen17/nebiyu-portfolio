@@ -23,8 +23,8 @@ export function Hero() {
         }}
         aria-hidden="true"
       />
-      <Container className="relative py-14 md:py-20 lg:py-24">
-        <div className="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16 items-center">
+      <Container className="relative py-12 md:py-16 lg:py-18">
+        <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:gap-14 items-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -39,7 +39,7 @@ export function Hero() {
               </div>
             )}
 
-            <h1 className="text-[38px] leading-[1.08] sm:text-[46px] md:text-[54px] font-bold text-fg text-balance tracking-tight">
+            <h1 className="text-[38px] leading-[1.08] sm:text-[46px] md:text-[52px] font-bold text-fg text-balance tracking-tight">
               I build real software systems on <span className="text-gold">AWS</span> that
               solve problems and <span className="text-gold">create impact.</span>
             </h1>
@@ -83,12 +83,12 @@ export function Hero() {
           </motion.div>
 
           <motion.div
-            className="flex flex-col gap-5"
+            className="flex w-full max-w-[360px] flex-col gap-4 justify-self-center lg:justify-self-end"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.15, ease: easeOut }}
           >
-            <div className="relative mx-auto w-full max-w-[340px] lg:max-w-none">
+            <div className="relative mx-auto w-full max-w-[340px] lg:max-w-[360px]">
               <div
                 className="pointer-events-none absolute -inset-4 rounded-[28px] opacity-70"
                 style={{
