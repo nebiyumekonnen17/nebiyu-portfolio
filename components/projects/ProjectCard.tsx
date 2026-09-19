@@ -14,18 +14,22 @@ export function ProjectCard({ project, priority = false }: { project: Project; p
   return (
     <article
       className={cn(
-        "group relative flex flex-col rounded-2xl border border-border bg-surface-elevated overflow-hidden transition-all duration-200 hover:bg-surface-elevated-hover hover:-translate-y-0.5",
+        "group relative flex flex-col rounded-2xl border border-border bg-surface-elevated overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.14)] transition-all duration-200 hover:bg-surface-elevated-hover hover:-translate-y-1 hover:shadow-[0_18px_45px_rgba(0,0,0,0.24)]",
         accent.hoverBorder
       )}
     >
-      <div className="relative aspect-square overflow-hidden bg-surface">
+      <div className="relative aspect-[4/3] overflow-hidden bg-surface">
         <Image
           src={project.thumbnail}
           alt={project.thumbnailAlt}
           fill
           sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-          className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+          className="object-cover object-top transition-transform duration-300 group-hover:scale-[1.025]"
           priority={priority}
+        />
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-surface-elevated via-surface-elevated/65 to-transparent"
+          aria-hidden="true"
         />
         <div className="absolute top-3 right-3">
           <StatusBadge status={project.status} />
