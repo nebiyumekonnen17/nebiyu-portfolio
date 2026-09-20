@@ -19,6 +19,7 @@ import "./story.css";
 import "./story-interactions.css";
 import "./story-autoplay.css";
 import "./story-film.css";
+import "./product-scenes.css";
 
 const projectStoryInputs: Array<
   [string, string, string, string, string, StoryVisual[]]
