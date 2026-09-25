@@ -28,32 +28,53 @@ const projectStoryInputs: Array<
     "degissnap",
     "Event memories are scattered across phones and group chats.",
     "I built a private event companion where guests enter through a QR code, contribute without an account, and hosts keep control of the experience.",
-    "Production AWS deployment · Event-companion milestone verified on phone and desktop",
+    "Production AWS · Real event deployment · 974 tests · Mobile + desktop verified",
     "React · Amplify · Cognito · AppSync · DynamoDB · S3",
     [
+      {
+        label: "Event experience",
+        image: assetUrl("/assets/projects/Visual-Tizita-events-poster.png"),
+        alt: "Visual Tizita event companion across weddings, graduations, baby showers, conferences, and celebrations",
+        note: "One event companion across different kinds of moments",
+      },
       {
         label: "Guest entry",
         image: assetUrl(
           "/images/projects/degissnap/gallery/01-guest-landing-qr-scan-concept.png",
         ),
         alt: "Visual Tizita guest QR entry experience",
-        note: "A guest-first entry point",
+        note: "QR-first entry with no guest account required",
       },
       {
-        label: "Host view",
+        label: "Host controls",
         image: assetUrl(
           "/images/projects/degissnap/gallery/06-host-dashboard-overview-concept.png",
         ),
         alt: "Visual Tizita host dashboard",
-        note: "Host controls and activity",
+        note: "Host operations, moderation, and event visibility",
       },
       {
-        label: "Gallery",
+        label: "Shared gallery",
         image: assetUrl(
           "/images/projects/degissnap/gallery/02-event-gallery-concept.png",
         ),
         alt: "Visual Tizita private event gallery",
-        note: "A shared event memory",
+        note: "A shared memory space guests can actually use",
+      },
+    ],
+  ],
+  [
+    "naep",
+    "AI-assisted development gets messy when the knowledge disappears with the tool.",
+    "I am building a provider-agnostic TypeScript platform that standardizes engineering workspaces first, then gives future AI runtimes a dependable foundation to operate on.",
+    "Public source repository · TypeScript monorepo builds · Working init, doctor & info CLI",
+    "TypeScript · Node.js · Commander.js · npm workspaces",
+    [
+      {
+        label: "Platform overview",
+        image: assetUrl("/assets/projects/NAEP-thumbnail.png"),
+        alt: "NAEP engineering platform dashboard concept",
+        note: "A durable engineering layer designed to outlive any one AI provider",
       },
     ],
   ],
@@ -61,7 +82,7 @@ const projectStoryInputs: Array<
     "nehas-digital-signage",
     "A screen fleet needs more than content—it needs control.",
     "I designed one system for tenant-scoped media, scheduling, device operations, and playback visibility, with operational controls for the fleet.",
-    "Active build · Development environment deployed in us-west-2",
+    "Active build · AWS development environment · Tenant-scoped fleet operations",
     "TypeScript · React · Vite · AWS Amplify",
     [
       {
@@ -70,7 +91,7 @@ const projectStoryInputs: Array<
           "/images/projects/nehas-digital-signage/gallery/01-overview-dashboard-concept.png",
         ),
         alt: "Nehas digital signage dashboard",
-        note: "One view of the fleet",
+        note: "One operational view of screens, tenants, and activity",
       },
       {
         label: "Schedules",
@@ -78,7 +99,7 @@ const projectStoryInputs: Array<
           "/images/projects/nehas-digital-signage/gallery/07-schedules-concept.png",
         ),
         alt: "Nehas digital signage schedules",
-        note: "Content at the right time",
+        note: "Content planned for the right screen at the right time",
       },
       {
         label: "Monitoring",
@@ -86,40 +107,7 @@ const projectStoryInputs: Array<
           "/images/projects/nehas-digital-signage/gallery/08-publishing-and-monitoring-concept.png",
         ),
         alt: "Nehas publishing and monitoring",
-        note: "Operational visibility",
-      },
-    ],
-  ],
-  [
-    "fsss-limat-pos",
-    "A busy counter cannot depend on disconnected tools.",
-    "I built a register and management system around real workflows: scanning, held carts, receipts, inventory history, and staff permissions—while retaining legacy data compatibility.",
-    "Built · Local web/PWA and Electron delivery paths",
-    "React · Node.js · Express · MySQL · Electron",
-    [
-      {
-        label: "Checkout",
-        image: assetUrl(
-          "/images/projects/fsss-limat-pos/gallery/01-pos-checkout-concept.png",
-        ),
-        alt: "FSSS Limat POS checkout screen",
-        note: "The counter workflow",
-      },
-      {
-        label: "Scan & search",
-        image: assetUrl(
-          "/images/projects/fsss-limat-pos/gallery/02-product-search-and-scan-concept.png",
-        ),
-        alt: "FSSS Limat POS product search and scan",
-        note: "Fast product discovery",
-      },
-      {
-        label: "Held sales",
-        image: assetUrl(
-          "/images/projects/fsss-limat-pos/gallery/07-held-sales-concept.png",
-        ),
-        alt: "FSSS Limat POS held sales",
-        note: "Pick up where you left off",
+        note: "Publishing status and fleet visibility after content goes live",
       },
     ],
   ],
@@ -127,21 +115,24 @@ const projectStoryInputs: Array<
 
 const projectStories: StoryProject[] = projectStoryInputs.map(
   ([slug, problem, outcome, proof, stack, visuals]) => {
-  const project = getProjectBySlug(slug)!;
-  return {
-    slug,
-    problem,
-    outcome,
-    proof,
-    stack,
-    visuals,
-    name: project.name,
-    status: project.status,
-    thumbnail: project.thumbnail,
-    thumbnailAlt: project.thumbnailAlt,
-  };
+    const project = getProjectBySlug(slug)!;
+    return {
+      slug,
+      problem,
+      outcome,
+      proof,
+      stack,
+      visuals,
+      name: project.name,
+      status: project.status,
+      thumbnail: project.thumbnail,
+      thumbnailAlt: project.thumbnailAlt,
+      liveUrl: project.liveUrl,
+      repositoryUrl: project.repositoryUrl,
+    };
   },
 );
+
 const selectedCredentials = [
   "AWS re/Start Graduate",
   "AWS Skills Center Cloud Practitioner Foundations",
@@ -236,16 +227,18 @@ export function StoryHome() {
           </dl>
         </Container>
       </section>
+
       <section id="selected-work" className="home-section home-work">
         <Container>
           <div className="home-section-intro">
             <p className="home-kicker">Selected work</p>
             <h2>
-              Every system starts with a <em>real problem.</em>
+              Don’t just read the project. <em>See how it works.</em>
             </h2>
             <p>
-              Scroll through three projects to see the problem, the system I
-              built, and the proof behind it.
+              Follow three systems from the problem to the proof. As you move
+              through the stories, the product view changes with the work—from
+              event experience to engineering platform to fleet operations.
             </p>
             <Link href="/projects" className="home-inline-link">
               View all {projects.length} projects{" "}
@@ -256,6 +249,7 @@ export function StoryHome() {
           <WorkflowMap />
         </Container>
       </section>
+
       <section className="home-section home-architecture">
         <Container>
           <div className="home-section-intro">
@@ -303,6 +297,7 @@ export function StoryHome() {
           </div>
         </Container>
       </section>
+
       <section className="home-section home-evidence">
         <Container>
           <div className="home-section-intro">
@@ -314,6 +309,7 @@ export function StoryHome() {
           <EvidenceReveal />
         </Container>
       </section>
+
       <section className="home-section home-capabilities">
         <Container>
           <div className="home-section-intro">
@@ -353,6 +349,7 @@ export function StoryHome() {
           </div>
         </Container>
       </section>
+
       <section className="home-section home-learning">
         <Container>
           <div className="home-section-intro">
@@ -381,6 +378,7 @@ export function StoryHome() {
           </div>
         </Container>
       </section>
+
       <section className="home-close">
         <Container>
           <p className="home-kicker">Let’s connect</p>
