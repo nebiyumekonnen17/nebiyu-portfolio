@@ -35,6 +35,7 @@ const filters = [
 ];
 
 const featuredSlugs = ["degissnap", "naep", "nehas-digital-signage"];
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "/nebiyu-portfolio";
 
 function projectIsArchitecture(project: Project) {
   return project.status === "Architecture" || project.status === "Concept";
@@ -42,6 +43,18 @@ function projectIsArchitecture(project: Project) {
 
 function evidenceFor(project: Project) {
   return project.evidence.slice(0, 3);
+}
+
+function featuredImageFor(project: Project) {
+  if (project.slug === "naep") {
+    return `${basePath}/assets/projects/NAEP-thumbnail-final.webp`;
+  }
+
+  if (project.slug === "nehas-digital-signage") {
+    return `${basePath}/assets/projects/Nehas-Digital-Signage-thumbnail-final.webp`;
+  }
+
+  return project.thumbnail;
 }
 
 function FeaturedProjectRow({ project, index }: { project: Project; index: number }) {
@@ -53,13 +66,13 @@ function FeaturedProjectRow({ project, index }: { project: Project; index: numbe
       <div className={cn("featured-project-visual", project.slug === "degissnap" && "preserve-artwork")}>
         <div className="featured-project-frame">
           <Image
-            src={project.thumbnail}
+            src={featuredImageFor(project)}
             alt={project.thumbnailAlt}
             fill
             sizes="(min-width: 1100px) 58vw, 100vw"
             className={cn(
               "featured-project-image",
-              project.slug === "degissnap" ? "object-contain object-center" : "object-cover object-top",
+              project.slug === "degissnap" ? "object-contain object-center" : "object-cover object-center",
             )}
             priority={index === 0}
           />
