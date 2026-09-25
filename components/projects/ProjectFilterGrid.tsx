@@ -1,10 +1,13 @@
 "use client";
 
+import Image from "next/image";
+import Link from "next/link";
 import { useMemo, useState } from "react";
-import { Search } from "lucide-react";
+import { ArrowUpRight, Search } from "lucide-react";
 import type { Project } from "@/types/content";
 import { ProjectCard } from "@/components/projects/ProjectCard";
 import { RevealGroup, RevealItem } from "@/components/ui/Reveal";
+import { StatusBadge } from "@/components/ui/StatusBadge";
 import { cn } from "@/lib/utils";
 
 const filters = [
@@ -20,9 +23,72 @@ const filters = [
   { label: "Architecture", match: (p: Project) => p.status === "Architecture" || p.status === "Concept" },
 ];
 
+const featuredSlugs = ["degissnap", "naep", "nehas-digital-signage"];
+
+function FeaturedProject({ project, primary = false }: { project: Project; primary?: boolean }) {
+  const evidence = project.evidence.slice(0, primary ? 3 : 2);
+
+  return (
+    <article className={cn("featured-work-card", primary && "is-primary")}>
+      <div className={cn("featured-work-media", project.slug === "degissnap" && "preserve-artwork")}>
+        <Image
+          src={project.thumbnail}
+          alt={project.thumbnailAlt}
+          fill
+          sizes={primary ? "(min-width: 1024px) 58vw, 100vw" : "(min-width: 1024px) 38vw, 100vw"}
+          className={project.slug === "degissnap" ? "object-contain object-center" : "object-cover object-top"}
+          priority={primary}
+        />
+        <div className="featured-work-image-shade" aria-hidden="true" />
+        <div className="featured-work-status">
+          <StatusBadge status={project.status} />
+        </div>
+      </div>
+
+      <div className="featured-work-copy">
+        <div className="featured-work-label">
+          <span>{primary ? "Featured case study" : "Selected work"}</span>
+          <span>{project.category.slice(0, 2).join(" / ")}</span>
+        </div>
+        <h2>{project.name}</h2>
+        <p className="featured-work-tagline">{project.tagline}</p>
+        <p className="featured-work-summary">{project.summary}</p>
+
+        {evidence.length > 0 && (
+          <div className="featured-work-evidence" aria-label={`${project.name} evidence`}>
+            {evidence.map((item) => (
+              <span key={item}>{item}</span>
+            ))}
+          </div>
+        )}
+
+        <div className="featured-work-actions">
+          <Link href={`/projects/${project.slug}`}>
+            Explore case study <ArrowUpRight size={15} />
+          </Link>
+          {project.liveUrl && (
+            <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+              Live product <ArrowUpRight size={14} />
+            </a>
+          )}
+          {project.repositoryUrl && (
+            <a href={project.repositoryUrl} target="_blank" rel="noopener noreferrer">
+              Source <ArrowUpRight size={14} />
+            </a>
+          )}
+        </div>
+      </div>
+    </article>
+  );
+}
+
 export function ProjectFilterGrid({ projects }: { projects: Project[] }) {
   const [active, setActive] = useState(filters[0].label);
   const [query, setQuery] = useState("");
+
+  const featured = featuredSlugs
+    .map((slug) => projects.find((project) => project.slug === slug))
+    .filter((project): project is Project => Boolean(project));
 
   const visible = useMemo(() => {
     const filterFn = filters.find((f) => f.label === active)?.match ?? (() => true);
@@ -33,56 +99,108 @@ export function ProjectFilterGrid({ projects }: { projects: Project[] }) {
       return (
         p.name.toLowerCase().includes(q) ||
         p.summary.toLowerCase().includes(q) ||
+        p.tagline.toLowerCase().includes(q) ||
         p.technologies.some((t) => t.toLowerCase().includes(q))
       );
     });
   }, [projects, active, query]);
 
+  const isDefaultView = active === filters[0].label && query.trim() === "";
+  const archiveProjects = isDefaultView
+    ? visible.filter((project) => !featuredSlugs.includes(project.slug))
+    : visible;
+
   return (
-    <div>
-      <div className="flex flex-col gap-4 mb-10 md:flex-row md:items-center md:justify-between">
-        <div className="flex flex-wrap gap-2" role="group" aria-label="Filter projects by category">
-          {filters.map((f) => (
-            <button
-              key={f.label}
-              onClick={() => setActive(f.label)}
-              aria-pressed={active === f.label}
-              className={cn(
-                "rounded-full border px-4 py-2 text-sm font-medium transition-colors cursor-pointer",
-                active === f.label
-                  ? "border-gold bg-gold/10 text-gold"
-                  : "border-border text-fg-muted hover:border-border-strong hover:text-fg"
-              )}
-            >
-              {f.label}
-            </button>
-          ))}
+    <div className="work-browser">
+      {isDefaultView && featured.length > 0 && (
+        <section className="featured-work" aria-labelledby="featured-work-title">
+          <div className="work-section-heading">
+            <div>
+              <p>Featured work</p>
+              <h2 id="featured-work-title">Three systems. Three different engineering problems.</h2>
+            </div>
+            <span>Selected for product depth, cloud work, and engineering range.</span>
+          </div>
+
+          <div className="featured-work-grid">
+            {featured[0] && <FeaturedProject project={featured[0]} primary />}
+            <div className="featured-work-side">
+              {featured.slice(1).map((project) => (
+                <FeaturedProject key={project.slug} project={project} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <section className="project-archive" aria-labelledby="project-archive-title">
+        <div className="work-section-heading archive-heading">
+          <div>
+            <p>{isDefaultView ? "Project archive" : "Filtered work"}</p>
+            <h2 id="project-archive-title">
+              {isDefaultView ? "More systems, experiments, and architecture work." : `${visible.length} matching project${visible.length === 1 ? "" : "s"}.`}
+            </h2>
+          </div>
+          <span>
+            {isDefaultView
+              ? `${projects.length} documented projects across product, AWS, AI, and operations.`
+              : "Adjust the filters or search to explore a different slice of the portfolio."}
+          </span>
         </div>
 
-        <label className="relative w-full md:w-64">
-          <span className="sr-only">Search projects</span>
-          <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-fg-subtle" />
-          <input
-            type="search"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search projects..."
-            className="w-full rounded-xl border border-border bg-surface-elevated py-2.5 pl-9 pr-3 text-sm text-fg placeholder:text-fg-subtle focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-gold)]"
-          />
-        </label>
-      </div>
+        <div className="work-filter-bar">
+          <div className="work-filter-buttons" role="group" aria-label="Filter projects by category">
+            {filters.map((f) => (
+              <button
+                key={f.label}
+                onClick={() => setActive(f.label)}
+                aria-pressed={active === f.label}
+                className={cn("work-filter-button", active === f.label && "is-active")}
+              >
+                {f.label}
+              </button>
+            ))}
+          </div>
 
-      {visible.length > 0 ? (
-        <RevealGroup className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {visible.map((project) => (
-            <RevealItem key={project.slug}>
-              <ProjectCard project={project} />
-            </RevealItem>
-          ))}
-        </RevealGroup>
-      ) : (
-        <p className="text-center text-fg-muted py-16">No projects match that search or filter.</p>
-      )}
+          <label className="work-project-search">
+            <span className="sr-only">Search projects</span>
+            <Search size={16} />
+            <input
+              type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search projects..."
+            />
+          </label>
+        </div>
+
+        {archiveProjects.length > 0 ? (
+          <RevealGroup className="project-archive-grid">
+            {archiveProjects.map((project) => (
+              <RevealItem key={project.slug}>
+                <ProjectCard project={project} />
+              </RevealItem>
+            ))}
+          </RevealGroup>
+        ) : isDefaultView ? (
+          <div className="project-archive-empty">
+            <p>The featured case studies above are the full portfolio currently documented here.</p>
+          </div>
+        ) : (
+          <div className="project-archive-empty">
+            <p>No projects match that search or filter.</p>
+            <button
+              type="button"
+              onClick={() => {
+                setActive(filters[0].label);
+                setQuery("");
+              }}
+            >
+              Clear filters
+            </button>
+          </div>
+        )}
+      </section>
     </div>
   );
 }
