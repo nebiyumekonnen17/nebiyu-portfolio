@@ -47,7 +47,7 @@ function evidenceFor(project: Project) {
 
 function featuredImageFor(project: Project) {
   if (project.slug === "naep") {
-    return `${basePath}/assets/projects/NAEP-thumbnail-final.webp`;
+    return `${basePath}/assets/projects/NAEP-fallback.svg`;
   }
 
   if (project.slug === "nehas-digital-signage") {
