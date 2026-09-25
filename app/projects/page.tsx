@@ -15,24 +15,17 @@ export const metadata: Metadata = {
 export default function ProjectsPage() {
   return (
     <main className="work-page">
-      <section className="work-page-hero">
+      <header className="work-page-header">
         <Container>
-          <div className="work-page-hero-copy">
-            <p className="work-page-kicker">Work / Product Engineering</p>
-            <h1>I build software around the way people actually work.</h1>
-            <p className="work-page-intro">
-              Full-stack products shaped around real workflows — from the interface and permissions
-              to the backend, cloud architecture, security, and deployment.
+          <div className="work-page-header-inner">
+            <h1>Work</h1>
+            <p>
+              Selected production systems, active builds, and case studies across product
+              engineering, AWS, and AI.
             </p>
-            <div className="work-page-focus" aria-label="Work focus">
-              <span>Product engineering</span>
-              <span>AWS systems</span>
-              <span>Operational UX</span>
-              <span>Security & permissions</span>
-            </div>
           </div>
         </Container>
-      </section>
+      </header>
 
       <section className="work-page-content">
         <Container>
