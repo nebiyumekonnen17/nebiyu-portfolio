@@ -7,73 +7,93 @@ import { ArrowUpRight, Search } from "lucide-react";
 import type { Project } from "@/types/content";
 import { ProjectCard } from "@/components/projects/ProjectCard";
 import { RevealGroup, RevealItem } from "@/components/ui/Reveal";
-import { StatusBadge } from "@/components/ui/StatusBadge";
 import { cn } from "@/lib/utils";
 
 const filters = [
   { label: "All Projects", match: () => true },
   { label: "AWS", match: (p: Project) => p.category.includes("AWS") },
   { label: "AI", match: (p: Project) => p.category.includes("AI") },
-  { label: "SaaS", match: (p: Project) => p.category.includes("SaaS") || p.category.includes("Enterprise SaaS") },
+  {
+    label: "SaaS",
+    match: (p: Project) =>
+      p.category.includes("SaaS") || p.category.includes("Enterprise SaaS"),
+  },
   {
     label: "Business Software",
-    match: (p: Project) => p.category.includes("Business Software") || p.category.includes("POS"),
+    match: (p: Project) =>
+      p.category.includes("Business Software") || p.category.includes("POS"),
   },
-  { label: "Marketplace", match: (p: Project) => p.category.includes("Marketplace") || p.category.includes("Ecommerce") },
-  { label: "Architecture", match: (p: Project) => p.status === "Architecture" || p.status === "Concept" },
+  {
+    label: "Marketplace",
+    match: (p: Project) =>
+      p.category.includes("Marketplace") || p.category.includes("Ecommerce"),
+  },
+  {
+    label: "Architecture",
+    match: (p: Project) => projectIsArchitecture(p),
+  },
 ];
 
 const featuredSlugs = ["degissnap", "naep", "nehas-digital-signage"];
 
-function FeaturedProject({ project, primary = false }: { project: Project; primary?: boolean }) {
-  const evidence = project.evidence.slice(0, primary ? 3 : 2);
+function projectIsArchitecture(project: Project) {
+  return project.status === "Architecture" || project.status === "Concept";
+}
+
+function evidenceFor(project: Project) {
+  return project.evidence.slice(0, 3);
+}
+
+function FeaturedProjectRow({ project, index }: { project: Project; index: number }) {
+  const reverse = index % 2 === 1;
+  const evidence = evidenceFor(project);
 
   return (
-    <article className={cn("featured-work-card", primary && "is-primary")}>
-      <div className={cn("featured-work-media", project.slug === "degissnap" && "preserve-artwork")}>
-        <Image
-          src={project.thumbnail}
-          alt={project.thumbnailAlt}
-          fill
-          sizes={primary ? "(min-width: 1024px) 58vw, 100vw" : "(min-width: 1024px) 38vw, 100vw"}
-          className={project.slug === "degissnap" ? "object-contain object-center" : "object-cover object-top"}
-          priority={primary}
-        />
-        <div className="featured-work-image-shade" aria-hidden="true" />
-        <div className="featured-work-status">
-          <StatusBadge status={project.status} />
+    <article className={cn("featured-project-row", reverse && "is-reversed")}>
+      <div className={cn("featured-project-visual", project.slug === "degissnap" && "preserve-artwork")}>
+        <div className="featured-project-frame">
+          <Image
+            src={project.thumbnail}
+            alt={project.thumbnailAlt}
+            fill
+            sizes="(min-width: 1100px) 58vw, 100vw"
+            className={cn(
+              "featured-project-image",
+              project.slug === "degissnap" ? "object-contain object-center" : "object-cover object-top",
+            )}
+            priority={index === 0}
+          />
         </div>
       </div>
 
-      <div className="featured-work-copy">
-        <div className="featured-work-label">
-          <span>{primary ? "Featured case study" : "Selected work"}</span>
-          <span>{project.category.slice(0, 2).join(" / ")}</span>
-        </div>
+      <div className="featured-project-copy">
+        <p className="featured-project-number">
+          {String(index + 1).padStart(2, "0")} — {project.status}
+        </p>
         <h2>{project.name}</h2>
-        <p className="featured-work-tagline">{project.tagline}</p>
-        <p className="featured-work-summary">{project.summary}</p>
+        <p className="featured-project-tagline">{project.tagline}</p>
+        <p className="featured-project-summary">{project.summary}</p>
 
         {evidence.length > 0 && (
-          <div className="featured-work-evidence" aria-label={`${project.name} evidence`}>
+          <ul className="featured-project-proof" aria-label={`${project.name} evidence`}>
             {evidence.map((item) => (
-              <span key={item}>{item}</span>
+              <li key={item}>{item}</li>
             ))}
-          </div>
+          </ul>
         )}
 
-        <div className="featured-work-actions">
+        <div className="featured-project-actions">
           <Link href={`/projects/${project.slug}`}>
-            Explore case study <ArrowUpRight size={15} />
+            View case study <ArrowUpRight size={16} />
           </Link>
           {project.liveUrl && (
             <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
-              Live product <ArrowUpRight size={14} />
+              Visit product <ArrowUpRight size={15} />
             </a>
           )}
           {project.repositoryUrl && (
             <a href={project.repositoryUrl} target="_blank" rel="noopener noreferrer">
-              Source <ArrowUpRight size={14} />
+              View source <ArrowUpRight size={15} />
             </a>
           )}
         </div>
@@ -91,16 +111,17 @@ export function ProjectFilterGrid({ projects }: { projects: Project[] }) {
     .filter((project): project is Project => Boolean(project));
 
   const visible = useMemo(() => {
-    const filterFn = filters.find((f) => f.label === active)?.match ?? (() => true);
+    const filterFn = filters.find((filter) => filter.label === active)?.match ?? (() => true);
     const q = query.trim().toLowerCase();
-    return projects.filter((p) => {
-      if (!filterFn(p)) return false;
+
+    return projects.filter((project) => {
+      if (!filterFn(project)) return false;
       if (!q) return true;
       return (
-        p.name.toLowerCase().includes(q) ||
-        p.summary.toLowerCase().includes(q) ||
-        p.tagline.toLowerCase().includes(q) ||
-        p.technologies.some((t) => t.toLowerCase().includes(q))
+        project.name.toLowerCase().includes(q) ||
+        project.summary.toLowerCase().includes(q) ||
+        project.tagline.toLowerCase().includes(q) ||
+        project.technologies.some((technology) => technology.toLowerCase().includes(q))
       );
     });
   }, [projects, active, query]);
@@ -113,51 +134,49 @@ export function ProjectFilterGrid({ projects }: { projects: Project[] }) {
   return (
     <div className="work-browser">
       {isDefaultView && featured.length > 0 && (
-        <section className="featured-work" aria-labelledby="featured-work-title">
+        <section className="featured-projects" aria-labelledby="featured-projects-title">
           <div className="work-section-heading">
-            <div>
-              <p>Featured work</p>
-              <h2 id="featured-work-title">Three systems. Three different engineering problems.</h2>
-            </div>
-            <span>Selected for product depth, cloud work, and engineering range.</span>
+            <p>Featured work</p>
+            <h2 id="featured-projects-title">Three systems. Three different engineering problems.</h2>
+            <span>
+              Production event software, an AI engineering platform, and cloud-based signage —
+              shown as complete product stories instead of squeezed cards.
+            </span>
           </div>
 
-          <div className="featured-work-grid">
-            {featured[0] && <FeaturedProject project={featured[0]} primary />}
-            <div className="featured-work-side">
-              {featured.slice(1).map((project) => (
-                <FeaturedProject key={project.slug} project={project} />
-              ))}
-            </div>
+          <div className="featured-project-list">
+            {featured.map((project, index) => (
+              <FeaturedProjectRow key={project.slug} project={project} index={index} />
+            ))}
           </div>
         </section>
       )}
 
       <section className="project-archive" aria-labelledby="project-archive-title">
         <div className="work-section-heading archive-heading">
-          <div>
-            <p>{isDefaultView ? "Project archive" : "Filtered work"}</p>
-            <h2 id="project-archive-title">
-              {isDefaultView ? "More systems, experiments, and architecture work." : `${visible.length} matching project${visible.length === 1 ? "" : "s"}.`}
-            </h2>
-          </div>
+          <p>{isDefaultView ? "More work" : "Filtered work"}</p>
+          <h2 id="project-archive-title">
+            {isDefaultView
+              ? "More systems, experiments, and architecture work."
+              : `${visible.length} matching project${visible.length === 1 ? "" : "s"}.`}
+          </h2>
           <span>
             {isDefaultView
-              ? `${projects.length} documented projects across product, AWS, AI, and operations.`
-              : "Adjust the filters or search to explore a different slice of the portfolio."}
+              ? "Browse the rest of the portfolio or filter by the kind of engineering you want to see."
+              : "Adjust the filters or search to explore a different part of the portfolio."}
           </span>
         </div>
 
-        <div className="work-filter-bar">
+        <div className="work-filter-row">
           <div className="work-filter-buttons" role="group" aria-label="Filter projects by category">
-            {filters.map((f) => (
+            {filters.map((filter) => (
               <button
-                key={f.label}
-                onClick={() => setActive(f.label)}
-                aria-pressed={active === f.label}
-                className={cn("work-filter-button", active === f.label && "is-active")}
+                key={filter.label}
+                onClick={() => setActive(filter.label)}
+                aria-pressed={active === filter.label}
+                className={cn("work-filter-button", active === filter.label && "is-active")}
               >
-                {f.label}
+                {filter.label}
               </button>
             ))}
           </div>
@@ -168,7 +187,7 @@ export function ProjectFilterGrid({ projects }: { projects: Project[] }) {
             <input
               type="search"
               value={query}
-              onChange={(e) => setQuery(e.target.value)}
+              onChange={(event) => setQuery(event.target.value)}
               placeholder="Search projects..."
             />
           </label>

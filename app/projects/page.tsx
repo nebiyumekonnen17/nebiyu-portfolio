@@ -13,51 +13,23 @@ export const metadata: Metadata = {
 };
 
 export default function ProjectsPage() {
-  const shipped = projects.filter((project) =>
-    ["Production", "Built"].includes(project.status),
-  ).length;
-  const activeBuilds = projects.filter((project) =>
-    ["Active Build", "Development"].includes(project.status),
-  ).length;
-
   return (
     <main className="work-page">
       <section className="work-page-hero">
         <Container>
-          <div className="work-page-hero-grid">
-            <div className="work-page-hero-copy">
-              <p className="work-page-kicker">Work / Product Engineering</p>
-              <h1>
-                Systems built to solve <em>real operational problems.</em>
-              </h1>
-              <p>
-                I design and build full-stack products from the workflow up — shaping the
-                interface, backend, cloud architecture, permissions, and deployment around how
-                people actually need to use the system.
-              </p>
+          <div className="work-page-hero-copy">
+            <p className="work-page-kicker">Work / Product Engineering</p>
+            <h1>I build software around the way people actually work.</h1>
+            <p className="work-page-intro">
+              Full-stack products shaped around real workflows — from the interface and permissions
+              to the backend, cloud architecture, security, and deployment.
+            </p>
+            <div className="work-page-focus" aria-label="Work focus">
+              <span>Product engineering</span>
+              <span>AWS systems</span>
+              <span>Operational UX</span>
+              <span>Security & permissions</span>
             </div>
-
-            <div className="work-page-proof-panel" aria-label="Portfolio summary">
-              <div>
-                <strong>{shipped}</strong>
-                <span>shipped or production systems</span>
-              </div>
-              <div>
-                <strong>{activeBuilds}</strong>
-                <span>active development builds</span>
-              </div>
-              <div>
-                <strong>{projects.length}</strong>
-                <span>documented case studies</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="work-page-scope" aria-label="Work focus">
-            <span>Full-stack product development</span>
-            <span>AWS cloud systems</span>
-            <span>Operations-first UX</span>
-            <span>Security & permissions</span>
           </div>
         </Container>
       </section>
