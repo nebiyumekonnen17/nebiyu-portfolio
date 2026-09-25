@@ -9,8 +9,8 @@ export const projects: Project[] = [
     category: ["AWS", "SaaS", "Full Stack"],
     summary:
       "Production event platform with no-account guest uploads, private galleries, moderation, downloads, slideshow, guestbook, analytics, cover artwork, QR sharing, and host operations.",
-    thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH ?? "/nebiyu-portfolio"}/assets/projects/Visual-Tizita-thumbnail.jpg`,
-    thumbnailAlt: "Visual Tizita brand preview for the AWS-native event companion platform",
+    thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH ?? "/nebiyu-portfolio"}/assets/projects/Visual-Tizita-events-poster.png`,
+    thumbnailAlt: "Visual Tizita event companion for weddings, graduations, baby showers, conferences, and celebrations",
     accent: "violet",
     technologies: [
       "React",
