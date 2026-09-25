@@ -1,31 +1,72 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
 import { ProjectFilterGrid } from "@/components/projects/ProjectFilterGrid";
-import { Reveal } from "@/components/ui/Reveal";
 import { projects } from "@/data/projects";
 import { absoluteUrl } from "@/lib/config";
+import "./work-page.css";
 
 export const metadata: Metadata = {
-  title: "Projects",
+  title: "Work",
   description:
     "Explore Nebiyu Mekonnen's production software, active builds, and architecture work across full stack development, AWS, and AI.",
   alternates: { canonical: absoluteUrl("/projects") },
 };
 
 export default function ProjectsPage() {
-  return (
-    <div className="py-14 md:py-16">
-      <Container>
-        <Reveal className="mb-10 max-w-2xl">
-          <h1 className="text-[32px] md:text-[40px] font-bold text-fg mb-3">Projects</h1>
-          <p className="text-lg text-fg-muted leading-relaxed">
-            Production software, active builds, and architecture concepts—each labeled clearly so
-            you can see what is live, what is implemented, and what is still being designed.
-          </p>
-        </Reveal>
+  const shipped = projects.filter((project) =>
+    ["Production", "Built"].includes(project.status),
+  ).length;
+  const activeBuilds = projects.filter((project) =>
+    ["Active Build", "Development"].includes(project.status),
+  ).length;
 
-        <ProjectFilterGrid projects={projects} />
-      </Container>
-    </div>
+  return (
+    <main className="work-page">
+      <section className="work-page-hero">
+        <Container>
+          <div className="work-page-hero-grid">
+            <div className="work-page-hero-copy">
+              <p className="work-page-kicker">Work / Product Engineering</p>
+              <h1>
+                Systems built to solve <em>real operational problems.</em>
+              </h1>
+              <p>
+                I design and build full-stack products from the workflow up — shaping the
+                interface, backend, cloud architecture, permissions, and deployment around how
+                people actually need to use the system.
+              </p>
+            </div>
+
+            <div className="work-page-proof-panel" aria-label="Portfolio summary">
+              <div>
+                <strong>{shipped}</strong>
+                <span>shipped or production systems</span>
+              </div>
+              <div>
+                <strong>{activeBuilds}</strong>
+                <span>active development builds</span>
+              </div>
+              <div>
+                <strong>{projects.length}</strong>
+                <span>documented case studies</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="work-page-scope" aria-label="Work focus">
+            <span>Full-stack product development</span>
+            <span>AWS cloud systems</span>
+            <span>Operations-first UX</span>
+            <span>Security & permissions</span>
+          </div>
+        </Container>
+      </section>
+
+      <section className="work-page-content">
+        <Container>
+          <ProjectFilterGrid projects={projects} />
+        </Container>
+      </section>
+    </main>
   );
 }
