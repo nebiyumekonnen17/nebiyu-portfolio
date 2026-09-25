@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowUpRight, Github } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import "./work-premium.css";
 
@@ -87,7 +87,7 @@ function ProjectActions({ project }: { project: StoryProject }) {
           rel="noopener noreferrer"
           className="project-story-action"
         >
-          <Github size={14} /> GitHub
+          GitHub <ArrowUpRight size={14} />
         </a>
       )}
     </div>
