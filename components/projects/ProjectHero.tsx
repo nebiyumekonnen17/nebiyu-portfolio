@@ -9,9 +9,12 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { accentClasses } from "@/lib/accent";
+import { projectHeroImage, preserveFullProjectArtwork } from "@/lib/project-images";
 
 export function ProjectHero({ project }: { project: Project }) {
   const accent = accentClasses[project.accent];
+  const heroImage = projectHeroImage(project.slug, project.thumbnail);
+  const preserveArtwork = preserveFullProjectArtwork(project.slug);
 
   return (
     <section className="border-b border-border bg-surface">
@@ -23,7 +26,7 @@ export function ProjectHero({ project }: { project: Project }) {
           <ArrowLeft size={15} /> Back to Projects
         </Link>
 
-        <Reveal className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+        <Reveal className="grid gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
           <div>
             <div className="flex items-center gap-3 mb-4">
               <StatusBadge status={project.status} />
@@ -76,14 +79,14 @@ export function ProjectHero({ project }: { project: Project }) {
             </div>
           </div>
 
-          <div className={`relative aspect-square w-full overflow-hidden rounded-2xl border ${accent.borderSoft}`}>
+          <div className={`relative aspect-[16/10] w-full overflow-hidden rounded-2xl border ${accent.borderSoft} bg-surface-elevated shadow-[0_18px_45px_rgba(0,0,0,0.24)]`}>
             <Image
-              src={project.thumbnail}
+              src={heroImage}
               alt={project.thumbnailAlt}
               fill
               priority
-              sizes="(min-width: 1024px) 45vw, 100vw"
-              className="object-cover"
+              sizes="(min-width: 1024px) 48vw, 100vw"
+              className={preserveArtwork ? "object-contain object-center" : "object-cover object-center"}
             />
           </div>
         </Reveal>
