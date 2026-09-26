@@ -24,16 +24,16 @@ export function ProjectGallery({
     <div>
       <button
         onClick={() => setOpenIndex(0)}
-        className="group relative block w-full overflow-hidden rounded-2xl border border-border bg-surface-elevated text-left cursor-pointer transition-colors hover:border-border-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-gold)] mb-4"
+        className="group relative mx-auto block w-full max-w-[720px] overflow-hidden rounded-2xl border border-border bg-surface-elevated text-left cursor-pointer transition-colors hover:border-border-strong focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-gold)] mb-5"
         aria-label={`Enlarge ${featured.title}`}
       >
-        <div className="relative aspect-[16/9] sm:aspect-[2/1] bg-surface">
+        <div className="relative aspect-[4/3] bg-surface">
           <Image
             src={featured.src}
             alt={featured.alt}
             fill
-            sizes="(min-width: 1024px) 800px, 100vw"
-            className="object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+            sizes="(min-width: 768px) 720px, 100vw"
+            className="object-contain transition-transform duration-300 group-hover:scale-[1.01]"
           />
           <span className="absolute top-3 left-3">
             <GalleryTypeBadge type={featured.type} />
@@ -64,7 +64,7 @@ export function ProjectGallery({
                   alt={item.alt}
                   fill
                   sizes="(min-width: 1024px) 220px, (min-width: 640px) 33vw, 50vw"
-                  className="object-contain transition-transform duration-300 group-hover:scale-[1.03]"
+                  className="object-contain transition-transform duration-300 group-hover:scale-[1.015]"
                   loading="lazy"
                 />
                 <span className="absolute bottom-2 right-2 flex h-7 w-7 items-center justify-center rounded-md bg-bg/70 text-fg opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-opacity">
