@@ -1,4 +1,4 @@
-﻿export const profile = {
+export const profile = {
   name: "Nebiyu Mekonnen",
   location: "Washington State, USA",
   positioning: [
@@ -29,7 +29,7 @@
     "Solutions Engineer",
     "Technical Product Engineer",
   ],
-  portrait: `${process.env.NEXT_PUBLIC_BASE_PATH ?? "/nebiyu-portfolio"}/assets/profile/nebiyu_primary_portrait.webp`,
+  portrait: `${process.env.NEXT_PUBLIC_BASE_PATH ?? "/nebiyu-portfolio"}/assets/profile/nebiyu_primary_portrait.png`,
 };
 
 export const quickCredibility = [
