@@ -129,14 +129,14 @@ export function GalleryLightbox({ items, index, projectName, onClose, onNavigate
           <ChevronLeft size={22} />
         </button>
 
-        <figure className="relative flex max-h-full max-w-4xl flex-col items-center gap-4">
-          <div className="relative max-h-[62vh] w-[min(88vw,880px)] aspect-[4/3] rounded-2xl overflow-hidden border border-border-strong bg-surface">
+        <figure className="relative flex max-h-full max-w-3xl flex-col items-center gap-4">
+          <div className="relative max-h-[64vh] w-[min(92vw,700px)] aspect-[4/3] rounded-2xl overflow-hidden border border-border-strong bg-surface shadow-[0_20px_70px_rgba(0,0,0,0.45)]">
             <Image
               key={item.src}
               src={item.src}
               alt={item.alt}
               fill
-              sizes="(min-width: 1024px) 880px, 88vw"
+              sizes="(min-width: 768px) 700px, 92vw"
               className="object-contain"
               priority
             />
