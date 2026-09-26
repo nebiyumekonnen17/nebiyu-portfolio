@@ -72,8 +72,8 @@ const projectStoryInputs: Array<
     [
       {
         label: "Platform overview",
-        image: assetUrl("/assets/projects/NAEP-thumbnail.png"),
-        alt: "NAEP engineering platform dashboard concept",
+        image: assetUrl("/assets/projects/NAEP-hero.svg"),
+        alt: "NAEP AI engineering platform workspace and provider-agnostic pipeline",
         note: "A durable engineering layer designed to outlive any one AI provider",
       },
     ],
@@ -86,12 +86,10 @@ const projectStoryInputs: Array<
     "TypeScript · React · Vite · AWS Amplify",
     [
       {
-        label: "Control room",
-        image: assetUrl(
-          "/images/projects/nehas-digital-signage/gallery/01-overview-dashboard-concept.png",
-        ),
-        alt: "Nehas digital signage dashboard",
-        note: "One operational view of screens, tenants, and activity",
+        label: "Digital signage system",
+        image: assetUrl("/assets/projects/Nehas-Digital-Signage-hero.svg"),
+        alt: "Nehas Digital Signage screen fleet and management console",
+        note: "Real-world screen content paired with centralized fleet control",
       },
       {
         label: "Schedules",
