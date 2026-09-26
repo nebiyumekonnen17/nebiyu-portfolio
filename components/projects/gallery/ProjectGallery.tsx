@@ -4,8 +4,21 @@ import { useState } from "react";
 import Image from "next/image";
 import { Maximize2 } from "lucide-react";
 import type { ProjectGalleryItem } from "@/types/content";
+import { assetUrl, siteConfig } from "@/lib/config";
 import { GalleryTypeBadge } from "./ConceptBadge";
 import { GalleryLightbox } from "./GalleryLightbox";
+
+function resolveGalleryAsset(src: string) {
+  if (/^(?:https?:)?\/\//.test(src) || src.startsWith("data:") || src.startsWith("blob:")) {
+    return src;
+  }
+
+  if (src === siteConfig.basePath || src.startsWith(`${siteConfig.basePath}/`)) {
+    return src;
+  }
+
+  return assetUrl(src);
+}
 
 export function ProjectGallery({
   items,
@@ -18,7 +31,11 @@ export function ProjectGallery({
 
   if (items.length === 0) return null;
 
-  const [featured, ...rest] = items;
+  const resolvedItems = items.map((item) => ({
+    ...item,
+    src: resolveGalleryAsset(item.src),
+  }));
+  const [featured, ...rest] = resolvedItems;
 
   return (
     <div>
@@ -81,7 +98,7 @@ export function ProjectGallery({
 
       {openIndex !== null && (
         <GalleryLightbox
-          items={items}
+          items={resolvedItems}
           index={openIndex}
           projectName={projectName}
           onClose={() => setOpenIndex(null)}
