@@ -7,6 +7,7 @@ import { ArrowUpRight, Search } from "lucide-react";
 import type { Project } from "@/types/content";
 import { ProjectCard } from "@/components/projects/ProjectCard";
 import { RevealGroup, RevealItem } from "@/components/ui/Reveal";
+import { projectHeroImage, preserveFullProjectArtwork } from "@/lib/project-images";
 import { cn } from "@/lib/utils";
 
 const filters = [
@@ -35,7 +36,6 @@ const filters = [
 ];
 
 const featuredSlugs = ["degissnap", "naep", "nehas-digital-signage"];
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "/nebiyu-portfolio";
 
 function projectIsArchitecture(project: Project) {
   return project.status === "Architecture" || project.status === "Concept";
@@ -45,34 +45,24 @@ function evidenceFor(project: Project) {
   return project.evidence.slice(0, 3);
 }
 
-function featuredImageFor(project: Project) {
-  if (project.slug === "naep") {
-    return `${basePath}/assets/projects/NAEP-fallback.svg`;
-  }
-
-  if (project.slug === "nehas-digital-signage") {
-    return `${basePath}/assets/projects/Nehas-Digital-Signage-thumbnail-final.webp`;
-  }
-
-  return project.thumbnail;
-}
-
 function FeaturedProjectRow({ project, index }: { project: Project; index: number }) {
   const reverse = index % 2 === 1;
   const evidence = evidenceFor(project);
+  const preserveArtwork = preserveFullProjectArtwork(project.slug);
+  const displayImage = projectHeroImage(project.slug, project.thumbnail);
 
   return (
     <article className={cn("featured-project-row", reverse && "is-reversed")}>
-      <div className={cn("featured-project-visual", project.slug === "degissnap" && "preserve-artwork")}>
+      <div className={cn("featured-project-visual", preserveArtwork && "preserve-artwork")}>
         <div className="featured-project-frame">
           <Image
-            src={featuredImageFor(project)}
+            src={displayImage}
             alt={project.thumbnailAlt}
             fill
             sizes="(min-width: 1100px) 58vw, 100vw"
             className={cn(
               "featured-project-image",
-              project.slug === "degissnap" ? "object-contain object-center" : "object-cover object-center",
+              preserveArtwork ? "object-contain object-center" : "object-cover object-center",
             )}
             priority={index === 0}
           />
