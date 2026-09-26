@@ -5,12 +5,14 @@ import type { Project } from "@/types/content";
 import { StatusBadge } from "@/components/ui/StatusBadge";
 import { TechChip } from "@/components/ui/TechChip";
 import { accentClasses } from "@/lib/accent";
+import { projectHeroImage, preserveFullProjectArtwork } from "@/lib/project-images";
 import { cn } from "@/lib/utils";
 
 export function ProjectCard({ project, priority = false }: { project: Project; priority?: boolean }) {
   const accent = accentClasses[project.accent];
   const visibleTech = project.technologies.slice(0, 4);
-  const preserveFullThumbnail = project.slug === "degissnap";
+  const preserveFullThumbnail = preserveFullProjectArtwork(project.slug);
+  const displayImage = projectHeroImage(project.slug, project.thumbnail);
 
   return (
     <article
@@ -21,23 +23,23 @@ export function ProjectCard({ project, priority = false }: { project: Project; p
     >
       <div
         className={cn(
-          "relative aspect-[4/3] overflow-hidden bg-surface",
+          "relative aspect-[16/10] overflow-hidden bg-surface",
           preserveFullThumbnail && "bg-[#071510]"
         )}
       >
         <Image
-          src={project.thumbnail}
+          src={displayImage}
           alt={project.thumbnailAlt}
           fill
-          sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+          sizes="(min-width: 1024px) 42vw, (min-width: 640px) 50vw, 100vw"
           className={cn(
-            "transition-transform duration-300 group-hover:scale-[1.025]",
-            preserveFullThumbnail ? "object-contain object-center" : "object-cover object-top"
+            "transition-transform duration-300 group-hover:scale-[1.018]",
+            preserveFullThumbnail ? "object-contain object-center" : "object-cover object-center"
           )}
           priority={priority}
         />
         <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-surface-elevated via-surface-elevated/65 to-transparent"
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-surface-elevated via-surface-elevated/45 to-transparent"
           aria-hidden="true"
         />
         <div className="absolute top-3 right-3">
