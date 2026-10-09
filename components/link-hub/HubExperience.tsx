@@ -56,7 +56,7 @@ export function HubExperience({ content, compact = false }: { content: HubConten
         </div>
       </section>
       <section className="hub-main-links" aria-label="Main links">
-        {buttons.map((l, i) => <a href={l.url} {...linkAttrs(l.url)} key={l.id} className={"hub-link-card " + (i === 0 ? "hub-link-featured" : "")}>
+        {buttons.map((l, i) => <a href={l.id === "resume" ? content.profile.resume : l.url} {...linkAttrs(l.id === "resume" ? content.profile.resume : l.url)} key={l.id} className={"hub-link-card " + (i === 0 ? "hub-link-featured" : "")}>
           <span className="hub-link-icon"><Icon name={l.icon}/></span>
           <span className="hub-link-text"><strong>{l.label}</strong>{l.description && <small>{l.description}</small>}</span>
           <ArrowUpRight size={19} aria-hidden="true"/>
