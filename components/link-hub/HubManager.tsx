@@ -1,6 +1,6 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
-import { ArrowDown, ArrowUp, ArrowUpRight, BarChart3, Check, ChevronRight, Download, Eye, EyeOff, FileText, Github, ImageUp, LayoutDashboard, Link2, Loader2, LockKeyhole, LogOut, Palette, Plus, QrCode, Save, Settings, Share2, ShieldCheck, Smartphone, Sparkles, Trash2, Upload, X } from "lucide-react";
+import { ArrowDown, ArrowUp, ArrowUpRight, BarChart3, Check, ChevronRight, Download, Eye, EyeOff, FileText, ImageUp, LayoutDashboard, Link2, Loader2, LockKeyhole, LogOut, Palette, Plus, QrCode, Save, Settings, Share2, ShieldCheck, Smartphone, Sparkles, Trash2, Upload, X } from "lucide-react";
 import QRCode from "qrcode";
 import { HubExperience } from "@/components/link-hub/HubExperience";
 import { initialHub, type HubContent, type HubLink, type HubProject } from "@/lib/link-hub";
