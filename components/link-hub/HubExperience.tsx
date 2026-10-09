@@ -107,15 +107,19 @@ function ProjectArtwork({ src, name, type }: { src: string; name: string; type: 
 export function HubExperience({
   content,
   compact = false,
+  previewTheme,
+  onPreviewThemeChange,
 }: {
   content: HubContent;
   compact?: boolean;
+  previewTheme?: "dark" | "light";
+  onPreviewThemeChange?: (theme: "dark" | "light") => void;
 }) {
   const theme = useSyncExternalStore(subscribeTheme, readTheme, serverTheme);
   const [copied, setCopied] = useState(false);
   const [shareFallback, setShareFallback] = useState(false);
 
-  const isLight = theme === "light";
+  const isLight = (previewTheme ?? theme) === "light";
   const visibleSocials = content.links.filter((link) => link.visible && link.section === "social");
   const primaryLinks = content.links.filter((link) => link.visible && link.section === "primary");
   const extraLinks = content.links.filter((link) => link.visible && link.section === "extra");
@@ -124,6 +128,7 @@ export function HubExperience({
 
   function toggleTheme() {
     const next = isLight ? "dark" : "light";
+    if (onPreviewThemeChange) { onPreviewThemeChange(next); return; }
     try {
       window.localStorage.setItem("nebiyu-link-theme", next);
       window.dispatchEvent(new Event("hub-theme-change"));
@@ -153,7 +158,9 @@ export function HubExperience({
 
   return (
     <div
-      className={"link-hub-shell hub-" + theme + (compact ? " hub-compact" : "")}
+      className={"link-hub-shell hub-" + (previewTheme ?? theme) + (compact ? " hub-compact" : "")}
+      data-dark-template={content.design.darkTemplate ?? "midnight"}
+      data-light-template={content.design.lightTemplate ?? "minimal"}
       style={{
         "--hub-accent-dark": content.design.darkAccent,
         "--hub-accent-light": content.design.lightAccent,
