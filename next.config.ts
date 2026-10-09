@@ -5,7 +5,7 @@ import type { NextConfig } from "next";
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? (process.env.VERCEL ? "" : "/nebiyu-portfolio");
 
 const nextConfig: NextConfig = {
-  output: "export",
+  output: process.env.VERCEL ? undefined : "export",
   trailingSlash: true,
   basePath: basePath || undefined,
   assetPrefix: basePath || undefined,

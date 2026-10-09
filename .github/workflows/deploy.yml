@@ -1,90 +1,47 @@
-name: Deploy Portfolio to GitHub Pages
-
+name: Redirect old portfolio to new domain
 on:
   push:
-    branches:
-      - master
+    branches: [master]
   workflow_dispatch:
-
 permissions:
   contents: read
   pages: write
   id-token: write
-
 concurrency:
   group: github-pages
   cancel-in-progress: true
-
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
-    env:
-      NEXT_PUBLIC_SITE_URL: https://nebiyumekonnen17.github.io/nebiyu-portfolio
-      NEXT_PUBLIC_BASE_PATH: /nebiyu-portfolio
-
+    environment:
+      name: github-pages
+      url: https://nebiyumekonnen17.github.io/nebiyu-portfolio/
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Lint
-        run: npm run lint
-
-      - name: Type check
-        run: npm run typecheck
-
-      - name: Build static website
-        run: npm run build
-
-      - name: Verify exported website
-        run: ls -la out
-
-      - name: Redirect the old GitHub Pages homepage to the new domain
+      - name: Generate permanent redirect landing page
+        shell: bash
         run: |
+          mkdir -p out
           cat > out/index.html <<'EOF'
           <!doctype html>
           <html lang="en">
             <head>
               <meta charset="utf-8">
-              <meta name="robots" content="noindex, follow">
+              <meta name="robots" content="noindex,follow">
               <meta http-equiv="refresh" content="0;url=https://nebiyumekonnen.com/">
               <link rel="canonical" href="https://nebiyumekonnen.com/">
-              <title>Portfolio moved — Nebiyu Mekonnen</title>
-              <script>
-                window.location.replace("https://nebiyumekonnen.com/" + window.location.search + window.location.hash);
-              </script>
+              <title>Moved to nebiyumekonnen.com</title>
+              <script>window.location.replace("https://nebiyumekonnen.com/" + window.location.search + window.location.hash);</script>
             </head>
-            <body>
-              <p>This portfolio has moved to <a href="https://nebiyumekonnen.com/">nebiyumekonnen.com</a>.</p>
-            </body>
+            <body><p>This portfolio moved to <a href="https://nebiyumekonnen.com/">nebiyumekonnen.com</a>.</p></body>
           </html>
           EOF
-
+          cp out/index.html out/404.html
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
-
-      - name: Upload GitHub Pages artifact
+      - name: Upload redirect
         uses: actions/upload-pages-artifact@v4
         with:
           path: ./out
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    steps:
-      - name: Deploy GitHub Pages
+      - name: Publish redirect
         id: deployment
         uses: actions/deploy-pages@v4
