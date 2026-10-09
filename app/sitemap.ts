@@ -13,6 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/credentials",
     "/about",
     "/contact",
+    "/links",
   ].map((path) => ({
     url: absoluteUrl(path),
     lastModified: new Date(),

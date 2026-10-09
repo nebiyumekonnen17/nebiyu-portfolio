@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
+import { SiteChrome } from "@/components/layout/SiteChrome";
 import { MotionProvider } from "@/components/MotionProvider";
 import { profile } from "@/data/profile";
 import { absoluteUrl, siteConfig } from "@/lib/config";
@@ -103,11 +102,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <MotionProvider>
-          <Header />
-          <main id="main-content" className="flex-1">
-            {children}
-          </main>
-          <Footer />
+          <SiteChrome>{children}</SiteChrome>
         </MotionProvider>
       </body>
     </html>
