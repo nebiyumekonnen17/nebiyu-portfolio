@@ -27,3 +27,14 @@ export function LinkedinIcon({ size = 16, className }: { size?: number; classNam
     </svg>
   );
 }
+
+
+export function InstagramIcon({ size = 16, className }: { size?: number; className?: string }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      <rect x="2.3" y="2.3" width="19.4" height="19.4" rx="5.5" />
+      <circle cx="12" cy="12" r="4.1" />
+      <circle cx="17.9" cy="6.1" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
