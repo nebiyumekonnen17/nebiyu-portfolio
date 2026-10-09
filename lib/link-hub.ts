@@ -1,3 +1,20 @@
+export const DARK_HUB_TEMPLATES = [
+  { id: "midnight", name: "Midnight + Ice Blue", detail: "Topographic midnight blue", accent: "#84B6FF", bg: "#0B1424", surface: "#142338", ink: "#F1F6FF" },
+  { id: "deep-blue", name: "Deep Blue Gradient", detail: "Soft atmospheric electric blue", accent: "#2288FF", bg: "#080F24", surface: "#13213C", ink: "#F4F7FF" },
+  { id: "charcoal", name: "Minimal Charcoal", detail: "Quiet texture and cool slate", accent: "#879EBE", bg: "#10151C", surface: "#1C2530", ink: "#F4F5F6" },
+  { id: "waves", name: "Abstract Waves", detail: "Layered flowing blue shapes", accent: "#287AFF", bg: "#091426", surface: "#122036", ink: "#F4F7FF" },
+  { id: "purple-slate", name: "Purple Slate", detail: "Creative, refined violet", accent: "#9478F8", bg: "#16132A", surface: "#231F3C", ink: "#F6F2FF" },
+] as const;
+export const LIGHT_HUB_TEMPLATES = [
+  { id: "minimal", name: "Light Minimal", detail: "Ivory with delicate contour lines", accent: "#286EF1", bg: "#F7F7F4", surface: "#FFFFFF", ink: "#172235" },
+  { id: "soft-blue", name: "Soft Blue Gradient", detail: "Calm, airy blue atmosphere", accent: "#207CFA", bg: "#EFF5FF", surface: "#FFFFFF", ink: "#15253A" },
+  { id: "clean-white", name: "Clean White", detail: "Distraction-free white canvas", accent: "#176EF2", bg: "#FFFFFF", surface: "#F9FAFC", ink: "#111C30" },
+  { id: "soft-waves", name: "Soft Waves", detail: "Minimalist flowing shapes", accent: "#2077F5", bg: "#EEF6FF", surface: "#FFFFFF", ink: "#16273B" },
+  { id: "warm-neutral", name: "Warm Neutral", detail: "Natural off-white and navy", accent: "#1A355D", bg: "#F5F0E8", surface: "#FFFCF6", ink: "#18243A" },
+] as const;
+export type DarkHubTemplate = typeof DARK_HUB_TEMPLATES[number]["id"];
+export type LightHubTemplate = typeof LIGHT_HUB_TEMPLATES[number]["id"];
+
 export type HubLink = {
   id: string;
   label: string;
@@ -10,7 +27,7 @@ export type HubLink = {
 export type HubProject = { id: string; name: string; description: string; url: string; image: string; visible: boolean };
 export type HubContent = {
   profile: { name: string; headline: string; bio: string; portrait: string; resume: string };
-  design: { darkAccent: string; lightAccent: string };
+  design: { darkAccent: string; lightAccent: string; darkTemplate: DarkHubTemplate; lightTemplate: LightHubTemplate };
   links: HubLink[];
   projects: HubProject[];
   updatedAt?: string;
@@ -23,7 +40,7 @@ export const initialHub: HubContent = {
     portrait: "/assets/profile/nebiyu_primary_portrait.webp",
     resume: "/resume/Nebiyu_Mekonnen_Resume.pdf",
   },
-  design: { darkAccent: "#E9B23E", lightAccent: "#A36A10" },
+  design: { darkAccent: "#84B6FF", lightAccent: "#286EF1", darkTemplate: "midnight", lightTemplate: "minimal" },
   links: [
     { id: "portfolio", label: "Explore My Portfolio", url: "/", icon: "globe", section: "primary", visible: true },
     { id: "resume", label: "Download My Resume", url: "/resume/Nebiyu_Mekonnen_Resume.pdf", icon: "file", section: "primary", visible: true },
@@ -77,7 +94,17 @@ export function validateHub(value: unknown): HubContent {
   if (!validImage(portrait) || !validImage(resume)) throw new Error("Profile assets must use local paths");
   return {
     profile: { name: saneText(source.profile.name, 90), headline: saneText(source.profile.headline, 140), bio: saneText(source.profile.bio, 250), portrait, resume },
-    design: { darkAccent: safeColor(source.design.darkAccent, "#E9B23E"), lightAccent: safeColor(source.design.lightAccent, "#A36A10") },
+    design: {
+      darkTemplate: DARK_HUB_TEMPLATES.some((t) => t.id === source.design.darkTemplate)
+        ? source.design.darkTemplate as DarkHubTemplate : "midnight",
+      lightTemplate: LIGHT_HUB_TEMPLATES.some((t) => t.id === source.design.lightTemplate)
+        ? source.design.lightTemplate as LightHubTemplate : "minimal",
+      // Upgrade legacy gold presets automatically; preserve other intentional accent overrides.
+      darkAccent: source.design.darkTemplate === undefined && source.design.darkAccent?.toLowerCase() === "#e9b23e"
+        ? "#84B6FF" : safeColor(source.design.darkAccent, "#84B6FF"),
+      lightAccent: source.design.lightTemplate === undefined && source.design.lightAccent?.toLowerCase() === "#a36a10"
+        ? "#286EF1" : safeColor(source.design.lightAccent, "#286EF1"),
+    },
     links, projects, updatedAt: new Date().toISOString(),
   };
 }
