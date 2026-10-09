@@ -6,7 +6,7 @@ export const hubStorageEnabled = () => process.env.LINK_HUB_STORAGE_ENABLED === 
 export async function readHub(kind: "draft" | "live"): Promise<HubContent> {
   if (!hubStorageEnabled()) return initialHub;
   const result = await get(pathFor(kind), { access: "private", useCache: false });
-  if (!result || result.statusCode === 404) return initialHub;
+  if (!result) return initialHub;
   if (result.statusCode !== 200 || !result.stream) throw new Error("Unable to load stored hub");
   return validateHub(JSON.parse(await new Response(result.stream).text()));
 }
