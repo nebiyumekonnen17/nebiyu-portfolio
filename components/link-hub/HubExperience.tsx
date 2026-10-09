@@ -39,7 +39,6 @@ function externalProps(url: string) {
 
 function Portrait({ src, name }: { src: string; name: string }) {
   const [failed, setFailed] = useState(false);
-  useEffect(() => setFailed(false), [src]);
   const initials = name.trim().split(/\s+/).slice(0, 2).map((x) => x[0] || "").join("").toUpperCase();
   return (
     <div className="hub-v2-portrait">
@@ -194,7 +193,7 @@ export function HubExperience({
         <div className="hub-v2-grid">
           <aside className="hub-v2-profile" aria-label="About Nebiyu">
             <div className="hub-v2-profile-inner">
-              <Portrait src={content.profile.portrait} name={content.profile.name} />
+              <Portrait key={content.profile.portrait} src={content.profile.portrait} name={content.profile.name} />
               {careerProfile.openToOpportunities && (
                 <p className="hub-v2-availability"><span aria-hidden="true" /> OPEN TO OPPORTUNITIES</p>
               )}
@@ -221,7 +220,7 @@ export function HubExperience({
             </div>
           </aside>
 
-          <main className="hub-v2-content" id="link-hub-main">
+          <div className="hub-v2-content" id="link-hub-main">
             {primaryLinks.length > 0 && (
               <section className="hub-v2-actions" aria-label="Explore and connect">
                 {primaryLinks.map((link, index) => {
@@ -259,7 +258,7 @@ export function HubExperience({
                     {...externalProps(project.url)}
                     onClick={compact ? (event) => event.preventDefault() : undefined}
                   >
-                    <ProjectArtwork src={project.image} name={project.name} type={project.id} />
+                    <ProjectArtwork key={project.image} src={project.image} name={project.name} type={project.id} />
                     <span className="hub-v2-project-info">
                       <strong>{project.name}</strong>
                       <span>{project.description}</span>
@@ -293,7 +292,7 @@ export function HubExperience({
                 </div>
               </section>
             )}
-          </main>
+          </div>
         </div>
 
         <footer className="hub-v2-footer">
