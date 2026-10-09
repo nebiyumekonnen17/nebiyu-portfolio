@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import {
   ArrowRight, ArrowUpRight, Award, Camera, Check, Cloud, Copy, FileText, Globe2,
-  Instagram, Link2, Mail, Moon, Send, Share2, Sun, ExternalLink,
+  Link2, Mail, Moon, Send, Share2, Sun, ExternalLink,
 } from "lucide-react";
 import type { HubContent } from "@/lib/link-hub";
-import { GithubIcon, LinkedinIcon } from "@/components/ui/BrandIcons";
-const icons = { globe: Globe2, file: FileText, github: GithubIcon, linkedin: LinkedinIcon, instagram: Instagram, mail: Mail, award: Award, send: Send, camera: Camera, cloud: Cloud, link: Link2 };
+import { GithubIcon, LinkedinIcon, InstagramIcon } from "@/components/ui/BrandIcons";
+const icons = { globe: Globe2, file: FileText, github: GithubIcon, linkedin: LinkedinIcon, instagram: InstagramIcon, mail: Mail, award: Award, send: Send, camera: Camera, cloud: Cloud, link: Link2 };
 function Icon({ name }: { name: string }) {
   const Chosen = icons[name as keyof typeof icons] || Link2;
   return <Chosen size={19} aria-hidden="true" />;
