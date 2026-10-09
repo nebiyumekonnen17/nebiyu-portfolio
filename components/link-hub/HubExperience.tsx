@@ -2,14 +2,15 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import {
-  ArrowRight, ArrowUpRight, Award, Camera, Check, Cloud, Copy, FileText, Github, Globe2,
-  Instagram, Linkedin, Link2, Mail, Moon, Send, Share2, Sun, ExternalLink,
+  ArrowRight, ArrowUpRight, Award, Camera, Check, Cloud, Copy, FileText, Globe2,
+  Instagram, Link2, Mail, Moon, Send, Share2, Sun, ExternalLink,
 } from "lucide-react";
-import type { HubContent, HubLink } from "@/lib/link-hub";
-const icons = { globe: Globe2, file: FileText, github: Github, linkedin: Linkedin, instagram: Instagram, mail: Mail, award: Award, send: Send, camera: Camera, cloud: Cloud, link: Link2 };
+import type { HubContent } from "@/lib/link-hub";
+import { GithubIcon, LinkedinIcon } from "@/components/ui/BrandIcons";
+const icons = { globe: Globe2, file: FileText, github: GithubIcon, linkedin: LinkedinIcon, instagram: Instagram, mail: Mail, award: Award, send: Send, camera: Camera, cloud: Cloud, link: Link2 };
 function Icon({ name }: { name: string }) {
   const Chosen = icons[name as keyof typeof icons] || Link2;
-  return <Chosen size={19} strokeWidth={1.8} aria-hidden="true" />;
+  return <Chosen size={19} aria-hidden="true" />;
 }
 function linkAttrs(url: string) { return /^https?:\/\//.test(url) ? { target: "_blank", rel: "noopener noreferrer" } : {}; }
 export function HubExperience({ content, compact = false }: { content: HubContent; compact?: boolean }) {
