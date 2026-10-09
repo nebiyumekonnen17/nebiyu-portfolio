@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useSyncExternalStore } from "react";
+import Link from "next/link";
 import Image from "next/image";
 import {
-  ArrowRight, ArrowUpRight, Award, Camera, Check, Cloud, Copy,
+  ArrowRight, ArrowUpRight, Award, Camera, Check, Cloud,
   FileText, Globe2, Link2, Mail, Moon, Send, Share2, Sun,
 } from "lucide-react";
 import { GithubIcon, InstagramIcon, LinkedinIcon } from "@/components/ui/BrandIcons";
@@ -11,6 +12,28 @@ import { profile as careerProfile } from "@/data/profile";
 import type { HubContent } from "@/lib/link-hub";
 
 type Theme = "system" | "dark" | "light";
+
+function subscribeTheme(onChange: () => void) {
+  const media = window.matchMedia("(prefers-color-scheme: light)");
+  media.addEventListener("change", onChange);
+  window.addEventListener("storage", onChange);
+  window.addEventListener("hub-theme-change", onChange);
+  return () => {
+    media.removeEventListener("change", onChange);
+    window.removeEventListener("storage", onChange);
+    window.removeEventListener("hub-theme-change", onChange);
+  };
+}
+function readTheme(): Theme {
+  try {
+    const saved = window.localStorage.getItem("nebiyu-link-theme");
+    if (saved === "dark" || saved === "light") return saved;
+  } catch {
+    // Browsers with restricted local storage still follow device settings.
+  }
+  return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+}
+function serverTheme(): Theme { return "system"; }
 
 const icons = {
   globe: Globe2,
@@ -61,7 +84,6 @@ function Portrait({ src, name }: { src: string; name: string }) {
 
 function ProjectArtwork({ src, name, type }: { src: string; name: string; type: string }) {
   const [failed, setFailed] = useState(false);
-  useEffect(() => setFailed(false), [src]);
   return (
     <div className={"hub-v2-project-art" + (type === "visual-tizita" ? " hub-v2-project-art-contain" : "")}>
       {src && !failed ? (
@@ -89,26 +111,11 @@ export function HubExperience({
   content: HubContent;
   compact?: boolean;
 }) {
-  const [theme, setTheme] = useState<Theme>("system");
-  const [systemLight, setSystemLight] = useState(false);
+  const theme = useSyncExternalStore(subscribeTheme, readTheme, serverTheme);
   const [copied, setCopied] = useState(false);
   const [shareFallback, setShareFallback] = useState(false);
 
-  useEffect(() => {
-    try {
-      const stored = window.localStorage.getItem("nebiyu-link-theme");
-      if (stored === "light" || stored === "dark") setTheme(stored);
-    } catch {
-      // The system preference still works if storage is disabled.
-    }
-    const media = window.matchMedia("(prefers-color-scheme: light)");
-    const update = () => setSystemLight(media.matches);
-    update();
-    media.addEventListener("change", update);
-    return () => media.removeEventListener("change", update);
-  }, []);
-
-  const isLight = theme === "light" || (theme === "system" && systemLight);
+  const isLight = theme === "light";
   const visibleSocials = content.links.filter((link) => link.visible && link.section === "social");
   const primaryLinks = content.links.filter((link) => link.visible && link.section === "primary");
   const extraLinks = content.links.filter((link) => link.visible && link.section === "extra");
@@ -117,11 +124,11 @@ export function HubExperience({
 
   function toggleTheme() {
     const next = isLight ? "dark" : "light";
-    setTheme(next);
     try {
       window.localStorage.setItem("nebiyu-link-theme", next);
+      window.dispatchEvent(new Event("hub-theme-change"));
     } catch {
-      // Theme remains switched for this visit.
+      // Device theme still applies if local storage is blocked.
     }
   }
 
@@ -155,10 +162,10 @@ export function HubExperience({
       <div className="hub-v2-background" aria-hidden="true" />
       <div className="hub-page">
         <header className="hub-v2-topbar">
-          <a className="hub-v2-brand" href="/" aria-label="Nebiyu Mekonnen portfolio homepage" onClick={compact ? (e) => e.preventDefault() : undefined}>
+          <Link className="hub-v2-brand" href="/" aria-label="Nebiyu Mekonnen portfolio homepage" onClick={compact ? (e) => e.preventDefault() : undefined}>
             <span className="hub-v2-mark">NM<span>.</span></span>
             <span>NEBIYU <span className="hub-v2-brand-muted">/ LINKS</span></span>
-          </a>
+          </Link>
           <div className="hub-v2-toolbar">
             <button
               className="hub-v2-icon-button"
@@ -267,10 +274,10 @@ export function HubExperience({
                     <ArrowUpRight className="hub-v2-project-arrow" size={18} aria-hidden="true" />
                   </a>
                 ))}
-                <a className="hub-v2-view-all" href="/projects/" onClick={compact ? (event) => event.preventDefault() : undefined}>
+                <Link className="hub-v2-view-all" href="/projects/" onClick={compact ? (event) => event.preventDefault() : undefined}>
                   <span>View all projects</span>
                   <ArrowRight size={18} aria-hidden="true" />
-                </a>
+                </Link>
               </div>
             </section>
 
@@ -297,7 +304,7 @@ export function HubExperience({
 
         <footer className="hub-v2-footer">
           <span>© {new Date().getFullYear()} {content.profile.name.toUpperCase()}</span>
-          <a href="/" onClick={compact ? (event) => event.preventDefault() : undefined}>BACK TO PORTFOLIO <ArrowUpRight size={13} aria-hidden="true" /></a>
+          <Link href="/" onClick={compact ? (event) => event.preventDefault() : undefined}>BACK TO PORTFOLIO <ArrowUpRight size={13} aria-hidden="true" /></Link>
         </footer>
       </div>
     </div>
