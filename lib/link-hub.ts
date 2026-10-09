@@ -69,6 +69,7 @@ export function validateHub(value: unknown): HubContent {
   if (!value || typeof value !== "object") throw new Error("Invalid content");
   const source = value as Partial<HubContent>;
   if (!source.profile || !source.design || !Array.isArray(source.links) || !Array.isArray(source.projects)) throw new Error("Content must contain profile, design, links and projects");
+  const design = source.design;
   if (source.links.length > 60 || source.projects.length > 12) throw new Error("Too many entries");
   const links = source.links.map((l, i) => {
     const url = saneText(l.url, 700);
@@ -95,15 +96,15 @@ export function validateHub(value: unknown): HubContent {
   return {
     profile: { name: saneText(source.profile.name, 90), headline: saneText(source.profile.headline, 140), bio: saneText(source.profile.bio, 250), portrait, resume },
     design: {
-      darkTemplate: DARK_HUB_TEMPLATES.some((t) => t.id === source.design.darkTemplate)
-        ? source.design.darkTemplate as DarkHubTemplate : "midnight",
-      lightTemplate: LIGHT_HUB_TEMPLATES.some((t) => t.id === source.design.lightTemplate)
-        ? source.design.lightTemplate as LightHubTemplate : "minimal",
+      darkTemplate: DARK_HUB_TEMPLATES.some((t) => t.id === design.darkTemplate)
+        ? design.darkTemplate as DarkHubTemplate : "midnight",
+      lightTemplate: LIGHT_HUB_TEMPLATES.some((t) => t.id === design.lightTemplate)
+        ? design.lightTemplate as LightHubTemplate : "minimal",
       // Upgrade legacy gold presets automatically; preserve other intentional accent overrides.
-      darkAccent: source.design.darkTemplate === undefined && source.design.darkAccent?.toLowerCase() === "#e9b23e"
-        ? "#84B6FF" : safeColor(source.design.darkAccent, "#84B6FF"),
-      lightAccent: source.design.lightTemplate === undefined && source.design.lightAccent?.toLowerCase() === "#a36a10"
-        ? "#286EF1" : safeColor(source.design.lightAccent, "#286EF1"),
+      darkAccent: design.darkTemplate === undefined && design.darkAccent?.toLowerCase() === "#e9b23e"
+        ? "#84B6FF" : safeColor(design.darkAccent, "#84B6FF"),
+      lightAccent: design.lightTemplate === undefined && design.lightAccent?.toLowerCase() === "#a36a10"
+        ? "#286EF1" : safeColor(design.lightAccent, "#286EF1"),
     },
     links, projects, updatedAt: new Date().toISOString(),
   };
