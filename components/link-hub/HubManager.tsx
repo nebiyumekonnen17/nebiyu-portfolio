@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import { ArrowDown, ArrowUp, ArrowUpRight, BarChart3, Check, ChevronRight, Download, Eye, EyeOff, FileText, ImageUp, LayoutDashboard, Link2, Loader2, LockKeyhole, LogOut, Palette, Plus, QrCode, Save, Settings, Share2, ShieldCheck, Smartphone, Sparkles, Trash2, Upload, X } from "lucide-react";
 import QRCode from "qrcode";
 import { HubExperience } from "@/components/link-hub/HubExperience";
-import { initialHub, type HubContent, type HubLink, type HubProject } from "@/lib/link-hub";
+import { initialHub, DARK_HUB_TEMPLATES, LIGHT_HUB_TEMPLATES, type HubContent, type HubLink, type HubProject } from "@/lib/link-hub";
 const tabs = [
   { id: "overview", title: "Overview", icon: LayoutDashboard },
   { id: "links", title: "My Links", icon: Link2 },
@@ -31,6 +31,7 @@ export function HubManager() {
   const [history, setHistory] = useState<string[]>([]);
   const [tab, setTab] = useState<Tab>("overview");
   const [showPreview, setShowPreview] = useState(false);
+  const [previewTheme, setPreviewTheme] = useState<"dark" | "light">("dark");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
@@ -59,6 +60,16 @@ export function HubManager() {
   }
   function design(field: keyof HubContent["design"], value: string) {
     change(old => ({ ...old, design: { ...old.design, [field]: value } }));
+  }
+  function selectDarkTemplate(template: (typeof DARK_HUB_TEMPLATES)[number]) {
+    change(old => ({ ...old, design: { ...old.design, darkTemplate: template.id, darkAccent: template.accent } }));
+  }
+  function selectLightTemplate(template: (typeof LIGHT_HUB_TEMPLATES)[number]) {
+    change(old => ({ ...old, design: { ...old.design, lightTemplate: template.id, lightAccent: template.accent } }));
+  }
+  function openThemePreview(mode: "dark" | "light") {
+    setPreviewTheme(mode);
+    setShowPreview(true);
   }
   function updateLink(id: string, field: keyof HubLink, value: string | boolean) {
     change(old => ({ ...old, links: old.links.map(l => l.id === id ? { ...l, [field]: value } : l) }));
@@ -134,7 +145,7 @@ export function HubManager() {
       <div className="hub-manager-side-bottom"><a href="/links" target="_blank" rel="noopener noreferrer"><ArrowUpRight size={17}/> View live page</a><button type="button" onClick={logout}><LogOut size={17}/> Sign out</button></div>
     </aside>
     <main className="hub-manager-content">
-      <div className="hub-manager-toolbar"><div><div className="hub-admin-kicker">NEBIYU MEKONNEN / CONTROL CENTER</div><h1>{tabs.find(x=>x.id===tab)?.title}</h1></div><div className="hub-toolbar-actions"><button type="button" className="hub-admin-secondary" onClick={()=>setShowPreview(true)}><Smartphone size={16}/> Preview</button><button type="button" className="hub-admin-secondary" disabled={busy || !storageReady || !dirty} onClick={()=>save("save")}><Save size={16}/> Save draft</button><button type="button" className="hub-admin-primary" disabled={busy || !storageReady} onClick={()=>save("publish")}><ArrowUpRight size={16}/> Publish</button></div></div>
+      <div className="hub-manager-toolbar"><div><div className="hub-admin-kicker">NEBIYU MEKONNEN / CONTROL CENTER</div><h1>{tabs.find(x=>x.id===tab)?.title}</h1></div><div className="hub-toolbar-actions"><button type="button" className="hub-admin-secondary" onClick={()=>openThemePreview("dark")}><Smartphone size={16}/> Preview</button><button type="button" className="hub-admin-secondary" disabled={busy || !storageReady || !dirty} onClick={()=>save("save")}><Save size={16}/> Save draft</button><button type="button" className="hub-admin-primary" disabled={busy || !storageReady} onClick={()=>save("publish")}><ArrowUpRight size={16}/> Publish</button></div></div>
       {!storageReady && <div role="status" className="hub-alert"><ShieldCheck size={21}/><div><strong>Storage connection required</strong><p>The editor and preview are available, but saves and publishing are disabled until a private Vercel Blob store is connected and LINK_HUB_STORAGE_ENABLED=true is set.</p></div></div>}
       {error && <div className="hub-message hub-error" role="alert">{error}<button onClick={()=>setError("")} aria-label="Dismiss"><X size={16}/></button></div>}
       {notice && <div className="hub-message hub-success" role="status"><Check size={17}/>{notice}<button onClick={()=>setNotice("")} aria-label="Dismiss"><X size={16}/></button></div>}
@@ -174,9 +185,65 @@ export function HubManager() {
           <div className="hub-form-grid"><label>Project name<input value={p.name} onChange={e=>updateProject(p.id,"name",e.target.value)}/></label><label>Subtitle<input value={p.description} onChange={e=>updateProject(p.id,"description",e.target.value)}/></label><label className="hub-form-wide">Destination<input value={p.url} onChange={e=>updateProject(p.id,"url",e.target.value)}/></label><label className="hub-form-wide">Cover image path<input value={p.image} onChange={e=>updateProject(p.id,"image",e.target.value)}/></label></div>
         </div>)}
       </div>}
-      {tab === "appearance" && <div className="hub-admin-section"><p className="hub-admin-intro">Fine-tune your public identity. Both light and dark themes stay available to visitors.</p>
+      {tab === "appearance" && <div className="hub-admin-section">
+        <p className="hub-admin-intro">Choose a design for each visitor mode. You can change the template any time, preview both themes, and publish only when you are ready.</p>
+        <div className="hub-admin-card">
+          <div className="hub-admin-card-heading"><h2>Dark templates</h2><button type="button" className="hub-admin-secondary" onClick={()=>openThemePreview("dark")}><Smartphone size={16}/> Preview dark</button></div>
+          <div className="hub-template-grid">
+            {DARK_HUB_TEMPLATES.map(template=><button
+              type="button"
+              key={template.id}
+              className={"hub-template-tile" + (draft.design.darkTemplate === template.id ? " is-selected" : "")}
+              style={{ "--template-accent": template.accent, "--template-bg": template.bg, "--template-surface": template.surface, "--template-ink": template.ink } as React.CSSProperties}
+              aria-pressed={draft.design.darkTemplate === template.id}
+              onClick={()=>selectDarkTemplate(template)}
+            >
+              <span className={"hub-template-mini hub-template-" + template.id} aria-hidden="true">
+                <span className="hub-template-mini-brand">NM.</span>
+                <span className="hub-template-mini-portrait"/>
+                <span className="hub-template-mini-title"/>
+                <span className="hub-template-mini-subtitle"/>
+                <span className="hub-template-mini-social"><i/><i/><i/><i/></span>
+                <span className="hub-template-mini-main"/>
+                <span className="hub-template-mini-secondary"/>
+                <span className="hub-template-mini-project"/><span className="hub-template-mini-project"/>
+              </span>
+              <span className="hub-template-label"><strong>{template.name}</strong>{draft.design.darkTemplate === template.id ? <Check size={16} aria-hidden="true"/> : null}</span>
+              <small>{template.detail}</small>
+            </button>)}
+          </div>
+        </div>
+        <div className="hub-admin-card">
+          <div className="hub-admin-card-heading"><h2>Light templates</h2><button type="button" className="hub-admin-secondary" onClick={()=>openThemePreview("light")}><Smartphone size={16}/> Preview light</button></div>
+          <div className="hub-template-grid">
+            {LIGHT_HUB_TEMPLATES.map(template=><button
+              type="button"
+              key={template.id}
+              className={"hub-template-tile" + (draft.design.lightTemplate === template.id ? " is-selected" : "")}
+              style={{ "--template-accent": template.accent, "--template-bg": template.bg, "--template-surface": template.surface, "--template-ink": template.ink } as React.CSSProperties}
+              aria-pressed={draft.design.lightTemplate === template.id}
+              onClick={()=>selectLightTemplate(template)}
+            >
+              <span className={"hub-template-mini hub-template-" + template.id} aria-hidden="true">
+                <span className="hub-template-mini-brand">NM.</span>
+                <span className="hub-template-mini-portrait"/>
+                <span className="hub-template-mini-title"/>
+                <span className="hub-template-mini-subtitle"/>
+                <span className="hub-template-mini-social"><i/><i/><i/><i/></span>
+                <span className="hub-template-mini-main"/>
+                <span className="hub-template-mini-secondary"/>
+                <span className="hub-template-mini-project"/><span className="hub-template-mini-project"/>
+              </span>
+              <span className="hub-template-label"><strong>{template.name}</strong>{draft.design.lightTemplate === template.id ? <Check size={16} aria-hidden="true"/> : null}</span>
+              <small>{template.detail}</small>
+            </button>)}
+          </div>
+        </div>
+        <div className="hub-admin-card"><h2>Accent fine-tuning</h2>
+          <p>Choose a template above to load its recommended accent color, or customize the accent below. Your custom color stays on that theme until you select another preset.</p>
+          <div className="hub-form-grid"><label>Dark accent<input type="color" value={draft.design.darkAccent} onChange={e=>design("darkAccent",e.target.value)}/></label><label>Light accent<input type="color" value={draft.design.lightAccent} onChange={e=>design("lightAccent",e.target.value)}/></label></div>
+        </div>
         <div className="hub-admin-card"><h2>Profile</h2><div className="hub-form-grid">{(["name","headline","bio"] as const).map(k=><label className={k==="bio"?"hub-form-wide":""} key={k}>{k==="name"?"Display name":k==="headline"?"Headline":"Short bio"}<input value={draft.profile[k]} onChange={e=>profile(k,e.target.value)}/></label>)}</div></div>
-        <div className="hub-admin-card"><h2>Brand colors</h2><div className="hub-form-grid"><label>Dark theme accent<input type="color" value={draft.design.darkAccent} onChange={e=>design("darkAccent",e.target.value)}/></label><label>Light theme accent<input type="color" value={draft.design.lightAccent} onChange={e=>design("lightAccent",e.target.value)}/></label></div></div>
       </div>}
       {tab === "media" && <div className="hub-admin-section"><p className="hub-admin-intro">Manage your portrait, resume, and project artwork. Images and PDFs are limited to 3.5 MB per file.</p>
         <div className="hub-admin-card"><h2>Profile portrait</h2><p>Current file: {draft.profile.portrait}</p><label className="hub-upload"><Upload size={17}/> Upload new portrait<input disabled={!storageReady||busy} type="file" accept="image/png,image/jpeg,image/webp" onChange={e=>{const file=e.target.files?.[0];if(file)void upload(file,"portrait");}}/></label></div>
@@ -191,6 +258,6 @@ export function HubManager() {
       </div>}
       <div className="hub-admin-bottom">LINK HUB STUDIO <span>·</span> MADE FOR NEBIYU MEKONNEN</div>
     </main>
-    {showPreview && <div className="hub-preview-overlay" role="dialog" aria-modal="true" aria-label="Preview link hub"><div className="hub-preview-header"><strong>Draft preview</strong><span>Changes here aren&apos;t public until published.</span><button onClick={()=>setShowPreview(false)} aria-label="Close preview"><X size={22}/></button></div><div className="hub-preview-body"><HubExperience content={draft} compact/></div></div>}
+    {showPreview && <div className="hub-preview-overlay" role="dialog" aria-modal="true" aria-label="Preview link hub"><div className="hub-preview-header"><strong>Draft preview</strong><span>Changes here aren&apos;t public until published.</span><div className="hub-preview-mode" role="group" aria-label="Theme preview"><button type="button" className={previewTheme==="dark"?"active":""} aria-pressed={previewTheme==="dark"} onClick={()=>setPreviewTheme("dark")}>Dark</button><button type="button" className={previewTheme==="light"?"active":""} aria-pressed={previewTheme==="light"} onClick={()=>setPreviewTheme("light")}>Light</button></div><button onClick={()=>setShowPreview(false)} aria-label="Close preview"><X size={22}/></button></div><div className="hub-preview-body"><HubExperience content={draft} compact previewTheme={previewTheme} onPreviewThemeChange={setPreviewTheme}/></div></div>}
   </div>;
 }
