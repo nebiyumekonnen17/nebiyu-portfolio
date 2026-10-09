@@ -1,4 +1,4 @@
-﻿name: Deploy Portfolio to GitHub Pages
+name: Deploy Portfolio to GitHub Pages
 
 on:
   push:
@@ -46,6 +46,27 @@ jobs:
 
       - name: Verify exported website
         run: ls -la out
+
+      - name: Redirect the old GitHub Pages homepage to the new domain
+        run: |
+          cat > out/index.html <<'EOF'
+          <!doctype html>
+          <html lang="en">
+            <head>
+              <meta charset="utf-8">
+              <meta name="robots" content="noindex, follow">
+              <meta http-equiv="refresh" content="0;url=https://nebiyumekonnen.com/">
+              <link rel="canonical" href="https://nebiyumekonnen.com/">
+              <title>Portfolio moved — Nebiyu Mekonnen</title>
+              <script>
+                window.location.replace("https://nebiyumekonnen.com/" + window.location.search + window.location.hash);
+              </script>
+            </head>
+            <body>
+              <p>This portfolio has moved to <a href="https://nebiyumekonnen.com/">nebiyumekonnen.com</a>.</p>
+            </body>
+          </html>
+          EOF
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
