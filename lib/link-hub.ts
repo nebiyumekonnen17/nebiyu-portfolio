@@ -18,6 +18,13 @@ export const LIGHT_HUB_TEMPLATES = [
 ] as const;
 export type DarkHubTemplate = typeof DARK_HUB_TEMPLATES[number]["id"];
 export type LightHubTemplate = typeof LIGHT_HUB_TEMPLATES[number]["id"];
+/** One publicly published template, regardless of the visitor's device theme. */
+export const HUB_TEMPLATES = [...DARK_HUB_TEMPLATES, ...LIGHT_HUB_TEMPLATES] as const;
+export type HubThemeTemplate = DarkHubTemplate | LightHubTemplate;
+export const isLightHubTemplate = (id: HubThemeTemplate) => LIGHT_HUB_TEMPLATES.some(t => t.id === id);
+export const getSelectedHubTemplate = (design: Pick<HubContent["design"], "activeTemplate" | "darkTemplate">) =>
+  HUB_TEMPLATES.find(t => t.id === design.activeTemplate) ?? DARK_HUB_TEMPLATES.find(t => t.id === design.darkTemplate) ?? DARK_HUB_TEMPLATES[0];
+
 export type HubBackgroundSettings = {
   intensity: number;
   placement: "profile" | "top" | "full";
@@ -45,7 +52,7 @@ export type HubLink = {
 export type HubProject = { id: string; name: string; description: string; url: string; image: string; visible: boolean };
 export type HubContent = {
   profile: { name: string; headline: string; bio: string; portrait: string; resume: string };
-  design: { darkAccent: string; lightAccent: string; darkTemplate: DarkHubTemplate; lightTemplate: LightHubTemplate; background?: HubBackgroundSettings };
+  design: { activeTemplate: HubThemeTemplate; darkAccent: string; lightAccent: string; darkTemplate: DarkHubTemplate; lightTemplate: LightHubTemplate; background?: HubBackgroundSettings };
   links: HubLink[];
   projects: HubProject[];
   updatedAt?: string;
@@ -58,7 +65,7 @@ export const initialHub: HubContent = {
     portrait: "/assets/profile/nebiyu_primary_portrait.webp",
     resume: "/resume/Nebiyu_Mekonnen_Resume.pdf",
   },
-  design: { darkAccent: "#84B6FF", lightAccent: "#286EF1", darkTemplate: "midnight", lightTemplate: "minimal", background: { ...DEFAULT_HUB_BACKGROUND } },
+  design: { darkAccent: "#84B6FF", lightAccent: "#286EF1", darkTemplate: "midnight", lightTemplate: "minimal", activeTemplate: "midnight", background: { ...DEFAULT_HUB_BACKGROUND } },
   links: [
     { id: "portfolio", label: "Explore My Portfolio", url: "/", icon: "globe", section: "primary", visible: true },
     { id: "resume", label: "Download My Resume", url: "/resume/Nebiyu_Mekonnen_Resume.pdf", icon: "file", section: "primary", visible: true },
@@ -126,6 +133,11 @@ export function validateHub(value: unknown): HubContent {
   return {
     profile: { name: saneText(source.profile.name, 90), headline: saneText(source.profile.headline, 140), bio: saneText(source.profile.bio, 250), portrait, resume },
     design: {
+      // Existing published content may predate single-template mode. Adopt its previously
+      // configured dark design; never overwrite a valid explicitly published selection.
+      activeTemplate: HUB_TEMPLATES.some(t => t.id === design.activeTemplate)
+        ? design.activeTemplate as HubThemeTemplate
+        : DARK_HUB_TEMPLATES.some(t => t.id === design.darkTemplate) ? design.darkTemplate as DarkHubTemplate : "midnight",
       darkTemplate: DARK_HUB_TEMPLATES.some((t) => t.id === design.darkTemplate)
         ? design.darkTemplate as DarkHubTemplate : "midnight",
       lightTemplate: LIGHT_HUB_TEMPLATES.some((t) => t.id === design.lightTemplate)
