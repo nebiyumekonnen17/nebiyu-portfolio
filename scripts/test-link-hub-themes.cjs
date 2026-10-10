@@ -22,8 +22,8 @@ const {
 } = result.exports;
 
 assert.equal(DARK_HUB_TEMPLATES.length, 13, "Preserve seven dark templates and add six");
-assert.equal(LIGHT_HUB_TEMPLATES.length, 9, "Preserve seven light templates and add two");
-assert.equal(HUB_TEMPLATES.length, 22, "One gallery of all twenty-two templates");
+assert.equal(LIGHT_HUB_TEMPLATES.length, 13, "Preserve nine light templates and add four white coder themes");
+assert.equal(HUB_TEMPLATES.length, 26, "One gallery of all twenty-six templates");
 for (const presets of [DARK_HUB_TEMPLATES, LIGHT_HUB_TEMPLATES]) {
   assert.equal(new Set(presets.map(x => x.id)).size, presets.length, "Template IDs must be unique");
 }
@@ -31,7 +31,12 @@ assert.ok(DARK_HUB_TEMPLATES.some(x => x.id === "futuristic-tech"));
 assert.ok(DARK_HUB_TEMPLATES.some(x => x.id === "aurora"));
 assert.ok(LIGHT_HUB_TEMPLATES.some(x => x.id === "futuristic-light"));
 assert.ok(LIGHT_HUB_TEMPLATES.some(x => x.id === "aurora-light"));
-const approvedCoderIds = ["coder-blueprint", "coder-editor", "coder-circuit", "coder-violet", "coder-white-grid"];
+const newWhiteIds = ["coder-white-blueprint", "coder-white-editor", "coder-white-circuit", "coder-white-violet"];
+assert.equal(newWhiteIds.length, 4);
+assert.equal(newWhiteIds.filter(id => LIGHT_HUB_TEMPLATES.some(t => t.id === id)).length, 4);
+assert.equal(LIGHT_HUB_TEMPLATES.filter(t => t.id.startsWith("coder-white-")).length, 5, "Four new and the original White Coder Grid");
+
+const approvedCoderIds = ["coder-blueprint", "coder-editor", "coder-circuit", "coder-violet", "coder-white-grid", "coder-white-blueprint", "coder-white-editor", "coder-white-circuit", "coder-white-violet"];
 const approvedAwsIds = ["aws-cloud-builder", "aws-console", "aws-aurora-cloud"];
 for (const id of [...approvedCoderIds, ...approvedAwsIds]) {
   assert.equal(HUB_TEMPLATES.filter(t => t.id === id).length, 1, "Each approved new theme must exist once: " + id);
@@ -78,7 +83,7 @@ for (const id of DARK_HUB_TEMPLATES.map(x => x.id)) {
 for (const id of LIGHT_HUB_TEMPLATES.map(x => x.id)) {
   assert.ok(css.includes('data-light-template="' + id + '"'), id + " needs CSS");
 }
-for (const name of ["circuits.svg","aurora.svg","waves.svg","topographic.svg", "coder-blueprint.svg", "coder-editor.svg", "coder-violet-flow.svg", "aws-cloud-topology.svg", "aws-console-map.svg", "aws-global-network.svg"]) {
+for (const name of ["circuits.svg","aurora.svg","waves.svg","topographic.svg", "coder-blueprint.svg", "coder-editor.svg", "coder-violet-flow.svg", "aws-cloud-topology.svg", "aws-console-map.svg", "aws-global-network.svg", "coder-white-blueprint.svg"]) {
   assert.ok(fs.existsSync("public/assets/links/" + name), name + " must exist");
 }
 const publicUI = fs.readFileSync("components/link-hub/HubExperience.tsx", "utf8");
@@ -86,8 +91,8 @@ const adminUI = fs.readFileSync("components/link-hub/HubManager.tsx", "utf8");
 assert.ok(!publicUI.includes("toggleTheme"), "The public hub must not have a theme switch");
 assert.ok(!publicUI.includes("useSyncExternalStore"), "Public theme must not follow visitor device settings");
 assert.ok(publicUI.includes("getSelectedHubTemplate(content.design)"), "Public UI must use the one published template");
-assert.ok(adminUI.includes("HUB_TEMPLATES.filter"), "All 22 themes must be available through gallery filters");
-assert.ok(adminUI.includes("Original 14") && adminUI.includes("Coder · 5") && adminUI.includes("AWS · 3"), "New themes must be grouped with the originals");
+assert.ok(adminUI.includes("HUB_TEMPLATES.filter"), "All 26 themes must be available through gallery filters");
+assert.ok(adminUI.includes("Original 14") && adminUI.includes('"Coder · " + coderIds.size') && adminUI.includes("AWS · 3"), "New themes must be grouped with originals and the coder count stays dynamic");
 assert.ok(adminUI.includes("activeTemplate: template.id"), "Admin selection sets one active published theme");
 assert.ok(!adminUI.includes("setPreviewTheme"), "Admin preview must not independently switch dark/light");
 // The selection and storage contract must roundtrip each new preset without losing content.
@@ -110,4 +115,4 @@ for (const template of HUB_TEMPLATES) {
     assert.ok(css.includes('.hub-template-' + template.id), template.id + " needs a preview thumbnail");
   }
 }
-console.log("Theme library regression checks passed: one public theme, 22 presets, eight new artworks, legacy drafts and roundtrip preservation.");
+console.log("Theme library regression checks passed: one public theme, 26 presets including 4 white coders, legacy drafts and roundtrip preservation.");
