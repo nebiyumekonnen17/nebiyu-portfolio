@@ -803,6 +803,20 @@
 .hub-template-aws-aurora-cloud { background-image:radial-gradient(circle at 85% 20%,#9D6036,#102B53 46%,#071629 90%); }
 /* Browsers with motion sensitivity retain the existing static artwork. */
 
+
+/* The single-choice theme library scales to 22 themes without overwhelming mobile. */
+.hub-theme-filters {display:flex;flex-wrap:wrap;gap:8px;margin:-2px 0 4px;}
+.hub-theme-filters button {
+  font:inherit;font-size:12px;font-weight:650;color:#B6C4D5;
+  border:1px solid #3B4D63;background:#1B2737;
+  border-radius:10px;padding:10px 13px;cursor:pointer;min-height:42px;
+}
+.hub-theme-filters button:hover,.hub-theme-filters button.active {
+  border-color:#84B6FF;color:#EAF4FF;background:#233C58;
+}
+.hub-theme-filters button:focus-visible{outline:2px solid #84B6FF;outline-offset:2px;}
+@media(max-width:480px){.hub-theme-filters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));}.hub-theme-filters button{text-align:center;padding:10px 7px;}}
+
 /* Private studio */
 .hub-manager,.hub-admin-login,.hub-manager-loading{font-family:var(--font-inter),Inter,Arial,sans-serif;color:#f2f5f9;background:#0c111a;min-height:100vh;color-scheme:dark}
 .hub-manager{display:grid;grid-template-columns:236px minmax(0,1fr)}
