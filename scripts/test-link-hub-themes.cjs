@@ -21,16 +21,22 @@ const {
   validateHub,
 } = result.exports;
 
-assert.equal(DARK_HUB_TEMPLATES.length, 7, "Exactly seven dark templates");
-assert.equal(LIGHT_HUB_TEMPLATES.length, 7, "Exactly seven light templates");
-assert.equal(HUB_TEMPLATES.length, 14, "One gallery of all fourteen templates");
+assert.equal(DARK_HUB_TEMPLATES.length, 13, "Preserve seven dark templates and add six");
+assert.equal(LIGHT_HUB_TEMPLATES.length, 9, "Preserve seven light templates and add two");
+assert.equal(HUB_TEMPLATES.length, 22, "One gallery of all twenty-two templates");
 for (const presets of [DARK_HUB_TEMPLATES, LIGHT_HUB_TEMPLATES]) {
-  assert.equal(new Set(presets.map(x => x.id)).size, 7, "Template IDs must be unique");
+  assert.equal(new Set(presets.map(x => x.id)).size, presets.length, "Template IDs must be unique");
 }
 assert.ok(DARK_HUB_TEMPLATES.some(x => x.id === "futuristic-tech"));
 assert.ok(DARK_HUB_TEMPLATES.some(x => x.id === "aurora"));
 assert.ok(LIGHT_HUB_TEMPLATES.some(x => x.id === "futuristic-light"));
 assert.ok(LIGHT_HUB_TEMPLATES.some(x => x.id === "aurora-light"));
+const approvedCoderIds = ["coder-blueprint", "coder-editor", "coder-circuit", "coder-violet", "coder-white-grid"];
+const approvedAwsIds = ["aws-cloud-builder", "aws-console", "aws-aurora-cloud"];
+for (const id of [...approvedCoderIds, ...approvedAwsIds]) {
+  assert.equal(HUB_TEMPLATES.filter(t => t.id === id).length, 1, "Each approved new theme must exist once: " + id);
+}
+
 
 const v = structuredClone(initialHub);
 v.design.darkTemplate = "futuristic-tech";
@@ -72,7 +78,7 @@ for (const id of DARK_HUB_TEMPLATES.map(x => x.id)) {
 for (const id of LIGHT_HUB_TEMPLATES.map(x => x.id)) {
   assert.ok(css.includes('data-light-template="' + id + '"'), id + " needs CSS");
 }
-for (const name of ["circuits.svg","aurora.svg","waves.svg","topographic.svg"]) {
+for (const name of ["circuits.svg","aurora.svg","waves.svg","topographic.svg", "coder-blueprint.svg", "coder-editor.svg", "coder-violet-flow.svg", "aws-cloud-topology.svg", "aws-console-map.svg", "aws-global-network.svg"]) {
   assert.ok(fs.existsSync("public/assets/links/" + name), name + " must exist");
 }
 const publicUI = fs.readFileSync("components/link-hub/HubExperience.tsx", "utf8");
@@ -80,7 +86,28 @@ const adminUI = fs.readFileSync("components/link-hub/HubManager.tsx", "utf8");
 assert.ok(!publicUI.includes("toggleTheme"), "The public hub must not have a theme switch");
 assert.ok(!publicUI.includes("useSyncExternalStore"), "Public theme must not follow visitor device settings");
 assert.ok(publicUI.includes("getSelectedHubTemplate(content.design)"), "Public UI must use the one published template");
-assert.ok(adminUI.includes("HUB_TEMPLATES.map"), "All fourteen templates must appear in one gallery");
+assert.ok(adminUI.includes("HUB_TEMPLATES.filter"), "All 22 themes must be available through gallery filters");
+assert.ok(adminUI.includes("Original 14") && adminUI.includes("Coder · 5") && adminUI.includes("AWS · 3"), "New themes must be grouped with the originals");
 assert.ok(adminUI.includes("activeTemplate: template.id"), "Admin selection sets one active published theme");
 assert.ok(!adminUI.includes("setPreviewTheme"), "Admin preview must not independently switch dark/light");
-console.log("Theme library regression checks passed: single public theme, 14 presets, legacy records and customization limits.");
+// The selection and storage contract must roundtrip each new preset without losing content.
+for (const template of HUB_TEMPLATES) {
+  const stored = structuredClone(initialHub);
+  stored.design.activeTemplate = template.id;
+  if (isLightHubTemplate(template.id)) {
+    stored.design.lightTemplate = template.id;
+    stored.design.lightAccent = template.accent;
+  } else {
+    stored.design.darkTemplate = template.id;
+    stored.design.darkAccent = template.accent;
+  }
+  const roundTrip = validateHub(JSON.parse(JSON.stringify(stored)));
+  assert.equal(roundTrip.design.activeTemplate, template.id);
+  assert.deepEqual(roundTrip.links, validateHub(initialHub).links);
+  assert.deepEqual(roundTrip.projects, validateHub(initialHub).projects);
+  if (approvedCoderIds.includes(template.id) || approvedAwsIds.includes(template.id)) {
+    assert.ok(css.includes('data-' + (isLightHubTemplate(template.id) ? 'light' : 'dark') + '-template="' + template.id + '"'), template.id + " needs a background theme rule");
+    assert.ok(css.includes('.hub-template-' + template.id), template.id + " needs a preview thumbnail");
+  }
+}
+console.log("Theme library regression checks passed: one public theme, 22 presets, eight new artworks, legacy drafts and roundtrip preservation.");
