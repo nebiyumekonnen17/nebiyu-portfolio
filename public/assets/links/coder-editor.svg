@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" fill="none">
+<g font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="25" fill="white" opacity=".86">
+<text x="52" y="68">01   const developer = {</text>
+<text x="85" y="111">02     focus: ["software", "cloud"],</text>
+<text x="85" y="154">03     passion: "building useful things",</text>
+<text x="85" y="197">04     stack: ["TypeScript", "AWS"],</text>
+<text x="52" y="240">05   };</text>
+<text x="52" y="327">06   // create. deploy. improve.</text>
+<text x="52" y="375">07   async function build() {</text>
+<text x="85" y="418">08     const ideas = await learn();</text>
+<text x="85" y="461">09     return ship(ideas);</text>
+<text x="52" y="504">10   }</text>
+<text x="52" y="590">11   &gt; npm run build</text>
+<text x="52" y="635">12   ✓ compiled successfully</text>
+<text x="52" y="690">13   // next: make an impact</text>
+</g>
+<g stroke="white" stroke-opacity=".25"><path d="M50 285H910M50 548H910M50 725H910"/></g>
+</svg>
