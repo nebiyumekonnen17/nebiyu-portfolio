@@ -27,5 +27,7 @@ jobs:
         run: npm run lint
       - name: TypeScript
         run: npm run typecheck
+      - name: Theme registry regression checks
+        run: node scripts/test-link-hub-themes.cjs
       - name: Production build
         run: npm run build
