@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" fill="none">
+<defs><pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="3" cy="3" r="1.9" fill="white" opacity=".4"/></pattern></defs>
+<path d="M140 224C220 140 335 125 432 179L501 238C583 186 715 164 785 235L866 268L1039 215L1105 328L996 409L1039 527L933 581L826 521L751 645L602 625L528 534L430 597L300 504L178 451Z" fill="url(#dots)" opacity=".75"/>
+<g stroke="white" stroke-width="3" stroke-linecap="round" fill="none">
+<path d="M245 365L425 328L625 422L815 350L1005 432"/><path d="M425 328L540 187M625 422L605 630M815 350L906 201M1005 432L914 636"/>
+<circle cx="245" cy="365" r="10"/><circle cx="425" cy="328" r="10"/><circle cx="625" cy="422" r="14"/><circle cx="815" cy="350" r="10"/><circle cx="1005" cy="432" r="10"/>
+<path d="M550 155C542 125 560 100 593 101C628 97 652 119 659 150C692 151 712 171 712 197C712 224 686 238 660 238H563C537 238 517 220 517 197C517 177 530 161 550 155Z"/>
+</g><g fill="white"><circle cx="245" cy="365" r="5"/><circle cx="425" cy="328" r="5"/><circle cx="625" cy="422" r="6"/><circle cx="815" cy="350" r="5"/><circle cx="1005" cy="432" r="5"/></g>
+</svg>
