@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-require-imports -- Node CommonJS smoke test loads TypeScript compiler directly. */
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const ts = require("typescript");
