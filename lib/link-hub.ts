@@ -6,6 +6,14 @@ export const DARK_HUB_TEMPLATES = [
   { id: "purple-slate", name: "Purple Slate", detail: "Creative, refined violet", accent: "#9478F8", bg: "#16132A", surface: "#231F3C", ink: "#F6F2FF" },
   { id: "futuristic-tech", name: "Futuristic Tech", detail: "Precision cyan circuit geometry", accent: "#00C9E8", bg: "#081524", surface: "#112536", ink: "#EAF8FF" },
   { id: "aurora", name: "Aurora", detail: "Cyan, indigo and violet light bands", accent: "#997CFF", bg: "#0A1127", surface: "#18203B", ink: "#F6F3FF" },
+  // Approved Coder board — concepts 1–4.
+  { id: "coder-blueprint", name: "Coder Blueprint", detail: "Electric blue grid, precise connected nodes", accent: "#2389FF", bg: "#071A3A", surface: "#10284B", ink: "#F4F9FF" },
+  { id: "coder-editor", name: "Code Editor", detail: "Developer terminal texture and cobalt accents", accent: "#337CFF", bg: "#081421", surface: "#102238", ink: "#EDF6FF" },
+  { id: "coder-circuit", name: "Cyan Circuit", detail: "Cyan engineering circuitry on deep teal", accent: "#26D5DE", bg: "#071B27", surface: "#102B3B", ink: "#EFFBFC" },
+  { id: "coder-violet", name: "Violet Code Waves", detail: "Violet gradients, flowing technical contours", accent: "#9655F7", bg: "#16112D", surface: "#241B40", ink: "#F8F4FF" },
+  // Approved AWS board — concepts 7–8.
+  { id: "aws-console", name: "AWS Dark Console", detail: "Cloud topology, console grids and blue signals", accent: "#219EFA", bg: "#071426", surface: "#0E2740", ink: "#EFF8FF" },
+  { id: "aws-aurora-cloud", name: "AWS Aurora Cloud", detail: "Cloud architecture, global arcs and warm orange", accent: "#FFA344", bg: "#08172C", surface: "#14283F", ink: "#F5F9FF" },
 ] as const;
 export const LIGHT_HUB_TEMPLATES = [
   { id: "minimal", name: "Light Minimal", detail: "Ivory with delicate contour lines", accent: "#286EF1", bg: "#F7F7F4", surface: "#FFFFFF", ink: "#172235" },
@@ -15,6 +23,9 @@ export const LIGHT_HUB_TEMPLATES = [
   { id: "warm-neutral", name: "Warm Neutral", detail: "Natural off-white and navy", accent: "#1A355D", bg: "#F5F0E8", surface: "#FFFCF6", ink: "#18243A" },
   { id: "futuristic-light", name: "Futuristic Light", detail: "Airy blueprint geometry in light blue", accent: "#286FAB", bg: "#EBF7FF", surface: "#FFFFFF", ink: "#173A59" },
   { id: "aurora-light", name: "Aurora Light", detail: "Soft violet and aqua atmosphere", accent: "#6752B4", bg: "#F5F3FF", surface: "#FFFFFF", ink: "#27345A" },
+  // Approved white/Coder + AWS board — concepts 5–6.
+  { id: "coder-white-grid", name: "White Coder Grid", detail: "Bright blueprint grid and subtle blue nodes", accent: "#176DF3", bg: "#F7FAFF", surface: "#FFFFFF", ink: "#15243D" },
+  { id: "aws-cloud-builder", name: "AWS Light Cloud Builder", detail: "Cloud architecture lines and airy soft whites", accent: "#F7931A", bg: "#F7FBFF", surface: "#FFFFFF", ink: "#172942" },
 ] as const;
 export type DarkHubTemplate = typeof DARK_HUB_TEMPLATES[number]["id"];
 export type LightHubTemplate = typeof LIGHT_HUB_TEMPLATES[number]["id"];

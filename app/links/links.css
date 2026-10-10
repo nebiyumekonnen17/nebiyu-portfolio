@@ -674,6 +674,149 @@
 .hub-setting-description {font-size:11px;color:#9DABC1;line-height:1.6;}
 @media(max-width:540px){.hub-background-controls{grid-template-columns:1fr;}}
 
+
+/* Eight approved Coder/AWS concept themes — background-led mobile designs. */
+/* Theme 1: Electric blueprint / technical constellation */
+.link-hub-shell.hub-dark[data-dark-template="coder-blueprint"] {
+  --hub-background:#071A3A;--hub-surface:#10284B;--hub-surface-raised:#1A3761;
+  --hub-ink:#F4F9FF;--hub-muted:#A9C8EC;--hub-line:#315A8E;
+  --hub-backdrop:radial-gradient(ellipse at 45% 20%,rgba(13,114,250,.50),transparent 67%);
+  --hub-pattern-url:url("/assets/links/coder-blueprint.svg");--hub-pattern-opacity:.53;
+  background-image:radial-gradient(ellipse at 55% 13%,rgba(0,94,214,.28),transparent 49%),linear-gradient(160deg,#06122C 0%,#0A2556 43%,#05152D 100%);
+}
+/* Theme 2: Text-editor/terminal look */
+.link-hub-shell.hub-dark[data-dark-template="coder-editor"] {
+  --hub-background:#081421;--hub-surface:#102238;--hub-surface-raised:#1B3452;
+  --hub-ink:#EDF6FF;--hub-muted:#ADC4DE;--hub-line:#324762;
+  --hub-backdrop:radial-gradient(ellipse at 50% 30%,rgba(29,91,180,.33),transparent 71%);
+  --hub-pattern-url:url("/assets/links/coder-editor.svg");--hub-pattern-opacity:.30;
+  background-image:linear-gradient(165deg,#07101B 0%,#102A44 48%,#06101E 100%);
+}
+/* Theme 3: Deep teal with vivid printed-circuit traces */
+.link-hub-shell.hub-dark[data-dark-template="coder-circuit"] {
+  --hub-background:#071B27;--hub-surface:#102B3B;--hub-surface-raised:#154254;
+  --hub-ink:#EFFBFC;--hub-muted:#A5CFD8;--hub-line:#236074;
+  --hub-backdrop:radial-gradient(ellipse at 45% 14%,rgba(0,199,222,.28),transparent 67%);
+  --hub-pattern-url:url("/assets/links/circuits.svg");--hub-pattern-opacity:.72;
+  background-image:radial-gradient(circle at 70% 10%,rgba(0,135,157,.26),transparent 43%),linear-gradient(172deg,#061621,#073043 47%,#061621 100%);
+}
+/* Theme 4: Violet flowing code lines */
+.link-hub-shell.hub-dark[data-dark-template="coder-violet"] {
+  --hub-background:#16112D;--hub-surface:#241B40;--hub-surface-raised:#342657;
+  --hub-ink:#F8F4FF;--hub-muted:#C4B8E8;--hub-line:#4B3B76;
+  --hub-backdrop:radial-gradient(ellipse at 52% 19%,rgba(142,63,246,.34),transparent 73%);
+  --hub-pattern-url:url("/assets/links/coder-violet-flow.svg");--hub-pattern-opacity:.57;
+  background-image:radial-gradient(ellipse at 80% 26%,rgba(120,39,224,.23),transparent 52%),linear-gradient(162deg,#100A23 0%,#28144D 51%,#110B29 100%);
+}
+/* Theme 5: Bright coder blueprint */
+.link-hub-shell.hub-light[data-light-template="coder-white-grid"] {
+  --hub-background:#F7FAFF;--hub-surface:#FFFFFF;--hub-surface-raised:#E9F2FF;
+  --hub-ink:#15243D;--hub-muted:#526B89;--hub-line:#BED5F4;
+  --hub-backdrop:radial-gradient(ellipse at 48% 15%,rgba(41,128,241,.19),transparent 71%);
+  --hub-pattern-url:url("/assets/links/coder-blueprint.svg");--hub-pattern-opacity:.33;
+  background-image:linear-gradient(145deg,#FFFFFF 0%,#E8F3FF 55%,#FFFFFF 100%);
+}
+/* Theme 6: AWS-inspired light cloud builder */
+.link-hub-shell.hub-light[data-light-template="aws-cloud-builder"] {
+  --hub-background:#F7FBFF;--hub-surface:#FFFFFF;--hub-surface-raised:#FFF1DD;
+  --hub-ink:#172942;--hub-muted:#536C88;--hub-line:#D4DCE8;--hub-accent-ink:#19243A;
+  --hub-backdrop:radial-gradient(ellipse at 46% 20%,rgba(153,197,236,.24),transparent 72%);
+  --hub-pattern-url:url("/assets/links/aws-cloud-topology.svg");--hub-pattern-opacity:.39;
+  background-image:radial-gradient(ellipse at 65% 12%,rgba(240,165,68,.10),transparent 49%),linear-gradient(165deg,#FFFFFF 0%,#F0F7FF 60%,#FFF9F0 100%);
+}
+/* Theme 7: AWS-inspired dark console */
+.link-hub-shell.hub-dark[data-dark-template="aws-console"] {
+  --hub-background:#071426;--hub-surface:#0E2740;--hub-surface-raised:#173959;
+  --hub-ink:#EFF8FF;--hub-muted:#ACC8E1;--hub-line:#22557A;
+  --hub-backdrop:radial-gradient(ellipse at 48% 21%,rgba(0,127,244,.37),transparent 74%);
+  --hub-pattern-url:url("/assets/links/aws-console-map.svg");--hub-pattern-opacity:.56;
+  background-image:radial-gradient(ellipse at 73% 13%,rgba(1,88,162,.34),transparent 53%),linear-gradient(165deg,#05101E,#0A2C48 54%,#06182C);
+}
+/* Theme 8: Global cloud/aurora with blue and warm-orange light */
+.link-hub-shell.hub-dark[data-dark-template="aws-aurora-cloud"] {
+  --hub-background:#08172C;--hub-surface:#14283F;--hub-surface-raised:#24334A;
+  --hub-ink:#F5F9FF;--hub-muted:#B9CBE1;--hub-line:#39506B;
+  --hub-backdrop:radial-gradient(ellipse at 38% 12%,rgba(19,107,245,.32),transparent 67%),radial-gradient(ellipse at 83% 35%,rgba(255,147,46,.21),transparent 63%);
+  --hub-pattern-url:url("/assets/links/aws-global-network.svg");--hub-pattern-opacity:.67;
+  background-image:radial-gradient(circle at 86% 20%,rgba(255,144,40,.23),transparent 30%),radial-gradient(ellipse at 23% 23%,rgba(20,108,234,.33),transparent 53%),linear-gradient(165deg,#051225 0%,#102542 53%,#071425 100%);
+}
+/* The artwork is subtle on the wider editorial layout, more visible on phones. */
+@media(min-width:768px) {
+  .link-hub-shell:is(
+    [data-dark-template="coder-blueprint"],
+    [data-dark-template="coder-editor"],
+    [data-dark-template="coder-circuit"],
+    [data-dark-template="coder-violet"],
+    [data-dark-template="aws-console"],
+    [data-dark-template="aws-aurora-cloud"],
+    [data-light-template="coder-white-grid"],
+    [data-light-template="aws-cloud-builder"]
+  ) .hub-v2-background {
+    opacity:calc(var(--hub-background-strength,.6) * .50);
+  }
+}
+/* The miniature previews carry the same patterned character as the real themes. */
+.hub-template-coder-blueprint::before,
+.hub-template-coder-white-grid::before {
+  background:var(--template-accent);
+  mask:url("/assets/links/coder-blueprint.svg") center / cover no-repeat;
+  opacity:.55;
+}
+.hub-template-coder-editor::before {
+  background:var(--template-accent);
+  mask:url("/assets/links/coder-editor.svg") center / cover no-repeat;
+  opacity:.52;
+}
+.hub-template-coder-circuit::before {
+  background:var(--template-accent);
+  mask:url("/assets/links/circuits.svg") center / cover no-repeat;
+  opacity:.63;
+}
+.hub-template-coder-violet::before {
+  background:var(--template-accent);
+  mask:url("/assets/links/coder-violet-flow.svg") center / cover no-repeat;
+  opacity:.55;
+}
+.hub-template-aws-cloud-builder::before {
+  background:var(--template-accent);
+  mask:url("/assets/links/aws-cloud-topology.svg") center / cover no-repeat;
+  opacity:.47;
+}
+.hub-template-aws-console::before {
+  background:var(--template-accent);
+  mask:url("/assets/links/aws-console-map.svg") center / cover no-repeat;
+  opacity:.57;
+}
+.hub-template-aws-aurora-cloud::before {
+  background:linear-gradient(135deg,#1979EE 10%,#FFAA46 80%);
+  mask:url("/assets/links/aws-global-network.svg") center / cover no-repeat;
+  opacity:.66;
+}
+/* Keep miniature color/gradient treatment consistent with each full-page preset. */
+.hub-template-coder-blueprint { background-image:linear-gradient(140deg,#07142F,#103B79 62%,#07152B); }
+.hub-template-coder-editor { background-image:linear-gradient(155deg,#081421,#102C48); }
+.hub-template-coder-circuit { background-image:linear-gradient(155deg,#071B27,#08465A); }
+.hub-template-coder-violet { background-image:linear-gradient(155deg,#17112E,#361B60); }
+.hub-template-coder-white-grid { background-image:linear-gradient(155deg,#FFFFFF,#E4F1FF); }
+.hub-template-aws-cloud-builder { background-image:linear-gradient(155deg,#FFFFFF,#EAF5FF 65%,#FFF7EA); }
+.hub-template-aws-console { background-image:linear-gradient(155deg,#061424,#0B3E64); }
+.hub-template-aws-aurora-cloud { background-image:radial-gradient(circle at 85% 20%,#9D6036,#102B53 46%,#071629 90%); }
+/* Browsers with motion sensitivity retain the existing static artwork. */
+
+
+/* The single-choice theme library scales to 22 themes without overwhelming mobile. */
+.hub-theme-filters {display:flex;flex-wrap:wrap;gap:8px;margin:-2px 0 4px;}
+.hub-theme-filters button {
+  font:inherit;font-size:12px;font-weight:650;color:#B6C4D5;
+  border:1px solid #3B4D63;background:#1B2737;
+  border-radius:10px;padding:10px 13px;cursor:pointer;min-height:42px;
+}
+.hub-theme-filters button:hover,.hub-theme-filters button.active {
+  border-color:#84B6FF;color:#EAF4FF;background:#233C58;
+}
+.hub-theme-filters button:focus-visible{outline:2px solid #84B6FF;outline-offset:2px;}
+@media(max-width:480px){.hub-theme-filters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));}.hub-theme-filters button{text-align:center;padding:10px 7px;}}
+
 /* Private studio */
 .hub-manager,.hub-admin-login,.hub-manager-loading{font-family:var(--font-inter),Inter,Arial,sans-serif;color:#f2f5f9;background:#0c111a;min-height:100vh;color-scheme:dark}
 .hub-manager{display:grid;grid-template-columns:236px minmax(0,1fr)}
