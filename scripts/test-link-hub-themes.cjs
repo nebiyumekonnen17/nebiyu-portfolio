@@ -13,6 +13,9 @@ new Function("exports", "module", js)(result.exports, result);
 const {
   DARK_HUB_TEMPLATES,
   LIGHT_HUB_TEMPLATES,
+  HUB_TEMPLATES,
+  getSelectedHubTemplate,
+  isLightHubTemplate,
   DEFAULT_HUB_BACKGROUND,
   initialHub,
   validateHub,
@@ -20,6 +23,7 @@ const {
 
 assert.equal(DARK_HUB_TEMPLATES.length, 7, "Exactly seven dark templates");
 assert.equal(LIGHT_HUB_TEMPLATES.length, 7, "Exactly seven light templates");
+assert.equal(HUB_TEMPLATES.length, 14, "One gallery of all fourteen templates");
 for (const presets of [DARK_HUB_TEMPLATES, LIGHT_HUB_TEMPLATES]) {
   assert.equal(new Set(presets.map(x => x.id)).size, 7, "Template IDs must be unique");
 }
@@ -31,6 +35,7 @@ assert.ok(LIGHT_HUB_TEMPLATES.some(x => x.id === "aurora-light"));
 const v = structuredClone(initialHub);
 v.design.darkTemplate = "futuristic-tech";
 v.design.lightTemplate = "aurora-light";
+v.design.activeTemplate = "aurora-light";
 v.design.background = {
   intensity: 200, placement: "full", motion: true,
   texture: false, cardOpacity: 10,
@@ -38,6 +43,9 @@ v.design.background = {
 const accepted = validateHub(v);
 assert.equal(accepted.design.darkTemplate, "futuristic-tech");
 assert.equal(accepted.design.lightTemplate, "aurora-light");
+assert.equal(accepted.design.activeTemplate, "aurora-light");
+assert.equal(getSelectedHubTemplate(accepted.design).id, "aurora-light");
+assert.equal(isLightHubTemplate(getSelectedHubTemplate(accepted.design).id), true);
 assert.equal(accepted.design.background.intensity, 100);
 assert.equal(accepted.design.background.cardOpacity, 85);
 assert.equal(accepted.design.background.placement, "full");
@@ -47,11 +55,15 @@ assert.deepEqual(accepted.links, validateHub(initialHub).links, "Links should re
 
 const old = structuredClone(initialHub);
 delete old.design.background;
+delete old.design.activeTemplate;
 assert.deepEqual(validateHub(old).design.background, DEFAULT_HUB_BACKGROUND, "Old drafts should remain readable");
 old.design.darkTemplate = "purple-slate";
 old.design.lightTemplate = "warm-neutral";
 assert.equal(validateHub(old).design.darkTemplate, "purple-slate");
 assert.equal(validateHub(old).design.lightTemplate, "warm-neutral");
+assert.equal(validateHub(old).design.activeTemplate, "purple-slate", "Legacy dual-mode records select the previously configured dark theme");
+old.design.activeTemplate = "not-a-template";
+assert.equal(validateHub(old).design.activeTemplate, "purple-slate", "Invalid published selection falls back safely");
 
 const css = fs.readFileSync("app/links/links.css", "utf8");
 for (const id of DARK_HUB_TEMPLATES.map(x => x.id)) {
@@ -63,4 +75,12 @@ for (const id of LIGHT_HUB_TEMPLATES.map(x => x.id)) {
 for (const name of ["circuits.svg","aurora.svg","waves.svg","topographic.svg"]) {
   assert.ok(fs.existsSync("public/assets/links/" + name), name + " must exist");
 }
-console.log("Theme library regression checks passed: 14 templates, assets, legacy drafts and customization limits.");
+const publicUI = fs.readFileSync("components/link-hub/HubExperience.tsx", "utf8");
+const adminUI = fs.readFileSync("components/link-hub/HubManager.tsx", "utf8");
+assert.ok(!publicUI.includes("toggleTheme"), "The public hub must not have a theme switch");
+assert.ok(!publicUI.includes("useSyncExternalStore"), "Public theme must not follow visitor device settings");
+assert.ok(publicUI.includes("getSelectedHubTemplate(content.design)"), "Public UI must use the one published template");
+assert.ok(adminUI.includes("HUB_TEMPLATES.map"), "All fourteen templates must appear in one gallery");
+assert.ok(adminUI.includes("activeTemplate: template.id"), "Admin selection sets one active published theme");
+assert.ok(!adminUI.includes("setPreviewTheme"), "Admin preview must not independently switch dark/light");
+console.log("Theme library regression checks passed: single public theme, 14 presets, legacy records and customization limits.");
