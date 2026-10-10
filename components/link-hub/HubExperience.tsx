@@ -1,39 +1,15 @@
 "use client";
 
-import { useState, useSyncExternalStore } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import {
   ArrowRight, ArrowUpRight, Award, Camera, Check, Cloud,
-  FileText, Globe2, Link2, Mail, Moon, Send, Share2, Sun,
+  FileText, Globe2, Link2, Mail, Send, Share2,
 } from "lucide-react";
 import { GithubIcon, InstagramIcon, LinkedinIcon } from "@/components/ui/BrandIcons";
 import { profile as careerProfile } from "@/data/profile";
-import { DEFAULT_HUB_BACKGROUND, type HubContent } from "@/lib/link-hub";
-
-type Theme = "system" | "dark" | "light";
-
-function subscribeTheme(onChange: () => void) {
-  const media = window.matchMedia("(prefers-color-scheme: light)");
-  media.addEventListener("change", onChange);
-  window.addEventListener("storage", onChange);
-  window.addEventListener("hub-theme-change", onChange);
-  return () => {
-    media.removeEventListener("change", onChange);
-    window.removeEventListener("storage", onChange);
-    window.removeEventListener("hub-theme-change", onChange);
-  };
-}
-function readTheme(): Theme {
-  try {
-    const saved = window.localStorage.getItem("nebiyu-link-theme");
-    if (saved === "dark" || saved === "light") return saved;
-  } catch {
-    // Browsers with restricted local storage still follow device settings.
-  }
-  return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
-}
-function serverTheme(): Theme { return "system"; }
+import { DEFAULT_HUB_BACKGROUND, getSelectedHubTemplate, isLightHubTemplate, type HubContent } from "@/lib/link-hub";
 
 const icons = {
   globe: Globe2,
@@ -107,36 +83,21 @@ function ProjectArtwork({ src, name, type }: { src: string; name: string; type: 
 export function HubExperience({
   content,
   compact = false,
-  previewTheme,
-  onPreviewThemeChange,
 }: {
   content: HubContent;
   compact?: boolean;
-  previewTheme?: "dark" | "light";
-  onPreviewThemeChange?: (theme: "dark" | "light") => void;
 }) {
-  const theme = useSyncExternalStore(subscribeTheme, readTheme, serverTheme);
   const [copied, setCopied] = useState(false);
   const [shareFallback, setShareFallback] = useState(false);
 
-  const isLight = (previewTheme ?? theme) === "light";
+  const selectedTemplate = getSelectedHubTemplate(content.design);
+  const isLight = isLightHubTemplate(selectedTemplate.id);
   const background = { ...DEFAULT_HUB_BACKGROUND, ...content.design.background };
   const visibleSocials = content.links.filter((link) => link.visible && link.section === "social");
   const primaryLinks = content.links.filter((link) => link.visible && link.section === "primary");
   const extraLinks = content.links.filter((link) => link.visible && link.section === "extra");
   const projects = content.projects.filter((project) => project.visible).slice(0, 3);
   const shareUrl = "https://nebiyumekonnen.com/links";
-
-  function toggleTheme() {
-    const next = isLight ? "dark" : "light";
-    if (onPreviewThemeChange) { onPreviewThemeChange(next); return; }
-    try {
-      window.localStorage.setItem("nebiyu-link-theme", next);
-      window.dispatchEvent(new Event("hub-theme-change"));
-    } catch {
-      // Device theme still applies if local storage is blocked.
-    }
-  }
 
   async function share() {
     setShareFallback(false);
@@ -159,9 +120,9 @@ export function HubExperience({
 
   return (
     <div
-      className={"link-hub-shell hub-" + (previewTheme ?? theme) + (compact ? " hub-compact" : "")}
-      data-dark-template={content.design.darkTemplate ?? "midnight"}
-      data-light-template={content.design.lightTemplate ?? "minimal"}
+      className={"link-hub-shell hub-" + (isLight ? "light" : "dark") + (compact ? " hub-compact" : "")}
+      data-dark-template={isLight ? content.design.darkTemplate : selectedTemplate.id}
+      data-light-template={isLight ? selectedTemplate.id : content.design.lightTemplate}
       data-background-placement={background.placement}
       data-background-motion={String(background.motion)}
       data-background-texture={String(background.texture)}
@@ -180,15 +141,6 @@ export function HubExperience({
             <span>NEBIYU <span className="hub-v2-brand-muted">/ LINKS</span></span>
           </Link>
           <div className="hub-v2-toolbar">
-            <button
-              className="hub-v2-icon-button"
-              type="button"
-              onClick={toggleTheme}
-              aria-label={"Switch to " + (isLight ? "dark" : "light") + " theme"}
-              title={isLight ? "Dark theme" : "Light theme"}
-            >
-              {isLight ? <Moon size={18} aria-hidden="true" /> : <Sun size={18} aria-hidden="true" />}
-            </button>
             <button
               className="hub-v2-icon-button"
               type="button"
