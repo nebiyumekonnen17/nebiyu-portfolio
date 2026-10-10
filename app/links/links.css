@@ -804,7 +804,77 @@
 /* Browsers with motion sensitivity retain the existing static artwork. */
 
 
-/* The single-choice theme library scales to 22 themes without overwhelming mobile. */
+
+/* Four new white coder themes. Existing 22 templates remain unchanged. */
+/* White Coder Blueprint: architectural technical drawings, distinct from the dot grid. */
+.link-hub-shell.hub-light[data-light-template="coder-white-blueprint"] {
+  --hub-background:#FAFCFF;--hub-surface:#FFFFFF;--hub-surface-raised:#E7F0FE;
+  --hub-ink:#19314D;--hub-muted:#586E8A;--hub-line:#CFDFF1;
+  --hub-backdrop:radial-gradient(ellipse at 42% 18%,rgba(61,133,219,.23),transparent 70%);
+  --hub-pattern-url:url("/assets/links/coder-white-blueprint.svg");--hub-pattern-opacity:.38;
+  background-image:linear-gradient(160deg,#FFFFFF 0%,#F0F7FF 49%,#FFFFFF 100%);
+}
+/* White Code Editor: real source-code texture, soft cobalt, crisp white cards. */
+.link-hub-shell.hub-light[data-light-template="coder-white-editor"] {
+  --hub-background:#F5F8FD;--hub-surface:#FFFFFF;--hub-surface-raised:#E9EFFB;
+  --hub-ink:#1F2A42;--hub-muted:#626F89;--hub-line:#D1DBEB;
+  --hub-backdrop:radial-gradient(ellipse at 44% 16%,rgba(82,105,214,.17),transparent 74%);
+  --hub-pattern-url:url("/assets/links/coder-editor.svg");--hub-pattern-opacity:.34;
+  background-image:linear-gradient(150deg,#FFFFFF 0%,#EDF3FC 58%,#FCFDFF 100%);
+}
+/* White Circuit: airy cyan PCB traces, no heavy glass effects. */
+.link-hub-shell.hub-light[data-light-template="coder-white-circuit"] {
+  --hub-background:#F3FCFD;--hub-surface:#FFFFFF;--hub-surface-raised:#E5F8FA;
+  --hub-ink:#183B46;--hub-muted:#597C86;--hub-line:#C7E5E9;
+  --hub-backdrop:radial-gradient(ellipse at 58% 15%,rgba(0,164,184,.19),transparent 74%);
+  --hub-pattern-url:url("/assets/links/circuits.svg");--hub-pattern-opacity:.38;
+  background-image:linear-gradient(160deg,#FFFFFF 0%,#E8F8FB 52%,#FBFFFF 100%);
+}
+/* White Violet Flow: delicate contemporary curves over a lavender-tinted canvas. */
+.link-hub-shell.hub-light[data-light-template="coder-white-violet"] {
+  --hub-background:#F9F6FF;--hub-surface:#FFFFFF;--hub-surface-raised:#F0EAFB;
+  --hub-ink:#30294A;--hub-muted:#73698C;--hub-line:#DFD5F0;
+  --hub-backdrop:radial-gradient(ellipse at 50% 13%,rgba(158,116,220,.25),transparent 70%);
+  --hub-pattern-url:url("/assets/links/coder-violet-flow.svg");--hub-pattern-opacity:.39;
+  background-image:radial-gradient(ellipse at 90% 20%,rgba(162,132,224,.11),transparent 47%),linear-gradient(165deg,#FFFFFF 0%,#F2EDFF 60%,#FFFDFF 100%);
+}
+/* Gallery miniature artwork uses the same vector art as the live background. */
+.hub-template-coder-white-blueprint::before {
+  background:var(--template-accent);
+  mask:url("/assets/links/coder-white-blueprint.svg") center / cover no-repeat;
+  opacity:.53;
+}
+.hub-template-coder-white-editor::before {
+  background:var(--template-accent);
+  mask:url("/assets/links/coder-editor.svg") center / cover no-repeat;
+  opacity:.48;
+}
+.hub-template-coder-white-circuit::before {
+  background:var(--template-accent);
+  mask:url("/assets/links/circuits.svg") center / cover no-repeat;
+  opacity:.58;
+}
+.hub-template-coder-white-violet::before {
+  background:var(--template-accent);
+  mask:url("/assets/links/coder-violet-flow.svg") center / cover no-repeat;
+  opacity:.51;
+}
+.hub-template-coder-white-blueprint {background-image:linear-gradient(145deg,#FFFFFF,#E8F2FF);}
+.hub-template-coder-white-editor {background-image:linear-gradient(145deg,#FFFFFF,#EAF0FC);}
+.hub-template-coder-white-circuit {background-image:linear-gradient(145deg,#FFFFFF,#E5F8FA);}
+.hub-template-coder-white-violet {background-image:linear-gradient(145deg,#FFFFFF,#EEE5FF);}
+@media (min-width:768px) {
+  .link-hub-shell:is(
+    [data-light-template="coder-white-blueprint"],
+    [data-light-template="coder-white-editor"],
+    [data-light-template="coder-white-circuit"],
+    [data-light-template="coder-white-violet"]
+  ) .hub-v2-background {
+    opacity:calc(var(--hub-background-strength,.6) * .50);
+  }
+}
+
+/* The single-choice theme library scales to 26 themes without overwhelming mobile. */
 .hub-theme-filters {display:flex;flex-wrap:wrap;gap:8px;margin:-2px 0 4px;}
 .hub-theme-filters button {
   font:inherit;font-size:12px;font-weight:650;color:#B6C4D5;

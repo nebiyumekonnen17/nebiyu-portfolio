@@ -15,7 +15,7 @@ const tabs = [
 ] as const;
 type Tab = typeof tabs[number]["id"];
 type ThemeFilter = "all" | "classic" | "coder" | "aws";
-const coderIds: ReadonlySet<string> = new Set(["coder-blueprint","coder-editor","coder-circuit","coder-violet","coder-white-grid"]);
+const coderIds: ReadonlySet<string> = new Set(["coder-blueprint","coder-editor","coder-circuit","coder-violet","coder-white-grid","coder-white-blueprint","coder-white-editor","coder-white-circuit","coder-white-violet"]);
 const awsIds: ReadonlySet<string> = new Set(["aws-cloud-builder","aws-console","aws-aurora-cloud"]);
 
 async function callAPI(url: string, opts?: RequestInit) {
@@ -197,7 +197,7 @@ export function HubManager() {
         </div>)}
       </div>}
       {tab === "appearance" && <div className="hub-admin-section">
-        <p className="hub-admin-intro">Choose <strong>one theme</strong> for everyone who visits your public Link Hub. All {HUB_TEMPLATES.length} styles are available here, including new coding and AWS-inspired designs. Visitors cannot change the theme themselves.</p>
+        <p className="hub-admin-intro">Choose <strong>one theme</strong> for everyone who visits your public Link Hub. All {HUB_TEMPLATES.length} styles are available here, including nine coding and three AWS-inspired designs. Visitors cannot change the theme themselves.</p>
         <div className="hub-admin-card">
           <div className="hub-admin-card-heading"><h2>Choose your public theme</h2><button type="button" className="hub-admin-secondary" onClick={openThemePreview}><Smartphone size={16}/> Preview selection</button></div>
           <p>Selected draft: <strong>{getSelectedHubTemplate(draft.design).name}</strong> · Published: <strong>{getSelectedHubTemplate(live.design).name}</strong></p>
@@ -205,7 +205,7 @@ export function HubManager() {
             {([
               ["all", "All " + HUB_TEMPLATES.length],
               ["classic", "Original 14"],
-              ["coder", "Coder · 5"],
+              ["coder", "Coder · " + coderIds.size],
               ["aws", "AWS · 3"],
             ] as const).map(([id,label]) => <button key={id} type="button" className={themeFilter === id ? "active" : ""} aria-pressed={themeFilter === id} onClick={()=>setThemeFilter(id)}>{label}</button>)}
           </div>

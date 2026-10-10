@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" fill="none">
+<g stroke="white" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+<rect x="155" y="120" width="670" height="470" rx="18"/>
+<rect x="192" y="165" width="590" height="55" rx="9"/><path d="M212 196H520M545 196H625M650 196H753"/>
+<rect x="195" y="251" width="245" height="286" rx="11"/><rect x="470" y="251" width="312" height="130" rx="11"/><rect x="470" y="409" width="312" height="128" rx="11"/>
+<path d="M220 280H407M220 315H365M220 350H380M220 385H343M220 420H397M220 455H354M220 490H374"/>
+<path d="M490 278H760M490 311H697M490 340H625M490 442H759M490 476H686M490 511H743"/>
+<path d="M155 96V76M825 96V76M120 120H105M855 120H872M155 613V642M825 613V642"/>
+<path d="M110 678H900M110 678L125 666M110 678L125 690M900 678L885 666M900 678L885 690"/>
+<path d="M905 120H1045V590H905M916 138H1015M916 171H981M916 204H1000"/>
+</g>
+<g stroke="white" stroke-width="1.4" stroke-dasharray="7 9" opacity=".8">
+<path d="M140 114V601M840 114V601M110 610H864M110 104H864"/>
+<path d="M325 60V750M625 60V750"/>
+</g>
+<g fill="white" font-family="monospace" font-size="24" opacity=".9"><text x="155" y="735">UI SYSTEM / COMPONENT BLUEPRINT</text><text x="155" y="770">DESIGN → CODE → DEPLOY</text></g>
+</svg>
