@@ -25,6 +25,11 @@ export const LIGHT_HUB_TEMPLATES = [
   { id: "aurora-light", name: "Aurora Light", detail: "Soft violet and aqua atmosphere", accent: "#6752B4", bg: "#F5F3FF", surface: "#FFFFFF", ink: "#27345A" },
   // Approved white/Coder + AWS board — concepts 5–6.
   { id: "coder-white-grid", name: "White Coder Grid", detail: "Bright blueprint grid and subtle blue nodes", accent: "#176DF3", bg: "#F7FAFF", surface: "#FFFFFF", ink: "#15243D" },
+  // Additional approved white coder collection: precise, developer-focused, no gold.
+  { id: "coder-white-blueprint", name: "White Coder Blueprint", detail: "Architectural blueprints and numbered wireframes", accent: "#2364C9", bg: "#FAFCFF", surface: "#FFFFFF", ink: "#19314D" },
+  { id: "coder-white-editor", name: "White Code Editor", detail: "Clean editor typography on frosted white", accent: "#3761D7", bg: "#F5F8FD", surface: "#FFFFFF", ink: "#1F2A42" },
+  { id: "coder-white-circuit", name: "White Circuit", detail: "Cyan circuit traces on bright white", accent: "#008EAA", bg: "#F3FCFD", surface: "#FFFFFF", ink: "#183B46" },
+  { id: "coder-white-violet", name: "White Violet Flow", detail: "Soft lavender, flowing code contours", accent: "#7452C4", bg: "#F9F6FF", surface: "#FFFFFF", ink: "#30294A" },
   { id: "aws-cloud-builder", name: "AWS Light Cloud Builder", detail: "Cloud architecture lines and airy soft whites", accent: "#F7931A", bg: "#F7FBFF", surface: "#FFFFFF", ink: "#172942" },
 ] as const;
 export type DarkHubTemplate = typeof DARK_HUB_TEMPLATES[number]["id"];
