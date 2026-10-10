@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import { ArrowDown, ArrowUp, ArrowUpRight, BarChart3, Check, ChevronRight, Download, Eye, EyeOff, FileText, ImageUp, LayoutDashboard, Link2, Loader2, LockKeyhole, LogOut, Palette, Plus, QrCode, Save, Settings, Share2, ShieldCheck, Smartphone, Sparkles, Trash2, Upload, X } from "lucide-react";
 import QRCode from "qrcode";
 import { HubExperience } from "@/components/link-hub/HubExperience";
-import { initialHub, DARK_HUB_TEMPLATES, LIGHT_HUB_TEMPLATES, type HubContent, type HubLink, type HubProject } from "@/lib/link-hub";
+import { initialHub, DARK_HUB_TEMPLATES, LIGHT_HUB_TEMPLATES, DEFAULT_HUB_BACKGROUND, type HubBackgroundSettings, type HubContent, type HubLink, type HubProject } from "@/lib/link-hub";
 const tabs = [
   { id: "overview", title: "Overview", icon: LayoutDashboard },
   { id: "links", title: "My Links", icon: Link2 },
@@ -70,6 +70,9 @@ export function HubManager() {
   function openThemePreview(mode: "dark" | "light") {
     setPreviewTheme(mode);
     setShowPreview(true);
+  }
+  function setBackground<K extends keyof HubBackgroundSettings>(field: K, value: HubBackgroundSettings[K]) {
+    change(old => ({ ...old, design: { ...old.design, background: { ...DEFAULT_HUB_BACKGROUND, ...old.design.background, [field]: value } } }));
   }
   function updateLink(id: string, field: keyof HubLink, value: string | boolean) {
     change(old => ({ ...old, links: old.links.map(l => l.id === id ? { ...l, [field]: value } : l) }));
@@ -237,6 +240,30 @@ export function HubManager() {
               <span className="hub-template-label"><strong>{template.name}</strong>{draft.design.lightTemplate === template.id ? <Check size={16} aria-hidden="true"/> : null}</span>
               <small>{template.detail}</small>
             </button>)}
+          </div>
+        </div>
+        <div className="hub-admin-card">
+          <div className="hub-admin-card-heading"><h2>Background settings</h2><button className="hub-admin-secondary" type="button" onClick={()=>openThemePreview(previewTheme)}><Smartphone size={16}/> Preview</button></div>
+          <p>These settings apply to both selected templates. They are stored with your draft, not on the public page until publishing.</p>
+          <div className="hub-background-controls">
+            <label>Background intensity: {draft.design.background?.intensity ?? 60}%
+              <input aria-label="Background intensity" type="range" min={0} max={100} step={5} value={draft.design.background?.intensity ?? 60} onChange={e=>setBackground("intensity", Number(e.target.value))}/>
+            </label>
+            <label>Background placement
+              <select value={draft.design.background?.placement ?? "top"} onChange={e=>setBackground("placement", e.target.value as HubBackgroundSettings["placement"])}>
+                <option value="profile">Profile only</option>
+                <option value="top">Top section</option>
+                <option value="full">Full page</option>
+              </select>
+            </label>
+            <label>Card surface opacity: {draft.design.background?.cardOpacity ?? 100}%
+              <input aria-label="Card surface opacity" type="range" min={85} max={100} step={5} value={draft.design.background?.cardOpacity ?? 100} onChange={e=>setBackground("cardOpacity", Number(e.target.value))}/>
+            </label>
+            <div>
+              <label className="hub-setting-toggle"><input type="checkbox" checked={draft.design.background?.texture ?? true} onChange={e=>setBackground("texture", e.target.checked)}/> Background line texture</label>
+              <label className="hub-setting-toggle"><input type="checkbox" checked={draft.design.background?.motion ?? false} onChange={e=>setBackground("motion", e.target.checked)}/> Subtle ambient motion</label>
+              <p className="hub-setting-description">Motion stays off by default and follows your visitors&apos; reduced-motion preferences.</p>
+            </div>
           </div>
         </div>
         <div className="hub-admin-card"><h2>Accent fine-tuning</h2>

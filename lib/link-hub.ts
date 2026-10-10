@@ -4,6 +4,8 @@ export const DARK_HUB_TEMPLATES = [
   { id: "charcoal", name: "Minimal Charcoal", detail: "Quiet texture and cool slate", accent: "#879EBE", bg: "#10151C", surface: "#1C2530", ink: "#F4F5F6" },
   { id: "waves", name: "Abstract Waves", detail: "Layered flowing blue shapes", accent: "#287AFF", bg: "#091426", surface: "#122036", ink: "#F4F7FF" },
   { id: "purple-slate", name: "Purple Slate", detail: "Creative, refined violet", accent: "#9478F8", bg: "#16132A", surface: "#231F3C", ink: "#F6F2FF" },
+  { id: "futuristic-tech", name: "Futuristic Tech", detail: "Precision cyan circuit geometry", accent: "#00C9E8", bg: "#081524", surface: "#112536", ink: "#EAF8FF" },
+  { id: "aurora", name: "Aurora", detail: "Cyan, indigo and violet light bands", accent: "#997CFF", bg: "#0A1127", surface: "#18203B", ink: "#F6F3FF" },
 ] as const;
 export const LIGHT_HUB_TEMPLATES = [
   { id: "minimal", name: "Light Minimal", detail: "Ivory with delicate contour lines", accent: "#286EF1", bg: "#F7F7F4", surface: "#FFFFFF", ink: "#172235" },
@@ -11,9 +13,25 @@ export const LIGHT_HUB_TEMPLATES = [
   { id: "clean-white", name: "Clean White", detail: "Distraction-free white canvas", accent: "#176EF2", bg: "#FFFFFF", surface: "#F9FAFC", ink: "#111C30" },
   { id: "soft-waves", name: "Soft Waves", detail: "Minimalist flowing shapes", accent: "#2077F5", bg: "#EEF6FF", surface: "#FFFFFF", ink: "#16273B" },
   { id: "warm-neutral", name: "Warm Neutral", detail: "Natural off-white and navy", accent: "#1A355D", bg: "#F5F0E8", surface: "#FFFCF6", ink: "#18243A" },
+  { id: "futuristic-light", name: "Futuristic Light", detail: "Airy blueprint geometry in light blue", accent: "#286FAB", bg: "#EBF7FF", surface: "#FFFFFF", ink: "#173A59" },
+  { id: "aurora-light", name: "Aurora Light", detail: "Soft violet and aqua atmosphere", accent: "#6752B4", bg: "#F5F3FF", surface: "#FFFFFF", ink: "#27345A" },
 ] as const;
 export type DarkHubTemplate = typeof DARK_HUB_TEMPLATES[number]["id"];
 export type LightHubTemplate = typeof LIGHT_HUB_TEMPLATES[number]["id"];
+export type HubBackgroundSettings = {
+  intensity: number;
+  placement: "profile" | "top" | "full";
+  motion: boolean;
+  texture: boolean;
+  cardOpacity: number;
+};
+export const DEFAULT_HUB_BACKGROUND: HubBackgroundSettings = {
+  intensity: 60,
+  placement: "top",
+  motion: false,
+  texture: true,
+  cardOpacity: 100,
+};
 
 export type HubLink = {
   id: string;
@@ -27,7 +45,7 @@ export type HubLink = {
 export type HubProject = { id: string; name: string; description: string; url: string; image: string; visible: boolean };
 export type HubContent = {
   profile: { name: string; headline: string; bio: string; portrait: string; resume: string };
-  design: { darkAccent: string; lightAccent: string; darkTemplate: DarkHubTemplate; lightTemplate: LightHubTemplate };
+  design: { darkAccent: string; lightAccent: string; darkTemplate: DarkHubTemplate; lightTemplate: LightHubTemplate; background?: HubBackgroundSettings };
   links: HubLink[];
   projects: HubProject[];
   updatedAt?: string;
@@ -40,7 +58,7 @@ export const initialHub: HubContent = {
     portrait: "/assets/profile/nebiyu_primary_portrait.webp",
     resume: "/resume/Nebiyu_Mekonnen_Resume.pdf",
   },
-  design: { darkAccent: "#84B6FF", lightAccent: "#286EF1", darkTemplate: "midnight", lightTemplate: "minimal" },
+  design: { darkAccent: "#84B6FF", lightAccent: "#286EF1", darkTemplate: "midnight", lightTemplate: "minimal", background: { ...DEFAULT_HUB_BACKGROUND } },
   links: [
     { id: "portfolio", label: "Explore My Portfolio", url: "/", icon: "globe", section: "primary", visible: true },
     { id: "resume", label: "Download My Resume", url: "/resume/Nebiyu_Mekonnen_Resume.pdf", icon: "file", section: "primary", visible: true },
@@ -65,6 +83,18 @@ const validDestination = (s: string) => {
 };
 const validImage = (s: string) => s.startsWith("/") && !s.startsWith("//") && !s.includes("\\");
 const safeColor = (v: unknown, fallback: string) => typeof v === "string" && /^#[0-9a-fA-F]{6}$/.test(v) ? v : fallback;
+const limitedNumber = (value: unknown, fallback: number, min: number, max: number) =>
+  typeof value === "number" && Number.isFinite(value) ? Math.max(min, Math.min(max, Math.round(value))) : fallback;
+function validateBackground(value: unknown): HubBackgroundSettings {
+  const raw = (value && typeof value === "object" && !Array.isArray(value) ? value : {}) as Partial<HubBackgroundSettings>;
+  return {
+    intensity: limitedNumber(raw.intensity, 60, 0, 100),
+    placement: raw.placement === "profile" || raw.placement === "full" ? raw.placement : "top",
+    motion: raw.motion === true,
+    texture: raw.texture !== false,
+    cardOpacity: limitedNumber(raw.cardOpacity, 100, 85, 100),
+  };
+}
 export function validateHub(value: unknown): HubContent {
   if (!value || typeof value !== "object") throw new Error("Invalid content");
   const source = value as Partial<HubContent>;
@@ -105,6 +135,7 @@ export function validateHub(value: unknown): HubContent {
         ? "#84B6FF" : safeColor(design.darkAccent, "#84B6FF"),
       lightAccent: design.lightTemplate === undefined && design.lightAccent?.toLowerCase() === "#a36a10"
         ? "#286EF1" : safeColor(design.lightAccent, "#286EF1"),
+      background: validateBackground(design.background),
     },
     links, projects, updatedAt: new Date().toISOString(),
   };

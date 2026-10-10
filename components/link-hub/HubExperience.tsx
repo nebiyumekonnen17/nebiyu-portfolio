@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import { GithubIcon, InstagramIcon, LinkedinIcon } from "@/components/ui/BrandIcons";
 import { profile as careerProfile } from "@/data/profile";
-import type { HubContent } from "@/lib/link-hub";
+import { DEFAULT_HUB_BACKGROUND, type HubContent } from "@/lib/link-hub";
 
 type Theme = "system" | "dark" | "light";
 
@@ -120,6 +120,7 @@ export function HubExperience({
   const [shareFallback, setShareFallback] = useState(false);
 
   const isLight = (previewTheme ?? theme) === "light";
+  const background = { ...DEFAULT_HUB_BACKGROUND, ...content.design.background };
   const visibleSocials = content.links.filter((link) => link.visible && link.section === "social");
   const primaryLinks = content.links.filter((link) => link.visible && link.section === "primary");
   const extraLinks = content.links.filter((link) => link.visible && link.section === "extra");
@@ -161,7 +162,12 @@ export function HubExperience({
       className={"link-hub-shell hub-" + (previewTheme ?? theme) + (compact ? " hub-compact" : "")}
       data-dark-template={content.design.darkTemplate ?? "midnight"}
       data-light-template={content.design.lightTemplate ?? "minimal"}
+      data-background-placement={background.placement}
+      data-background-motion={String(background.motion)}
+      data-background-texture={String(background.texture)}
       style={{
+        "--hub-background-strength": String(background.intensity / 100),
+        "--hub-card-opacity": background.cardOpacity + "%",
         "--hub-accent-dark": content.design.darkAccent,
         "--hub-accent-light": content.design.lightAccent,
       } as React.CSSProperties}
