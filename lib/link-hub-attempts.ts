@@ -1,6 +1,6 @@
 import "server-only";
 import { createHmac } from "node:crypto";
-import { get, head, put } from "@vercel/blob";
+import { BlobNotFoundError, get, head, put } from "@vercel/blob";
 import { hubStorageEnabled } from "@/lib/link-hub-store";
 
 const maximum = 8;
@@ -15,6 +15,10 @@ function pathFor(request: Request) {
   const key = process.env.LINK_HUB_SESSION_SECRET || "";
   const digest = createHmac("sha256", key).update(address).digest("hex").slice(0, 32);
   return "link-hub/security/login-attempts/" + digest + ".json";
+}
+async function safeHead(path: string) {
+  try { return await head(path); }
+  catch (error) { if (error instanceof BlobNotFoundError) return null; throw error; }
 }
 async function read(path: string) {
   const entry = await get(path, { access: "private", useCache: false });
@@ -35,9 +39,9 @@ export async function noteLoginFailure(request: Request) {
   ensureStorage();
   const path = pathFor(request);
   for (let i = 0; i < 5; i++) {
-    const before = await head(path);
+    const before = await safeHead(path);
     const old = await read(path);
-    const meta = await head(path);
+    const meta = await safeHead(path);
     if (before?.etag !== meta?.etag) continue;
     const now = Date.now();
     const recent = old && old.resetAt > now ? old : { count: 0, resetAt: now + windowMs };
