@@ -55,7 +55,7 @@ export function HubManager() {
       setAuthenticated(data.authenticated);
       if (data.authenticated) await reload();
     }).catch(e => { if (active) setError(e.message); }).finally(() => { if (active) setLoading(false); });
-    QRCode.toDataURL("https://nebiyumekonnen.com/links", { width: 420, margin: 2, color: { dark: "#151A23", light: "#FFFFFF" } }).then(setQr).catch(() => {});
+    QRCode.toDataURL("https://links.nebiyumekonnen.com", { width: 420, margin: 2, color: { dark: "#151A23", light: "#FFFFFF" } }).then(setQr).catch(() => {});
     return () => { active = false; };
   }, [reload]);
   function change(fn: (x: HubContent) => HubContent) { setDraft(old => fn(old)); setDirty(true); setNotice(""); }
@@ -136,7 +136,7 @@ export function HubManager() {
   if (loading) return <div className="hub-manager-loading"><Loader2 className="hub-spin" size={26}/> Checking access…</div>;
   if (!authenticated) return <div className="hub-admin-login">
     <form className="hub-login-card" onSubmit={login}>
-      <a href="/links" className="hub-back">← View public page</a>
+      <a href="/" className="hub-back">← View public page</a>
       <div className="hub-login-logo">NM</div>
       <div className="hub-admin-kicker">PRIVATE WORKSPACE</div>
       <h1>Welcome back.</h1><p>Manage your links, projects, and personal brand in one place.</p>
@@ -150,17 +150,18 @@ export function HubManager() {
   </div>;
   return <div className="hub-manager">
     <aside className="hub-manager-sidebar">
-      <a href="/links" className="hub-manager-brand"><span>NM</span><strong>Link Hub <em>Studio</em></strong></a>
+      <a href="/" className="hub-manager-brand"><span>NM</span><strong>Link Hub <em>Studio</em></strong></a>
       <div className="hub-sidebar-label">WORKSPACE</div>
       <nav aria-label="Manager navigation">{tabs.map(({id,title,icon:Icon}) => <button type="button" className={tab === id ? "selected" : ""} onClick={()=>setTab(id)} key={id}><Icon size={18}/>{title}{tab === id && <ChevronRight size={15} className="hub-side-arrow"/>}</button>)}</nav>
-      <div className="hub-manager-side-bottom"><a href="/links" target="_blank" rel="noopener noreferrer"><ArrowUpRight size={17}/> View live page</a><button type="button" onClick={logout}><LogOut size={17}/> Sign out</button></div>
+      <a href="/manage/qr" className="hub-qr-manager-nav" style={{display:"flex",alignItems:"center",gap:10,padding:"12px 16px",color:"#a8d3ff",fontWeight:700}}><QrCode size={18}/> Dynamic QR Manager <ArrowUpRight size={14}/></a>
+      <div className="hub-manager-side-bottom"><a href="/" target="_blank" rel="noopener noreferrer"><ArrowUpRight size={17}/> View live page</a><button type="button" onClick={logout}><LogOut size={17}/> Sign out</button></div>
     </aside>
     <main className="hub-manager-content">
       <div className="hub-manager-toolbar"><div><div className="hub-admin-kicker">NEBIYU MEKONNEN / CONTROL CENTER</div><h1>{tabs.find(x=>x.id===tab)?.title}</h1></div><div className="hub-toolbar-actions"><button type="button" className="hub-admin-secondary" onClick={()=>openThemePreview()}><Smartphone size={16}/> Preview</button><button type="button" className="hub-admin-secondary" disabled={busy || !storageReady || !dirty} onClick={()=>save("save")}><Save size={16}/> Save draft</button><button type="button" className="hub-admin-primary" disabled={busy || !storageReady} onClick={()=>save("publish")}><ArrowUpRight size={16}/> Publish</button></div></div>
       {!storageReady && <div role="status" className="hub-alert"><ShieldCheck size={21}/><div><strong>Storage connection required</strong><p>The editor and preview are available, but saves and publishing are disabled until a private Vercel Blob store is connected and LINK_HUB_STORAGE_ENABLED=true is set.</p></div></div>}
       {error && <div className="hub-message hub-error" role="alert">{error}<button onClick={()=>setError("")} aria-label="Dismiss"><X size={16}/></button></div>}
       {notice && <div className="hub-message hub-success" role="status"><Check size={17}/>{notice}<button onClick={()=>setNotice("")} aria-label="Dismiss"><X size={16}/></button></div>}
-      <div className="hub-mobile-tabs">{tabs.map(({id,title})=><button className={tab===id?"selected":""} onClick={()=>setTab(id)} key={id}>{title}</button>)}</div>
+      <div className="hub-mobile-tabs"><a href="/manage/qr" style={{display:"inline-flex",alignItems:"center",whiteSpace:"nowrap",padding:"11px 14px",color:"#9ccaff",fontSize:12}}>Dynamic QR Manager ↗</a>{tabs.map(({id,title})=><button className={tab===id?"selected":""} onClick={()=>setTab(id)} key={id}>{title}</button>)}</div>
       {tab === "overview" && <div className="hub-admin-section">
         <p className="hub-admin-intro">One place to manage what visitors see when they land on your link hub.</p>
         <div className="hub-admin-stats">
@@ -170,7 +171,7 @@ export function HubManager() {
           <div><span>PAGE VISITS</span><strong>—</strong><BarChart3 size={20}/><small>Analytics planned</small></div>
         </div>
         <div className="hub-admin-card"><div className="hub-admin-card-heading"><h2>Quick actions</h2><span>Get things done</span></div><div className="hub-quick-grid">{[["Add a link","links",Plus],["Update profile","appearance",Palette],["Generate QR","sharing",QrCode],["Manage projects","projects",Sparkles]].map(([title,id,Icon])=><button type="button" onClick={()=>setTab(id as Tab)} key={String(id)}><Icon size={22}/><strong>{title as string}</strong><ArrowUpRight size={15}/></button>)}</div></div>
-        <div className="hub-admin-card hub-overview-live"><div><span className="hub-admin-kicker">YOUR LIVE LINK</span><strong>nebiyumekonnen.com/links</strong><p>Ready to share across social media, resumes, and business cards.</p></div><a href="/links" target="_blank" rel="noopener noreferrer" className="hub-admin-secondary">Open <ArrowUpRight size={16}/></a></div>
+        <div className="hub-admin-card hub-overview-live"><div><span className="hub-admin-kicker">YOUR LIVE LINK</span><strong>links.nebiyumekonnen.com</strong><p>Ready to share across social media, resumes, and business cards.</p></div><a href="/" target="_blank" rel="noopener noreferrer" className="hub-admin-secondary">Open <ArrowUpRight size={16}/></a></div>
       </div>}
       {tab === "links" && <div className="hub-admin-section">
         <div className="hub-section-row"><p className="hub-admin-intro">Create social profiles, custom links, and buttons. Move or hide any card.</p><button type="button" className="hub-admin-primary" onClick={()=>change(old=>({...old,links:[...old.links,{id:crypto.randomUUID(),label:"New link",url:"https://example.com",icon:"link",section:"extra",visible:false}]}))}><Plus size={16}/> Add link</button></div>
@@ -273,7 +274,7 @@ export function HubManager() {
         <div className="hub-admin-card"><h2>Resume PDF</h2><p>Current file: {draft.profile.resume}</p><label className="hub-upload"><FileText size={17}/> Replace resume<input disabled={!storageReady||busy} type="file" accept="application/pdf" onChange={e=>{const file=e.target.files?.[0];if(file)void upload(file,"resume");}}/></label></div>
         <div className="hub-admin-card"><h2>Project covers</h2>{draft.projects.map(p=><div key={p.id} className="hub-media-row"><span>{p.name}</span><label className="hub-upload"><ImageUp size={16}/> Upload cover<input disabled={!storageReady||busy} type="file" accept="image/png,image/jpeg,image/webp" onChange={e=>{const file=e.target.files?.[0];if(file)void upload(file,p.id);}}/></label></div>)}</div>
       </div>}
-      {tab === "sharing" && <div className="hub-admin-section"><p className="hub-admin-intro">A single QR code for your portfolio, social bios, and business cards.</p><div className="hub-admin-card hub-qr-card">{qr?<img src={qr} alt="QR code linking to nebiyumekonnen.com/links" width={250} height={250}/>:<Loader2 className="hub-spin"/>}<strong>nebiyumekonnen.com/links</strong><div className="hub-toolbar-actions"><button className="hub-admin-secondary" onClick={()=>navigator.clipboard.writeText("https://nebiyumekonnen.com/links")}><Share2 size={16}/> Copy URL</button><button className="hub-admin-primary" disabled={!qr} onClick={()=>{const a=document.createElement("a");a.href=qr;a.download="nebiyu-links-qr.png";a.click();}}><Download size={16}/> Download PNG</button></div></div></div>}
+      {tab === "sharing" && <div className="hub-admin-section"><p className="hub-admin-intro">A shareable code for your Link Hub. Need a QR code with an editable destination? Open <a href="/manage/qr" style={{color:"#92c9ff",textDecoration:"underline"}}>Dynamic QR Manager</a>.</p><div className="hub-admin-card hub-qr-card">{qr?<img src={qr} alt="QR code linking to links.nebiyumekonnen.com" width={250} height={250}/>:<Loader2 className="hub-spin"/>}<strong>links.nebiyumekonnen.com</strong><div className="hub-toolbar-actions"><button className="hub-admin-secondary" onClick={()=>navigator.clipboard.writeText("https://links.nebiyumekonnen.com")}><Share2 size={16}/> Copy URL</button><button className="hub-admin-primary" disabled={!qr} onClick={()=>{const a=document.createElement("a");a.href=qr;a.download="nebiyu-links-qr.png";a.click();}}><Download size={16}/> Download PNG</button></div></div></div>}
       {tab === "settings" && <div className="hub-admin-section">
         <div className="hub-admin-card"><h2>Backup & restore</h2><p>Download your current draft configuration to keep your own backup.</p><button type="button" className="hub-admin-secondary" onClick={exportBackup}><Download size={16}/> Export JSON backup</button></div>
         <div className="hub-admin-card"><h2>Publication history</h2><p>Restore an earlier published version into your draft. It won&apos;t go live until you publish again.</p>{history.length ? <div className="hub-toolbar-actions"><select value={revision} onChange={e=>setRevision(e.target.value)}><option value="">Select previous version</option>{history.map(x=><option key={x} value={x}>{x.replace("link-hub/history/","").replace(".json","")}</option>)}</select><button type="button" className="hub-admin-secondary" disabled={!revision || !storageReady || busy} onClick={()=>save("restore",revision)}>Restore to draft</button></div> : <p>No previous published versions yet.</p>}</div>

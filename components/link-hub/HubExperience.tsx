@@ -97,7 +97,7 @@ export function HubExperience({
   const primaryLinks = content.links.filter((link) => link.visible && link.section === "primary");
   const extraLinks = content.links.filter((link) => link.visible && link.section === "extra");
   const projects = content.projects.filter((project) => project.visible).slice(0, 3);
-  const shareUrl = "https://nebiyumekonnen.com/links";
+  const shareUrl = "https://links.nebiyumekonnen.com";
 
   async function share() {
     setShareFallback(false);
