@@ -3,7 +3,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import {
   ArrowLeft, ArrowUpRight, Check, CheckCheck, ChevronRight, Copy, Download, Eye,
-  FileImage, FileText, ImagePlus, Info, Layers3, Loader2, LockKeyhole, Palette,
+  FileImage, FileText, ImagePlus, Info, Layers3, Loader2, Palette,
   QrCode, RotateCcw, Save, ScanLine, ShieldCheck, Sparkles, TrendingUp, Upload, X,
 } from "lucide-react";
 import { StudioLogin } from "@/components/link-hub/StudioLogin";
@@ -34,7 +34,6 @@ const panels:Array<{id:Panel;label:string;icon:typeof Sparkles}>= [
 function slugLabel(d:QRDesign,doc:QRDesignDocument|null,id:string|null){
  return doc?.versions.find(x=>x.id===id)?.name || qrPresets.find(x=>x.id===d.preset)?.label || "Custom";
 }
-const initials={};
 export function QRDesigner({slug}:{slug:string}){
  const[loading,setLoading]=useState(true);
  const[authenticated,setAuthenticated]=useState(false);
