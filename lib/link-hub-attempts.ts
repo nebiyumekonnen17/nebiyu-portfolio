@@ -35,7 +35,10 @@ export async function noteLoginFailure(request: Request) {
   ensureStorage();
   const path = pathFor(request);
   for (let i = 0; i < 5; i++) {
-    const [old, meta] = await Promise.all([read(path), head(path)]);
+    const before = await head(path);
+    const old = await read(path);
+    const meta = await head(path);
+    if (before?.etag !== meta?.etag) continue;
     const now = Date.now();
     const recent = old && old.resetAt > now ? old : { count: 0, resetAt: now + windowMs };
     const next: Attempt = { count: recent.count + 1, resetAt: recent.resetAt };
