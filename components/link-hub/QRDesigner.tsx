@@ -11,7 +11,7 @@ import { makeQRSvg, loadLogoData, permanentQRUrl, checkQRScan } from "@/lib/qr-a
 import { savePng, savePdf, saveSvg } from "@/lib/qr-export";
 import {
   applyQRPreset, defaultQRDesign, designWarnings, qrPresets, qrSizes,
-  type QRDesign, type QRDesignDocument, type QRDesignVersion, type QRPreset,
+  type QRDesign, type QRDesignDocument, type QRDesignVersion, type QRPreset, type QRSize,
 } from "@/lib/qr-design";
 
 type Panel="templates"|"customize"|"logo"|"frame"|"download"|"analytics";
@@ -42,6 +42,7 @@ export function QRDesigner({slug}:{slug:string}){
  const[qr,setQR]=useState<QR|null>(null);
  const[doc,setDoc]=useState<QRDesignDocument|null>(null);
  const[draft,setDraft]=useState<QRDesign>(defaultQRDesign);
+ const[exportSize,setExportSize]=useState<QRSize>("social");
  const[chosenId,setChosenId]=useState<string|null>(null);
  const[dirty,setDirty]=useState(false);
  const[panel,setPanel]=useState<Panel>("templates");
@@ -73,6 +74,7 @@ export function QRDesigner({slug}:{slug:string}){
    const active=(design.document as QRDesignDocument).versions.find(x=>x.id===design.document.currentId);
    setChosenId(active?.id||null);
    setDraft(active?.design||defaultQRDesign);
+   setExportSize(active?.design.size||"social");
    setDirty(false);
  },[slug]);
  useEffect(()=>{
@@ -112,7 +114,7 @@ export function QRDesigner({slug}:{slug:string}){
    setDraft(old=>applyQRPreset(id,old));setDirty(true);setScanState("idle");
  }
  function selectVersion(v:QRDesignVersion){
-   setDraft(v.design);setChosenId(v.id);setDirty(false);
+   setDraft(v.design);setExportSize(v.design.size);setChosenId(v.id);setDirty(false);
    setVersionName("");setScanState("idle");setNotice("Loaded saved version: "+v.name);
  }
  async function uploadLogo(file:File){
@@ -167,10 +169,10 @@ export function QRDesigner({slug}:{slug:string}){
    try{
      const check=await verify(rendered.svg,rendered.url);
      if(check==="fail")throw Error("This design did not pass the browser QR scanner. Make it more scannable before exporting.");
-     const filename=slug+"-"+saved.name.toLowerCase().replace(/[^a-z0-9]+/g,"-")+"-"+saved.id.slice(0,8);
+     const filename=slug+"-"+saved.name.toLowerCase().replace(/[^a-z0-9]+/g,"-")+"-"+saved.id.slice(0,8)+"-"+exportSize;
      if(type==="svg")saveSvg(rendered.svg,filename);
-     if(type==="png")await savePng(rendered.svg,filename,draft.size);
-     if(type==="pdf")await savePdf(rendered.svg,filename,draft.size);
+     if(type==="png")await savePng(rendered.svg,filename,exportSize);
+     if(type==="pdf")await savePdf(rendered.svg,filename,exportSize);
      setNotice(check==="unsupported"?"File exported. Verify a printed sample with a real phone before distributing.":"Design exported and browser scan check passed.");
    }catch(e){setError(e instanceof Error?e.message:"Export failed");}
    finally{setBusy(false);}
@@ -247,9 +249,9 @@ export function QRDesigner({slug}:{slug:string}){
            </div>}
            {panel==="download"&&<div className="designer-form">
              <h2>Print & export</h2><p className="designer-muted">Save the design first so every printed variant gets an identifiable design version.</p>
-             <label>Export size<select value={draft.size} onChange={e=>change({size:e.target.value as QRDesign["size"]})}>
+             <label>Export size<select value={exportSize} onChange={e=>setExportSize(e.target.value as QRSize)}>
                {Object.entries(qrSizes).map(([id,size])=><option value={id} key={id}>{size.label}</option>)}</select></label>
-             <div className="designer-info"><Info size={18}/><span>{qrSizes[draft.size].inches}. SVG preserves vector edges at any scale. PDF uses an embedded high-resolution image.</span></div>
+             <div className="designer-info"><Info size={18}/><span>{qrSizes[exportSize].inches}. SVG preserves vector edges at any scale. PDF uses an embedded high-resolution image.</span></div>
              <label>New version name (optional)<input placeholder="e.g. Girar Gold Menu" maxLength={60} value={versionName} onChange={e=>setVersionName(e.target.value)}/></label>
              {dirty&&<button className="designer-primary" type="button" onClick={save} disabled={busy||!ready||unsafe}><Save size={15}/> Save design before exporting</button>}
              <div className="designer-export-buttons">
@@ -284,7 +286,7 @@ export function QRDesigner({slug}:{slug:string}){
            <img src={"data:image/svg+xml;charset=utf-8,"+encodeURIComponent(rendered.svg)} alt="Live preview of customized dynamic QR code" />:
            <div className="designer-preview-loading"><Loader2 className="qm-spinner"/> Rendering design…</div>}
          </div>
-         <div className="designer-print-meta"><span className="designer-version-label"><ScanLine size={16}/> {slugLabel(draft,doc,chosenId)}</span><span>{qrSizes[draft.size].label}</span></div>
+         <div className="designer-print-meta"><span className="designer-version-label"><ScanLine size={16}/> {slugLabel(draft,doc,chosenId)}</span><span>{qrSizes[exportSize].label}</span></div>
          <div className="designer-url-box"><span>PERMANENT REDIRECT URL</span><code>{url}</code><small>Changing the destination will not require reprinting.</small></div>
          <div className={"designer-checker"+(unsafe?" unsafe":"")}>
            <ShieldCheck size={20}/><div><strong>Contrast {ratio.toFixed(1)}:1 {unsafe?"· Improve before export":ratio>=4.5?"· Good":"· Caution"}</strong>
