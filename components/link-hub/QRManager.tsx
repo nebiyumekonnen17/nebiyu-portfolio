@@ -34,13 +34,15 @@ export function QRManager() {
   const [form, setForm] = useState<Form>(blank);
   const [editing, setEditing] = useState<string | null>(null);
   const [search, setSearch] = useState("");
-  const [image, setImage] = useState("");
-  const [history, setHistory] = useState<QR[]>([]);
+  const [rendered, setRendered] = useState<{ slug: string; data: string } | null>(null);
+  const [historyState, setHistoryState] = useState<{ slug: string; records: QR[] } | null>(null);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
 
   const selected = items.find(item => item.slug === selectedSlug) || null;
+  const image = rendered?.slug === selectedSlug ? rendered.data : "";
+  const history = historyState?.slug === selectedSlug ? historyState.records : [];
   const reload = useCallback(async () => {
     const result = await api("/api/link-hub/qr");
     setItems(result.items);
@@ -59,19 +61,18 @@ export function QRManager() {
   }, [reload]);
   useEffect(() => {
     let live = true;
-    setImage("");
-    if (selected) QRCode.toDataURL(base + selected.slug, {
+    if (selectedSlug) QRCode.toDataURL(base + selectedSlug, {
       width: 480, margin: 3, errorCorrectionLevel: "H",
       color: { dark: "#17263D", light: "#FFFFFF" },
-    }).then(data => { if (live) setImage(data); }).catch(() => {});
+    }).then(data => { if (live) setRendered({ slug: selectedSlug, data }); }).catch(() => {});
     return () => { live = false; };
-  }, [selected?.slug]);
+  }, [selectedSlug]);
   useEffect(() => {
-    if (!selectedSlug || !authenticated) { setHistory([]); return; }
+    if (!selectedSlug || !authenticated) return;
     let live = true;
     api("/api/link-hub/qr?history=" + encodeURIComponent(selectedSlug))
-      .then(data => { if (live) setHistory(data.history || []); })
-      .catch(() => { if (live) setHistory([]); });
+      .then(data => { if (live) setHistoryState({ slug: selectedSlug, records: data.history || [] }); })
+      .catch(() => { if (live) setHistoryState({ slug: selectedSlug, records: [] }); });
     return () => { live = false; };
   }, [selectedSlug, authenticated, items]);
 
