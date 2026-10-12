@@ -7,8 +7,8 @@ export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
   title: "Links | Nebiyu Mekonnen",
   description: "Portfolio, projects, code, resume, and social profiles for Nebiyu Mekonnen.",
-  alternates: { canonical: "https://nebiyumekonnen.com/links" },
-  openGraph: { title: "Nebiyu Mekonnen — Links & Projects", description: "Explore my work, projects and social profiles.", url: "https://nebiyumekonnen.com/links" },
+  alternates: { canonical: "https://links.nebiyumekonnen.com" },
+  openGraph: { title: "Nebiyu Mekonnen — Links & Projects", description: "Explore my work, projects and social profiles.", url: "https://links.nebiyumekonnen.com" },
 };
 export default async function LinksPage() {
   let content = initialHub;
