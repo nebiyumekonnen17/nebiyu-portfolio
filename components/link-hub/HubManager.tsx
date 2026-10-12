@@ -1,7 +1,8 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
-import { ArrowDown, ArrowUp, ArrowUpRight, BarChart3, Check, ChevronRight, Download, Eye, EyeOff, FileText, ImageUp, LayoutDashboard, Link2, Loader2, LockKeyhole, LogOut, Palette, Plus, QrCode, Save, Settings, Share2, ShieldCheck, Smartphone, Sparkles, Trash2, Upload, X } from "lucide-react";
+import { ArrowDown, ArrowUp, ArrowUpRight, BarChart3, Check, ChevronRight, Download, Eye, EyeOff, FileText, ImageUp, LayoutDashboard, Link2, Loader2, LogOut, Palette, Plus, QrCode, Save, Settings, Share2, ShieldCheck, Smartphone, Sparkles, Trash2, Upload, X } from "lucide-react";
 import QRCode from "qrcode";
+import { StudioLogin } from "@/components/link-hub/StudioLogin";
 import { HubExperience } from "@/components/link-hub/HubExperience";
 import { initialHub, HUB_TEMPLATES, isLightHubTemplate, getSelectedHubTemplate, DEFAULT_HUB_BACKGROUND, type HubBackgroundSettings, type HubContent, type HubLink, type HubProject, type DarkHubTemplate, type LightHubTemplate } from "@/lib/link-hub";
 const tabs = [
@@ -28,7 +29,7 @@ export function HubManager() {
   const [authenticated, setAuthenticated] = useState(false);
   const [configured, setConfigured] = useState(true);
   const [loading, setLoading] = useState(true);
-  const [password, setPassword] = useState("");
+  const [twoFactorEnabled, setTwoFactorEnabled] = useState(false);
   const [draft, setDraft] = useState<HubContent>(initialHub);
   const [live, setLive] = useState<HubContent>(initialHub);
   const [storageReady, setStorageReady] = useState(false);
@@ -52,6 +53,7 @@ export function HubManager() {
     callAPI("/api/link-hub/session").then(async data => {
       if (!active) return;
       setConfigured(data.configured);
+      setTwoFactorEnabled(data.twoFactorEnabled);
       setAuthenticated(data.authenticated);
       if (data.authenticated) await reload();
     }).catch(e => { if (active) setError(e.message); }).finally(() => { if (active) setLoading(false); });
@@ -93,14 +95,6 @@ export function HubManager() {
     if (target >= 0 && target < next.length) [next[index], next[target]] = [next[target], next[index]];
     return next;
   }
-  async function login(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault(); setBusy(true); setError("");
-    try {
-      await callAPI("/api/link-hub/session", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ password }) });
-      setAuthenticated(true); setPassword(""); await reload();
-    } catch (e) { setError(e instanceof Error ? e.message : "Sign in failed"); }
-    finally { setBusy(false); }
-  }
   async function save(action: "save" | "publish" | "restore", path?: string) {
     setBusy(true); setError(""); setNotice("");
     try {
@@ -126,7 +120,7 @@ export function HubManager() {
   }
   async function logout() {
     await callAPI("/api/link-hub/session", { method: "DELETE" });
-    setAuthenticated(false); setPassword(""); setDraft(initialHub); setNotice("");
+    setAuthenticated(false); setDraft(initialHub); setNotice("");
   }
   function exportBackup() {
     const blob = new Blob([JSON.stringify(draft, null, 2)], { type: "application/json" });
@@ -134,26 +128,15 @@ export function HubManager() {
     const a = document.createElement("a"); a.href = url; a.download = "nebiyu-link-hub-backup.json"; a.click(); URL.revokeObjectURL(url);
   }
   if (loading) return <div className="hub-manager-loading"><Loader2 className="hub-spin" size={26}/> Checking access…</div>;
-  if (!authenticated) return <div className="hub-admin-login">
-    <form className="hub-login-card" onSubmit={login}>
-      <a href="https://links.nebiyumekonnen.com" className="hub-back">← View public page</a>
-      <div className="hub-login-logo">NM</div>
-      <div className="hub-admin-kicker">PRIVATE WORKSPACE</div>
-      <h1>Welcome back.</h1><p>Manage your links, projects, and personal brand in one place.</p>
-      <label htmlFor="hub-password">Admin password</label>
-      <input id="hub-password" type="password" autoComplete="current-password" value={password} onChange={e => setPassword(e.target.value)} placeholder="Enter your password" required disabled={!configured}/>
-      {error && <p role="alert" className="hub-error">{error}</p>}
-      {!configured && <p className="hub-error">Admin sign-in requires server environment secrets. The public link hub remains available.</p>}
-      <button type="submit" className="hub-admin-primary" disabled={busy || !configured}>{busy ? "Signing in…" : "Sign in securely"} <ArrowUpRight size={17}/></button>
-      <small><LockKeyhole size={14}/> Protected administrator access</small>
-    </form>
-  </div>;
+  if (!authenticated) return <StudioLogin configured={configured} twoFactorEnabled={twoFactorEnabled} onSignedIn={async()=>{setAuthenticated(true);await reload();}}/>;
   return <div className="hub-manager">
     <aside className="hub-manager-sidebar">
       <a href="https://links.nebiyumekonnen.com" className="hub-manager-brand"><span>NM</span><strong>Link Hub <em>Studio</em></strong></a>
       <div className="hub-sidebar-label">WORKSPACE</div>
+      <a href="/manage" className="hub-qr-manager-nav" style={{display:"flex",alignItems:"center",gap:10,padding:"12px 16px",color:"#a8d3ff",fontWeight:700}}><LayoutDashboard size={18}/> Dashboard <ArrowUpRight size={14}/></a>
       <nav aria-label="Manager navigation">{tabs.map(({id,title,icon:Icon}) => <button type="button" className={tab === id ? "selected" : ""} onClick={()=>setTab(id)} key={id}><Icon size={18}/>{title}{tab === id && <ChevronRight size={15} className="hub-side-arrow"/>}</button>)}</nav>
       <a href="/manage/qr" className="hub-qr-manager-nav" style={{display:"flex",alignItems:"center",gap:10,padding:"12px 16px",color:"#a8d3ff",fontWeight:700}}><QrCode size={18}/> Dynamic QR Manager <ArrowUpRight size={14}/></a>
+      <a href="/manage/security" className="hub-qr-manager-nav" style={{display:"flex",alignItems:"center",gap:10,padding:"12px 16px",color:"#a8d3ff",fontWeight:700}}><ShieldCheck size={18}/> Account Security <ArrowUpRight size={14}/></a>
       <div className="hub-manager-side-bottom"><a href="https://links.nebiyumekonnen.com" target="_blank" rel="noopener noreferrer"><ArrowUpRight size={17}/> View live page</a><button type="button" onClick={logout}><LogOut size={17}/> Sign out</button></div>
     </aside>
     <main className="hub-manager-content">
@@ -161,7 +144,7 @@ export function HubManager() {
       {!storageReady && <div role="status" className="hub-alert"><ShieldCheck size={21}/><div><strong>Storage connection required</strong><p>The editor and preview are available, but saves and publishing are disabled until a private Vercel Blob store is connected and LINK_HUB_STORAGE_ENABLED=true is set.</p></div></div>}
       {error && <div className="hub-message hub-error" role="alert">{error}<button onClick={()=>setError("")} aria-label="Dismiss"><X size={16}/></button></div>}
       {notice && <div className="hub-message hub-success" role="status"><Check size={17}/>{notice}<button onClick={()=>setNotice("")} aria-label="Dismiss"><X size={16}/></button></div>}
-      <div className="hub-mobile-tabs"><a href="/manage/qr" style={{display:"inline-flex",alignItems:"center",whiteSpace:"nowrap",padding:"11px 14px",color:"#9ccaff",fontSize:12}}>Dynamic QR Manager ↗</a>{tabs.map(({id,title})=><button className={tab===id?"selected":""} onClick={()=>setTab(id)} key={id}>{title}</button>)}</div>
+      <div className="hub-mobile-tabs"><a href="/manage" style={{display:"inline-flex",alignItems:"center",padding:"11px 14px",color:"#9ccaff",fontSize:12}}>Dashboard ↗</a><a href="/manage/qr" style={{display:"inline-flex",alignItems:"center",whiteSpace:"nowrap",padding:"11px 14px",color:"#9ccaff",fontSize:12}}>Dynamic QR Manager ↗</a>{tabs.map(({id,title})=><button className={tab===id?"selected":""} onClick={()=>setTab(id)} key={id}>{title}</button>)}</div>
       {tab === "overview" && <div className="hub-admin-section">
         <p className="hub-admin-intro">One place to manage what visitors see when they land on your link hub.</p>
         <div className="hub-admin-stats">
