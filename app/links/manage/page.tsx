@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { HubManager } from "@/components/link-hub/HubManager";
-import "../links.css";
+import { StudioDashboard } from "@/components/link-hub/StudioDashboard";
+import "./studio.css";
 export const dynamic = "force-dynamic";
-export const metadata: Metadata = { title: "Link Hub Manager | Private", robots: { index: false, follow: false } };
-export default function ManagePage() { return <HubManager/>; }
+export const metadata: Metadata = { title: "Links Studio | Dashboard", robots: { index: false, follow: false } };
+export default function ManagePage() { return <StudioDashboard />; }
