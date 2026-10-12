@@ -1,6 +1,6 @@
 import "server-only";
 import { createCipheriv, createDecipheriv, createHmac, createHash, randomBytes, timingSafeEqual } from "node:crypto";
-import { del, get, head, put } from "@vercel/blob";
+import { BlobNotFoundError, del, get, head, put } from "@vercel/blob";
 import { hubStorageEnabled } from "@/lib/link-hub-store";
 
 const activePath = "link-hub/security/totp-enabled.json";
@@ -10,6 +10,10 @@ type Encrypted = { iv: string; tag: string; ciphertext: string };
 type Active = { encrypted: Encrypted; lastStep: number; enabledAt: string };
 type Pending = { encrypted: Encrypted; expiresAt: number };
 const signingKey = () => process.env.LINK_HUB_SESSION_SECRET || "";
+async function safeHead(path: string) {
+  try { return await head(path); }
+  catch (error) { if (error instanceof BlobNotFoundError) return null; throw error; }
+}
 function ensureStore() {
   if (!hubStorageEnabled() || signingKey().length < 32) throw new Error("Secure private storage is required for admin access.");
 }
@@ -74,7 +78,7 @@ function matchedStep(secret: string, input: unknown, lastStep: number) {
 
 export async function twoFactorEnabled() {
   ensureStore();
-  return Boolean(await head(activePath));
+  return Boolean(await safeHead(activePath));
 }
 export async function twoFactorStatus() {
   const record = await readPrivate<Active>(activePath);
@@ -104,12 +108,12 @@ export async function confirmTwoFactorEnrollment(code: unknown) {
 }
 export async function consumeTwoFactorCode(code: unknown) {
   // Bind the read to an ETag before the conditional update, avoiding stale-code replay.
-  const before = await head(activePath);
+  const before = await safeHead(activePath);
   const record = await readPrivate<Active>(activePath);
   if (!record) return true;
   const step = matchedStep(decrypt(record.encrypted), code, record.lastStep);
   if (step === null) return false;
-  const after = await head(activePath);
+  const after = await safeHead(activePath);
   if (!before?.etag || before.etag !== after?.etag) return false;
   try {
     await put(activePath, JSON.stringify({ ...record, lastStep: step }), {
