@@ -10,11 +10,12 @@ export async function POST(req: Request) {
   try {
     const form = await req.formData();
     const file = form.get("file");
+    const isQRLogo = form.get("purpose") === "qr-logo";
     if (!(file instanceof File)) return NextResponse.json({ error: "Choose a file" }, { status: 400 });
-    if (file.size > 3_500_000 || file.size === 0) return NextResponse.json({ error: "File must be smaller than 3.5 MB" }, { status: 413 });
+    if (file.size > (isQRLogo ? 2_000_000 : 3_500_000) || file.size === 0) return NextResponse.json({ error: "File must be smaller than 3.5 MB" }, { status: 413 });
     const allowed: Record<string, string> = { "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp", "application/pdf": "pdf" };
     const ext = allowed[file.type];
-    if (!ext) return NextResponse.json({ error: "Only JPG, PNG, WebP and PDF allowed" }, { status: 400 });
+    if (!ext || (isQRLogo && ext === "pdf")) return NextResponse.json({ error: "Logo files must be PNG, JPG or WebP; SVG is disabled for safety." }, { status: 400 });
     const bytes = new Uint8Array(await file.slice(0, 12).arrayBuffer());
     const isPng = ext === "png" && bytes.slice(0, 8).join(",") === "137,80,78,71,13,10,26,10";
     const isJpg = ext === "jpg" && bytes[0] === 255 && bytes[1] === 216 && bytes[2] === 255;

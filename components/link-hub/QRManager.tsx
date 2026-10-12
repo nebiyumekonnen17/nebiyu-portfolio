@@ -5,7 +5,7 @@ import Link from "next/link";
 import QRCode from "qrcode";
 import { StudioLogin } from "@/components/link-hub/StudioLogin";
 import {
-  ArrowUpRight, Check, Clock3, Copy, Download, Edit3,
+  ArrowUpRight, Check, Clock3, Copy, Download, Edit3, Palette,
   ExternalLink, Link2, Loader2, LogOut, Plus, QrCode,
   RotateCcw, Save, Search, ShieldCheck, X,
 } from "lucide-react";
@@ -172,6 +172,7 @@ export function QRManager() {
           </form> : selected ? <>
             <div className="qm-panel-heading"><div><h2>{selected.title}</h2><span className={selected.enabled ? "qm-tag on" : "qm-tag"}>{selected.enabled ? "Active" : "Paused"}</span></div><button type="button" onClick={()=>startEdit(selected)} className="qm-secondary"><Edit3 size={15}/> Edit</button></div>
             <div className="qm-preview-layout"><div className="qm-preview">{image ? <img src={image} width={234} height={234} alt={"QR code for " + base + selected.slug}/> : <Loader2 className="qm-spinner"/>}</div><div className="qm-details"><span>PERMANENT LINK</span><p className="qm-permalink">{base + selected.slug}</p><button className="qm-inline-link" onClick={()=>copy(base + selected.slug)}><Copy size={15}/> Copy URL</button><span>CURRENT DESTINATION</span><a href={selected.target} target="_blank" rel="noopener noreferrer" className="qm-target">{selected.target} <ArrowUpRight size={15}/></a><span>LAST UPDATED</span><p>{new Date(selected.updatedAt).toLocaleString()}</p></div></div>
+            <div className="qm-premium-prompt"><div><Palette size={23}/><strong>Premium QR Designer</strong><p>Add your logo, pick a signature style, use gradients, and download a framed print-ready QR.</p></div><Link href={"/manage/qr/designer?slug="+encodeURIComponent(selected.slug)} className="qm-primary">Customize design <ArrowUpRight size={16}/></Link></div>
             <div className="qm-download"><button className="qm-primary" disabled={!image} onClick={()=>download("png")}><Download size={16}/> Download PNG</button><button className="qm-secondary" onClick={()=>download("svg")}><Download size={16}/> Download SVG</button></div>
             <div className="qm-foot-actions"><button className="qm-secondary" disabled={busy} onClick={()=>toggle(selected)}>{selected.enabled ? "Pause redirects" : "Reactivate QR"}</button><span><ShieldCheck size={15}/> Your QR image never changes when the destination changes.</span></div>
             {history.length > 0 && <div className="qm-history"><h3><Clock3 size={17}/> Previous destinations</h3>{history.slice(0,5).map((old,i)=><div key={i}><span>{new Date(old.updatedAt).toLocaleString()}</span><p>{old.target}</p><button type="button" onClick={()=>{startEdit(selected);setForm({ title:selected.title, slug:selected.slug, target:old.target, enabled:selected.enabled });}}><RotateCcw size={13}/> Restore by editing</button></div>)}</div>}
