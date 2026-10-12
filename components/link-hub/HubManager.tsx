@@ -136,7 +136,7 @@ export function HubManager() {
   if (loading) return <div className="hub-manager-loading"><Loader2 className="hub-spin" size={26}/> Checking access…</div>;
   if (!authenticated) return <div className="hub-admin-login">
     <form className="hub-login-card" onSubmit={login}>
-      <a href="/" className="hub-back">← View public page</a>
+      <a href="https://links.nebiyumekonnen.com" className="hub-back">← View public page</a>
       <div className="hub-login-logo">NM</div>
       <div className="hub-admin-kicker">PRIVATE WORKSPACE</div>
       <h1>Welcome back.</h1><p>Manage your links, projects, and personal brand in one place.</p>
@@ -150,11 +150,11 @@ export function HubManager() {
   </div>;
   return <div className="hub-manager">
     <aside className="hub-manager-sidebar">
-      <a href="/" className="hub-manager-brand"><span>NM</span><strong>Link Hub <em>Studio</em></strong></a>
+      <a href="https://links.nebiyumekonnen.com" className="hub-manager-brand"><span>NM</span><strong>Link Hub <em>Studio</em></strong></a>
       <div className="hub-sidebar-label">WORKSPACE</div>
       <nav aria-label="Manager navigation">{tabs.map(({id,title,icon:Icon}) => <button type="button" className={tab === id ? "selected" : ""} onClick={()=>setTab(id)} key={id}><Icon size={18}/>{title}{tab === id && <ChevronRight size={15} className="hub-side-arrow"/>}</button>)}</nav>
       <a href="/manage/qr" className="hub-qr-manager-nav" style={{display:"flex",alignItems:"center",gap:10,padding:"12px 16px",color:"#a8d3ff",fontWeight:700}}><QrCode size={18}/> Dynamic QR Manager <ArrowUpRight size={14}/></a>
-      <div className="hub-manager-side-bottom"><a href="/" target="_blank" rel="noopener noreferrer"><ArrowUpRight size={17}/> View live page</a><button type="button" onClick={logout}><LogOut size={17}/> Sign out</button></div>
+      <div className="hub-manager-side-bottom"><a href="https://links.nebiyumekonnen.com" target="_blank" rel="noopener noreferrer"><ArrowUpRight size={17}/> View live page</a><button type="button" onClick={logout}><LogOut size={17}/> Sign out</button></div>
     </aside>
     <main className="hub-manager-content">
       <div className="hub-manager-toolbar"><div><div className="hub-admin-kicker">NEBIYU MEKONNEN / CONTROL CENTER</div><h1>{tabs.find(x=>x.id===tab)?.title}</h1></div><div className="hub-toolbar-actions"><button type="button" className="hub-admin-secondary" onClick={()=>openThemePreview()}><Smartphone size={16}/> Preview</button><button type="button" className="hub-admin-secondary" disabled={busy || !storageReady || !dirty} onClick={()=>save("save")}><Save size={16}/> Save draft</button><button type="button" className="hub-admin-primary" disabled={busy || !storageReady} onClick={()=>save("publish")}><ArrowUpRight size={16}/> Publish</button></div></div>
@@ -171,7 +171,7 @@ export function HubManager() {
           <div><span>PAGE VISITS</span><strong>—</strong><BarChart3 size={20}/><small>Analytics planned</small></div>
         </div>
         <div className="hub-admin-card"><div className="hub-admin-card-heading"><h2>Quick actions</h2><span>Get things done</span></div><div className="hub-quick-grid">{[["Add a link","links",Plus],["Update profile","appearance",Palette],["Generate QR","sharing",QrCode],["Manage projects","projects",Sparkles]].map(([title,id,Icon])=><button type="button" onClick={()=>setTab(id as Tab)} key={String(id)}><Icon size={22}/><strong>{title as string}</strong><ArrowUpRight size={15}/></button>)}</div></div>
-        <div className="hub-admin-card hub-overview-live"><div><span className="hub-admin-kicker">YOUR LIVE LINK</span><strong>links.nebiyumekonnen.com</strong><p>Ready to share across social media, resumes, and business cards.</p></div><a href="/" target="_blank" rel="noopener noreferrer" className="hub-admin-secondary">Open <ArrowUpRight size={16}/></a></div>
+        <div className="hub-admin-card hub-overview-live"><div><span className="hub-admin-kicker">YOUR LIVE LINK</span><strong>links.nebiyumekonnen.com</strong><p>Ready to share across social media, resumes, and business cards.</p></div><a href="https://links.nebiyumekonnen.com" target="_blank" rel="noopener noreferrer" className="hub-admin-secondary">Open <ArrowUpRight size={16}/></a></div>
       </div>}
       {tab === "links" && <div className="hub-admin-section">
         <div className="hub-section-row"><p className="hub-admin-intro">Create social profiles, custom links, and buttons. Move or hide any card.</p><button type="button" className="hub-admin-primary" onClick={()=>change(old=>({...old,links:[...old.links,{id:crypto.randomUUID(),label:"New link",url:"https://example.com",icon:"link",section:"extra",visible:false}]}))}><Plus size={16}/> Add link</button></div>
