@@ -103,19 +103,21 @@ export async function confirmTwoFactorEnrollment(code: unknown) {
   return active.enabledAt;
 }
 export async function consumeTwoFactorCode(code: unknown) {
+  // Bind the read to an ETag before the conditional update, avoiding stale-code replay.
+  const before = await head(activePath);
   const record = await readPrivate<Active>(activePath);
   if (!record) return true;
   const step = matchedStep(decrypt(record.encrypted), code, record.lastStep);
   if (step === null) return false;
-  const info = await head(activePath);
-  if (!info?.etag) throw new Error("Verification storage temporarily unavailable.");
+  const after = await head(activePath);
+  if (!before?.etag || before.etag !== after?.etag) return false;
   try {
     await put(activePath, JSON.stringify({ ...record, lastStep: step }), {
-      access: "private", contentType: "application/json", allowOverwrite: true, ifMatch: info.etag,
+      access: "private", contentType: "application/json", allowOverwrite: true, ifMatch: after.etag,
     });
     return true;
   } catch {
-    // A concurrent request may already have used this one-time code.
+    // Another request may already have consumed this one-time code.
     return false;
   }
 }
