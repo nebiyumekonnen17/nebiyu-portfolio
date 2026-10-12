@@ -3,9 +3,10 @@
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import QRCode from "qrcode";
+import { StudioLogin } from "@/components/link-hub/StudioLogin";
 import {
-  ArrowLeft, ArrowUpRight, Check, Clock3, Copy, Download, Edit3,
-  ExternalLink, Link2, Loader2, LockKeyhole, LogOut, Plus, QrCode,
+  ArrowUpRight, Check, Clock3, Copy, Download, Edit3,
+  ExternalLink, Link2, Loader2, LogOut, Plus, QrCode,
   RotateCcw, Save, Search, ShieldCheck, X,
 } from "lucide-react";
 
@@ -28,7 +29,7 @@ export function QRManager() {
   const [authenticated, setAuthenticated] = useState(false);
   const [configured, setConfigured] = useState(true);
   const [loading, setLoading] = useState(true);
-  const [password, setPassword] = useState("");
+  const [twoFactorEnabled, setTwoFactorEnabled] = useState(false);
   const [items, setItems] = useState<QR[]>([]);
   const [selectedSlug, setSelectedSlug] = useState("");
   const [form, setForm] = useState<Form>(blank);
@@ -54,6 +55,7 @@ export function QRManager() {
       if (!live) return;
       setAuthenticated(session.authenticated);
       setConfigured(session.configured);
+      setTwoFactorEnabled(session.twoFactorEnabled);
       if (session.authenticated) await reload();
     }).catch(err => { if (live) setError(err.message); })
       .finally(() => { if (live) setLoading(false); });
@@ -76,14 +78,6 @@ export function QRManager() {
     return () => { live = false; };
   }, [selectedSlug, authenticated, items]);
 
-  async function signIn(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault(); setBusy(true); setError("");
-    try {
-      await api("/api/link-hub/session", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ password }) });
-      setPassword(""); setAuthenticated(true); await reload();
-    } catch (err) { setError(err instanceof Error ? err.message : "Sign in failed"); }
-    finally { setBusy(false); }
-  }
   async function signOut() {
     try { await api("/api/link-hub/session", { method: "DELETE" }); }
     finally { setAuthenticated(false); setItems([]); setSelectedSlug(""); setEditing(null); }
@@ -143,25 +137,14 @@ export function QRManager() {
   }
 
   if (loading) return <div className="qm-screen qm-center"><Loader2 className="qm-spinner" size={28}/> Checking secure access…</div>;
-  if (!authenticated) return <div className="qm-screen qm-login-wrap"><form onSubmit={signIn} className="qm-login">
-    <Link href="/manage" className="qm-back"><ArrowLeft size={16}/> Back to Link Hub Manager</Link>
-    <span className="qm-mark"><QrCode size={30}/></span>
-    <span className="qm-eyebrow">NEBIYU LINKS / PRIVATE STUDIO</span>
-    <h1>Dynamic QR Manager</h1>
-    <p>One permanent printed code. Change its destination anytime.</p>
-    <label>Admin password<input type="password" autoComplete="current-password" value={password} onChange={event => setPassword(event.target.value)} disabled={!configured} required placeholder="Enter your Link Hub password"/></label>
-    {error && <p className="qm-error" role="alert">{error}</p>}
-    {!configured && <p className="qm-error">Admin authentication needs Vercel environment configuration.</p>}
-    <button className="qm-primary" disabled={busy || !configured} type="submit">{busy ? "Signing in…" : "Sign in"} <ArrowUpRight size={16}/></button>
-    <small><LockKeyhole size={14}/> Shares the existing Link Hub sign-in</small>
-  </form></div>;
+  if (!authenticated) return <StudioLogin configured={configured} twoFactorEnabled={twoFactorEnabled} onSignedIn={async()=>{setAuthenticated(true);await reload();}}/>;
 
   const matches = items.filter(item => (item.title + " " + item.slug + " " + item.target).toLowerCase().includes(search.toLowerCase()));
 
   return <div className="qm-screen">
     <header className="qm-header"><div className="qm-header-inner">
       <Link href="/manage" className="qm-brand"><span className="qm-brand-icon">NM</span><span>Links <strong>Studio</strong></span></Link>
-      <nav aria-label="QR Manager"><Link href="/" target="_blank">Public hub <ExternalLink size={15}/></Link><Link href="/manage">Link Hub admin</Link><button type="button" onClick={signOut}><LogOut size={15}/> Sign out</button></nav>
+      <nav aria-label="QR Manager"><Link href="/" target="_blank">Public hub <ExternalLink size={15}/></Link><Link href="/manage">Dashboard</Link><Link href="/manage/links">Link Manager</Link><Link href="/manage/security">Security</Link><button type="button" onClick={signOut}><LogOut size={15}/> Sign out</button></nav>
     </div></header>
     <main className="qm-main">
       <div className="qm-title-row"><div><p className="qm-eyebrow">LINKS STUDIO / TOOLS</p><h1>Dynamic QR Manager</h1><p>Create once, print once, change where your QR codes point whenever you need.</p></div><button type="button" className="qm-primary" onClick={startNew}><Plus size={18}/> Create QR code</button></div>
