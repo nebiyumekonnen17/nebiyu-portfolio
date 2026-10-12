@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { hasHubSession, sameOrigin, stopHubSession, verifyPassword } from "@/lib/link-hub-auth";
+import { checkLoginLimit, noteLoginFailure } from "@/lib/link-hub-attempts";
 import {
   beginTwoFactorEnrollment, confirmTwoFactorEnrollment,
   disableTwoFactor, twoFactorStatus,
@@ -24,9 +25,12 @@ export async function POST(request: Request) {
   }
   try {
     if (!(await hasHubSession())) return NextResponse.json({ error: "Unauthorized" }, { status: 401, headers });
+    const locked = await checkLoginLimit(request);
+    if (locked) return NextResponse.json({ error: "Too many verification attempts." }, { status: 429, headers: { ...headers, "Retry-After": String(locked) } });
     const data = await request.json().catch(() => null);
     if (!data || typeof data.password !== "string" || !verifyPassword(data.password)) {
-      return NextResponse.json({ error: "Current administrator password is required." }, { status: 401, headers });
+      const retry = await noteLoginFailure(request);
+      return NextResponse.json({ error: "Current administrator password is required." }, { status: retry ? 429 : 401, headers: retry ? { ...headers, "Retry-After": String(retry) } : headers });
     }
     if (data.action === "begin") {
       return NextResponse.json({ setup: await beginTwoFactorEnrollment() }, { headers });
@@ -45,6 +49,7 @@ export async function POST(request: Request) {
   } catch (error) {
     const msg = error instanceof Error ? error.message : "Security request failed.";
     if (/expired|code|already enabled|not enabled/i.test(msg)) {
+      if (/code/i.test(msg)) await noteLoginFailure(request);
       return NextResponse.json({ error: msg }, { status: 400, headers });
     }
     return NextResponse.json({ error: "Security storage temporarily unavailable." }, { status: 503, headers });
