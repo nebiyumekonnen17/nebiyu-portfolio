@@ -190,6 +190,6 @@ export function resolveManagedQR(item: ManagedQR, now=Date.now()) {
   if(!item.enabled)return {kind:"paused" as const};
   if(item.expiresAt && now>=Date.parse(item.expiresAt))return {kind:"expired" as const};
   const active=item.schedule?.find(w=>now>=Date.parse(w.from)&&now<Date.parse(w.until));
-  if(item.landing?.enabled)return {kind:"landing" as const};
+  if(item.landing?.enabled)return {kind:"landing" as const,target:active?.target||item.target};
   return {kind:"redirect" as const,target:active?.target||item.target};
 }
