@@ -2,7 +2,7 @@
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { Activity, ArrowRight, ArrowUpRight, CheckCircle2, Clock3, ExternalLink, LayoutDashboard,
-  Link2, Loader2, LockKeyhole, LogOut, PencilRuler, Plus, QrCode, Shield, ShieldCheck, Sparkles } from "lucide-react";
+  Link2, Loader2, LockKeyhole, LogOut, PencilRuler, Plus, QrCode, Shield, ShieldCheck, Sparkles, Layers3 } from "lucide-react";
 import { StudioLogin } from "@/components/link-hub/StudioLogin";
 
 type Data = {
@@ -45,9 +45,11 @@ export function StudioDashboard() {
         <Link className="active" href="/manage"><LayoutDashboard size={19}/> Dashboard</Link>
         <Link href="/manage/links"><Link2 size={19}/> Link Manager</Link>
         <Link href="/manage/qr"><QrCode size={19}/> QR Manager</Link>
+        <Link href="/manage/qr/operations"><PencilRuler size={19}/> QR Operations</Link>
       </nav>
       <span className="studio-nav-label">ACCOUNT</span>
       <nav className="studio-nav">
+        <Link href="/manage/qr/operations"><Layers3 size={19}/> Brand Kits & Tools</Link>
         <Link href="/manage/security"><Shield size={19}/> Security</Link>
         <Link href="/" target="_blank"><ExternalLink size={19}/> Public page</Link>
       </nav>
