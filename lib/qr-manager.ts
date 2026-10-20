@@ -1,6 +1,7 @@
 import "server-only";
 import { get, head, list, put } from "@vercel/blob";
 import { hubStorageEnabled } from "@/lib/link-hub-store";
+export { resolveQRRoute as resolveManagedQR } from "@/lib/qr-routing";
 
 export type ManagedQR = {
   slug: string;
@@ -186,10 +187,3 @@ export async function listQRHistory(value: string): Promise<ManagedQR[]> {
 }
 
 
-export function resolveManagedQR(item: ManagedQR, now=Date.now()) {
-  if(!item.enabled)return {kind:"paused" as const};
-  if(item.expiresAt && now>=Date.parse(item.expiresAt))return {kind:"expired" as const};
-  const active=item.schedule?.find(w=>now>=Date.parse(w.from)&&now<Date.parse(w.until));
-  if(item.landing?.enabled)return {kind:"landing" as const,target:active?.target||item.target};
-  return {kind:"redirect" as const,target:active?.target||item.target};
-}
