@@ -1,6 +1,7 @@
 import "server-only";
 import { get, head, list, put } from "@vercel/blob";
 import { hubStorageEnabled } from "@/lib/link-hub-store";
+export { resolveQRRoute as resolveManagedQR } from "@/lib/qr-routing";
 
 export type ManagedQR = {
   slug: string;
@@ -9,6 +10,12 @@ export type ManagedQR = {
   enabled: boolean;
   createdAt: string;
   updatedAt: string;
+  folder?: string;
+  tags?: string[];
+  archived?: boolean;
+  expiresAt?: string | null;
+  schedule?: Array<{ from: string; until: string; target: string }>;
+  landing?: { enabled: boolean; heading: string; description: string; buttonLabel: string };
 };
 
 const prefix = "link-hub/qr/records/";
@@ -31,7 +38,7 @@ function validateTitle(value: unknown) {
   if (!title || title.length > 90) throw new Error("A name of 1–90 characters is required.");
   return title;
 }
-function validateTarget(value: unknown) {
+export function validateTarget(value: unknown) {
   const raw = String(value || "").trim();
   if (!raw || raw.length > 2048) throw new Error("Enter a destination URL shorter than 2,048 characters.");
   let url: URL;
@@ -86,6 +93,12 @@ export async function saveManagedQR(data: {
   title: unknown;
   target: unknown;
   enabled: unknown;
+  folder?: unknown;
+  tags?: unknown;
+  archived?: unknown;
+  expiresAt?: unknown;
+  schedule?: unknown;
+  landing?: unknown;
 }): Promise<ManagedQR> {
   assertStorage();
   const slug = normalizedSlug(data.slug);
@@ -96,10 +109,51 @@ export async function saveManagedQR(data: {
   const old = await parseBlob(path);
   if (data.action === "create" && old) throw new Error("This permanent QR slug already exists.");
   if (data.action === "update" && !old) throw new Error("QR code not found.");
+  const optionalText=(value:unknown,max:number,name:string)=>{
+    if(typeof value!=="string"||value.length>max)throw Error("Invalid "+name);
+    return value.trim();
+  };
+  const folder=data.folder===undefined?old?.folder||"":optionalText(data.folder,50,"folder");
+  const tags=data.tags===undefined?old?.tags||[]:(Array.isArray(data.tags)&&data.tags.length<=8
+    ?data.tags.map(x=>optionalText(x,24,"tag")).filter(Boolean):(()=>{throw Error("Maximum 8 tags allowed")})());
+  const archived=data.archived===undefined?old?.archived||false:data.archived;
+  if(typeof archived!=="boolean")throw Error("Invalid archive status");
+  const expiresAt=data.expiresAt===undefined?old?.expiresAt||null:data.expiresAt;
+  function utc(value:unknown):string {
+    if(typeof value!=="string"||!/^20\d\d-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d{3})?Z$/.test(value)||!Number.isFinite(Date.parse(value)))
+      throw Error("Schedules must use valid UTC dates with Z suffix");
+    const parsed=new Date(value);
+    if(parsed.toISOString().replace(".000Z","Z")!==value && parsed.toISOString()!==value)throw Error("Invalid schedule date");
+    return parsed.toISOString();
+  }
+  if(expiresAt!==null)utc(expiresAt);
+  const sourceSchedule=data.schedule===undefined?old?.schedule||[]:data.schedule;
+  if(!Array.isArray(sourceSchedule)||sourceSchedule.length>12)throw Error("Maximum 12 scheduled windows");
+  const schedule=sourceSchedule.map((v:unknown)=>{
+    if(!v||typeof v!=="object")throw Error("Invalid scheduled destination");
+    const row=v as Record<string,unknown>,from=utc(row.from),until=utc(row.until);
+    if(from>=until)throw Error("Schedule end must be after start");
+    return {from,until,target:validateTarget(row.target)};
+  }).sort((a,b)=>a.from.localeCompare(b.from));
+  for(let i=1;i<schedule.length;i++)if(schedule[i].from<schedule[i-1].until)throw Error("Scheduled windows cannot overlap");
+  const landingInput=data.landing===undefined?old?.landing:data.landing;
+  let landing:ManagedQR["landing"]=undefined;
+  if(landingInput!==undefined){
+    if(!landingInput||typeof landingInput!=="object")throw Error("Invalid landing page");
+    const v=landingInput as Record<string,unknown>;
+    if(typeof v.enabled!=="boolean")throw Error("Invalid landing mode");
+    landing={
+      enabled:v.enabled,
+      heading:optionalText(v.heading,100,"landing heading"),
+      description:optionalText(v.description,500,"landing description"),
+      buttonLabel:optionalText(v.buttonLabel,35,"button label")||"Continue",
+    };
+  }
   const now = new Date().toISOString();
   const next: ManagedQR = {
     slug, title, target, enabled: data.enabled,
     createdAt: old?.createdAt || now, updatedAt: now,
+    folder,tags,archived,expiresAt:expiresAt===null?null:utc(expiresAt),schedule,landing,
   };
 
   // Conditional writes prevent an older admin session from silently replacing newer edits.
@@ -131,3 +185,5 @@ export async function listQRHistory(value: string): Promise<ManagedQR[]> {
   const records = (await Promise.all(paths.slice(-100).map(parseBlob))).filter((x): x is ManagedQR => !!x);
   return records.sort((a, b) => b.updatedAt.localeCompare(a.updatedAt)).slice(0, 30);
 }
+
+

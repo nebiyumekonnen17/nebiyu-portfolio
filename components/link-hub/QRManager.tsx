@@ -7,7 +7,7 @@ import { StudioLogin } from "@/components/link-hub/StudioLogin";
 import {
   ArrowUpRight, Check, Clock3, Copy, Download, Edit3, Palette,
   ExternalLink, Link2, Loader2, LogOut, Plus, QrCode,
-  RotateCcw, Save, Search, ShieldCheck, X,
+  RotateCcw, Save, Search, ShieldCheck, X, Layers3,
 } from "lucide-react";
 
 type QR = {
@@ -144,10 +144,10 @@ export function QRManager() {
   return <div className="qm-screen">
     <header className="qm-header"><div className="qm-header-inner">
       <Link href="/manage" className="qm-brand"><span className="qm-brand-icon">NM</span><span>Links <strong>Studio</strong></span></Link>
-      <nav aria-label="QR Manager"><Link href="/" target="_blank">Public hub <ExternalLink size={15}/></Link><Link href="/manage">Dashboard</Link><Link href="/manage/links">Link Manager</Link><Link href="/manage/security">Security</Link><button type="button" onClick={signOut}><LogOut size={15}/> Sign out</button></nav>
+      <nav aria-label="QR Manager"><Link href="/" target="_blank">Public hub <ExternalLink size={15}/></Link><Link href="/manage">Dashboard</Link><Link href="/manage/links">Link Manager</Link><Link href="/manage/qr/operations">Operations</Link><Link href="/manage/security">Security</Link><button type="button" onClick={signOut}><LogOut size={15}/> Sign out</button></nav>
     </div></header>
     <main className="qm-main">
-      <div className="qm-title-row"><div><p className="qm-eyebrow">LINKS STUDIO / TOOLS</p><h1>Dynamic QR Manager</h1><p>Create once, print once, change where your QR codes point whenever you need.</p></div><button type="button" className="qm-primary" onClick={startNew}><Plus size={18}/> Create QR code</button></div>
+      <div className="qm-title-row"><div><p className="qm-eyebrow">LINKS STUDIO / TOOLS</p><h1>Dynamic QR Manager</h1><p>Create once, print once, change where your QR codes point whenever you need.</p></div><div style={{display:"flex",gap:10,flexWrap:"wrap"}}><Link href="/manage/qr/operations" className="qm-secondary"><Layers3 size={17}/> QR Operations</Link><button type="button" className="qm-primary" onClick={startNew}><Plus size={18}/> Create QR code</button></div></div>
       {error && <div role="alert" className="qm-alert qm-error">{error}<button aria-label="Dismiss error" onClick={()=>setError("")}><X size={16}/></button></div>}
       {notice && <div role="status" className="qm-alert qm-success"><Check size={17}/>{notice}<button aria-label="Dismiss message" onClick={()=>setNotice("")}><X size={16}/></button></div>}
       <div className="qm-stats"><div><span>MANAGED CODES</span><strong>{items.length}</strong></div><div><span>ACTIVE CODES</span><strong>{items.filter(x=>x.enabled).length}</strong></div><div><span>PAUSED CODES</span><strong>{items.filter(x=>!x.enabled).length}</strong></div></div>

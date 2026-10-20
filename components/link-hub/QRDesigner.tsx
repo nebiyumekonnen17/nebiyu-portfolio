@@ -73,9 +73,12 @@ export function QRDesigner({slug}:{slug:string}){
    setQR(found);setDoc(design.document);
    const active=(design.document as QRDesignDocument).versions.find(x=>x.id===design.document.currentId);
    setChosenId(active?.id||null);
-   setDraft(active?.design||defaultQRDesign);
-   setExportSize(active?.design.size||"social");
-   setDirty(false);
+   const kitId=new URLSearchParams(window.location.search).get("brand");
+   const kit=kitId?(await api("/api/link-hub/qr/brands")).items.find((x:{id:string})=>x.id===kitId):null;
+   setDraft(kit?.design||active?.design||defaultQRDesign);
+   setExportSize(kit?.design.size||active?.design.size||"social");
+   if(kit){setChosenId(null);setDirty(true);}
+   else setDirty(false);
  },[slug]);
  useEffect(()=>{
    let live=true;

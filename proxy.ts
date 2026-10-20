@@ -22,6 +22,8 @@ export function proxy(request: NextRequest) {
     "/manage/links/": "/links/manage/links/",
     "/manage/qr": "/links/manage/qr/",
     "/manage/qr/": "/links/manage/qr/",
+    "/manage/qr/operations": "/links/manage/qr/operations/",
+    "/manage/qr/operations/": "/links/manage/qr/operations/",
     "/manage/qr/designer": "/links/manage/qr/designer/",
     "/manage/qr/designer/": "/links/manage/qr/designer/",
     "/manage/security": "/links/manage/security/",

@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { hasHubSession, sameOrigin } from "@/lib/link-hub-auth";
 import { hubStorageEnabled } from "@/lib/link-hub-store";
 import { listManagedQR, listQRHistory, saveManagedQR } from "@/lib/qr-manager";
+import { writeQRActivity } from "@/lib/qr-audit";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -27,10 +28,28 @@ export async function POST(request: Request) {
   }
   try {
     const data = await request.json();
+    if (data.action === "bulk-create") {
+      if (!Array.isArray(data.items) || data.items.length > 20 || data.items.length < 1) {
+        return NextResponse.json({ error: "Import between 1 and 20 records per batch." }, { status: 400, headers });
+      }
+      const outcomes: Array<{ slug: string; created: boolean; error?: string }> = [];
+      for (const raw of data.items) {
+        const item = raw && typeof raw === "object" ? raw : {};
+        try {
+          const created = await saveManagedQR({ ...item, action: "create", enabled: true });
+          outcomes.push({ slug: created.slug, created: true });
+          await writeQRActivity("qr.bulk-created", created.slug).catch(() => {});
+        } catch (e) {
+          outcomes.push({ slug: String(item.slug || "").slice(0,48), created: false, error: e instanceof Error ? e.message : "Failed" });
+        }
+      }
+      return NextResponse.json({ results: outcomes }, { status: 207, headers });
+    }
     if (data.action !== "create" && data.action !== "update") {
       return NextResponse.json({ error: "Unsupported action" }, { status: 400, headers });
     }
     const item = await saveManagedQR(data);
+    await writeQRActivity(data.action === "create" ? "qr.created" : "qr.updated", item.slug).catch(() => {});
     return NextResponse.json({ item }, { headers, status: data.action === "create" ? 201 : 200 });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unable to save QR code";

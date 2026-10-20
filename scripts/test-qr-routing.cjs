@@ -1,0 +1,22 @@
+/* eslint-disable @typescript-eslint/no-require-imports */
+const fs=require("node:fs");
+const assert=require("node:assert/strict");
+const ts=require("typescript");
+const raw=fs.readFileSync("lib/qr-routing.ts","utf8");
+const js=ts.transpileModule(raw,{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022}}).outputText;
+const compiledExports={};
+new Function("exports",js)(compiledExports);
+const route=compiledExports.resolveQRRoute;
+const start=Date.parse("2026-12-01T12:00:00Z"),end=Date.parse("2026-12-01T14:00:00Z");
+const basic={enabled:true,target:"https://example.com",schedule:[{from:new Date(start).toISOString(),until:new Date(end).toISOString(),target:"https://example.com/special"}]};
+assert.deepEqual(route(basic,start-1),{kind:"redirect",target:"https://example.com"});
+assert.deepEqual(route(basic,start),{kind:"redirect",target:"https://example.com/special"});
+assert.deepEqual(route(basic,start+1),{kind:"redirect",target:"https://example.com/special"});
+assert.deepEqual(route(basic,end-1),{kind:"redirect",target:"https://example.com/special"});
+assert.deepEqual(route(basic,end),{kind:"redirect",target:"https://example.com"});
+assert.deepEqual(route({...basic,landing:{enabled:true}},start),{kind:"landing",target:"https://example.com/special"});
+assert.deepEqual(route({...basic,enabled:false},start),{kind:"paused"});
+assert.deepEqual(route({...basic,expiresAt:new Date(start).toISOString()},start-1),{kind:"redirect",target:"https://example.com"});
+assert.deepEqual(route({...basic,expiresAt:new Date(start).toISOString()},start),{kind:"expired"});
+assert.deepEqual(route({...basic,expiresAt:new Date(start).toISOString()},start+1),{kind:"expired"});
+console.log("QR route boundary tests passed");
