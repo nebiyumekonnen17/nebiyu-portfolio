@@ -968,3 +968,174 @@
 @media(max-width:800px){.hub-manager{display:block}.hub-manager-sidebar{display:none}.hub-manager-content{padding:23px 15px 50px}.hub-mobile-tabs{display:flex;gap:8px;overflow:auto;margin:-4px 0 22px;padding:0 0 8px;scrollbar-width:thin}.hub-mobile-tabs button{flex-shrink:0;background:#1a2634;color:#aebcd0;border:1px solid #304054;border-radius:11px;padding:11px 14px;font-size:12px;cursor:pointer}.hub-mobile-tabs button.selected{border-color:#84B6FF;color:#84B6FF}.hub-manager-toolbar{align-items:flex-start}.hub-toolbar-actions{width:100%}}
 @media(max-width:480px){.hub-admin-stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.hub-admin-stats>div{padding:15px;min-height:110px}.hub-admin-stats>div strong{font-size:24px}.hub-admin-card{padding:17px}.hub-form-grid{grid-template-columns:1fr}.hub-form-wide{grid-column:auto}.hub-edit-card{padding:13px}.hub-edit-controls{gap:0}.hub-edit-controls button{width:28px}.hub-toolbar-actions .hub-admin-secondary,.hub-toolbar-actions .hub-admin-primary{padding:10px 12px}.hub-preview-header span{display:none}.hub-login-card{padding:25px}}
 @media(prefers-reduced-motion:reduce){.link-hub-shell,.hub-link-card,.hub-project,.hub-icon-button{transition:none}.hub-spin{animation:none}}
+
+
+/* Standalone link-in-bio layout — independent of main portfolio navigation. */
+/* Hostname rewrites present "/" to the browser before hydration. Keep the
+   portfolio header/footer invisible even on the first server-rendered frame. */
+body:has(.link-hub-shell) > header,
+body:has(.link-hub-shell) > footer { display: none !important; }
+
+.link-hub-shell {
+  --hub-card-radius: 18px;
+  background-attachment: fixed;
+  padding-bottom: 8px;
+}
+.link-hub-shell .hub-page {
+  width: min(calc(100% - 40px), 610px);
+  margin-inline: auto;
+}
+.link-hub-shell .hub-v2-topbar {
+  padding: 23px 0 18px;
+  border-bottom: 0;
+}
+.link-hub-shell .hub-v2-brand { font-size: 11px; letter-spacing: .08em; gap: 10px; }
+.link-hub-shell .hub-v2-mark { width: 35px; height: 35px; font-size: 14px; border-radius: 10px; }
+.link-hub-shell .hub-v2-icon-button { width: 40px; height: 40px; border-radius: 50%; background: var(--hub-surface); }
+.link-hub-shell .hub-v2-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 33px;
+  margin: 9px 0 39px;
+}
+.link-hub-shell .hub-v2-profile-inner {
+  position: static;
+  align-items: center;
+  text-align: center;
+  padding: 4px 0 0;
+}
+.link-hub-shell .hub-v2-portrait {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 3px solid var(--hub-surface);
+  outline: 2px solid var(--hub-accent);
+  box-shadow: 0 15px 40px rgba(0,0,0,.16);
+}
+.link-hub-shell .hub-v2-availability {
+  margin: 22px 0 10px;
+  padding: 7px 12px;
+  border: 1px solid color-mix(in srgb, var(--hub-success) 35%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--hub-success) 8%, transparent);
+  font-size: 9px;
+  letter-spacing: .10em;
+}
+.link-hub-shell .hub-v2-profile h1 {
+  font-size: clamp(29px, 5.5vw, 36px);
+  font-weight: 760;
+  line-height: 1.14;
+  letter-spacing: -.048em;
+}
+.link-hub-shell .hub-v2-headline {
+  font-size: 14px;
+  line-height: 1.5;
+  margin-top: 9px;
+  font-weight: 610;
+}
+.link-hub-shell .hub-v2-bio {
+  max-width: 440px;
+  font-size: 13px;
+  line-height: 1.7;
+  margin-top: 9px;
+}
+.link-hub-shell .hub-v2-socials {
+  margin-top: 19px;
+  justify-content: center;
+  gap: 10px;
+}
+.link-hub-shell .hub-v2-socials a {
+  width: 43px;
+  height: 43px;
+  border-radius: 50%;
+  background: var(--hub-surface);
+}
+.link-hub-shell .hub-v2-socials a:hover,
+.link-hub-shell .hub-v2-icon-button:hover { background: var(--hub-surface-raised); }
+.link-hub-shell .hub-v2-profile-note { display: none; }
+.link-hub-shell .hub-v2-content { width: 100%; }
+.link-hub-shell .hub-v2-actions { gap: 12px; }
+.link-hub-shell .hub-v2-link {
+  min-height: 73px;
+  padding: 13px 17px;
+  border-radius: var(--hub-card-radius);
+  box-shadow: 0 4px 16px rgba(0,0,0,.045);
+}
+.link-hub-shell .hub-v2-link:hover { transform: translateY(-3px); box-shadow: 0 14px 28px rgba(0,0,0,.13); }
+.link-hub-shell .hub-v2-link-icon { width: 42px; height: 42px; flex-basis: 42px; border-radius: 12px; }
+.link-hub-shell .hub-v2-link-copy strong { font-size: 14px; }
+.link-hub-shell .hub-v2-link-copy small { font-size: 12px; }
+.link-hub-shell .hub-v2-link-primary .hub-v2-link-copy strong { color: var(--hub-accent-ink); }
+.link-hub-shell .hub-v2-work { margin-top: 36px; }
+.link-hub-shell .hub-v2-section-title { margin-bottom: 14px; }
+.link-hub-shell .hub-v2-section-title h2 {
+  margin: 7px 0 4px;
+  font-size: 21px;
+  line-height: 1.3;
+}
+.link-hub-shell .hub-v2-section-title p { font-size: 12px; }
+.link-hub-shell .hub-v2-projects { gap: 9px; }
+.link-hub-shell .hub-v2-project {
+  gap: 15px;
+  padding: 9px;
+  min-height: 86px;
+  border-radius: 15px;
+}
+.link-hub-shell .hub-v2-project-art {
+  width: 90px;
+  height: 68px;
+  flex-basis: 90px;
+  border-radius: 10px;
+}
+.link-hub-shell .hub-v2-project-info { gap: 4px; }
+.link-hub-shell .hub-v2-project-info strong { font-size: 13px; }
+.link-hub-shell .hub-v2-project-info > span { font-size: 11px; }
+.link-hub-shell .hub-v2-project-info small { font-size: 9px; }
+.link-hub-shell .hub-v2-view-all {
+  min-height: 48px;
+  margin-top: 2px;
+  padding-inline: 17px;
+  border-radius: 12px;
+}
+.link-hub-shell .hub-v2-extras { margin-top: 34px; }
+.link-hub-shell .hub-v2-extras > div { display: grid; gap: 9px; margin-top: 13px; }
+.link-hub-shell .hub-v2-extras a {
+  min-height: 55px;
+  padding: 13px 17px;
+  border: 1px solid var(--hub-line);
+  border-radius: 13px;
+  background: var(--hub-surface);
+  transition: border-color .2s ease, transform .2s ease;
+}
+.link-hub-shell .hub-v2-extras a:hover { border-color: var(--hub-accent); transform: translateY(-2px); }
+.link-hub-shell .hub-v2-footer {
+  padding: 20px 0 27px;
+  font-size: 10px;
+  letter-spacing: .03em;
+}
+.link-hub-shell .hub-v2-footer a { font-weight: 720; }
+.link-hub-shell .hub-v2-background {
+  width: min(780px, 100vw);
+  height: 670px;
+  left: 50%;
+  right: auto;
+  top: -195px;
+  transform: translateX(-50%);
+}
+@media (max-width: 650px) {
+  .link-hub-shell .hub-page { width: min(calc(100% - 32px), 480px); }
+  .link-hub-shell .hub-v2-topbar { padding-top: 17px; }
+  .link-hub-shell .hub-v2-grid { margin-top: 5px; gap: 28px; }
+  .link-hub-shell .hub-v2-portrait { width: 92px; height: 92px; }
+  .link-hub-shell .hub-v2-bio { max-width: 360px; font-size: 13px; }
+  .link-hub-shell .hub-v2-project-art { width: 82px; height: 66px; flex-basis: 82px; }
+  .link-hub-shell .hub-v2-project { gap: 12px; }
+  .link-hub-shell .hub-v2-footer { gap: 12px; }
+}
+@media (max-width: 360px) {
+  .link-hub-shell .hub-page { width: calc(100% - 24px); }
+  .link-hub-shell .hub-v2-brand { font-size: 10px; }
+  .link-hub-shell .hub-v2-project-art { width: 70px; height: 62px; flex-basis: 70px; }
+  .link-hub-shell .hub-v2-project-info small { font-size: 8px; }
+}
