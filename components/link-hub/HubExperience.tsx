@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
 import {
   ArrowRight, ArrowUpRight, Award, Camera, Check, Cloud,
@@ -28,6 +27,11 @@ const icons = {
 function HubIcon({ name, size = 20 }: { name: string; size?: number }) {
   const Chosen = icons[name as keyof typeof icons] || Link2;
   return <Chosen size={size} aria-hidden="true" />;
+}
+
+/** All relative destinations in the editor belong to the main portfolio, not the links subdomain. */
+function linkHref(url: string) {
+  return url.startsWith("/") && !url.startsWith("//") ? "https://nebiyumekonnen.com" + url : url;
 }
 
 function externalProps(url: string) {
@@ -136,10 +140,10 @@ export function HubExperience({
       <div className="hub-v2-background" aria-hidden="true" />
       <div className="hub-page">
         <header className="hub-v2-topbar">
-          <Link className="hub-v2-brand" href="/" aria-label="Nebiyu Mekonnen portfolio homepage" onClick={compact ? (e) => e.preventDefault() : undefined}>
+          <a className="hub-v2-brand" href="#link-hub-main" aria-label="Go to my links" onClick={compact ? (e) => e.preventDefault() : undefined}>
             <span className="hub-v2-mark">NM<span>.</span></span>
-            <span>NEBIYU <span className="hub-v2-brand-muted">/ LINKS</span></span>
-          </Link>
+            <span>NEBIYU <span className="hub-v2-brand-muted">/ MY LINKS</span></span>
+          </a>
           <div className="hub-v2-toolbar">
             <button
               className="hub-v2-icon-button"
@@ -176,11 +180,11 @@ export function HubExperience({
                 <nav className="hub-v2-socials" aria-label="Social profiles">
                   {visibleSocials.map((social) => (
                     <a
-                      href={social.url}
+                      href={linkHref(social.url)}
                       key={social.id}
                       title={social.label}
                       aria-label={social.label}
-                      {...externalProps(social.url)}
+                      {...externalProps(linkHref(social.url))}
                       onClick={compact ? (event) => event.preventDefault() : undefined}
                     >
                       <HubIcon name={social.icon} size={19} />
@@ -196,7 +200,7 @@ export function HubExperience({
             {primaryLinks.length > 0 && (
               <section className="hub-v2-actions" aria-label="Explore and connect">
                 {primaryLinks.map((link, index) => {
-                  const destination = link.id === "resume" ? content.profile.resume : link.url;
+                  const destination = linkHref(link.id === "resume" ? content.profile.resume : link.url);
                   return (
                     <a
                       className={"hub-v2-link" + (index === 0 ? " hub-v2-link-primary" : "")}
@@ -216,9 +220,9 @@ export function HubExperience({
 
             <section className="hub-v2-work" aria-labelledby="hub-v2-work-title">
               <div className="hub-v2-section-title">
-                <span className="hub-v2-eyebrow">01 / SELECTED WORK</span>
-                <h2 id="hub-v2-work-title">Things I&apos;ve built<span>.</span></h2>
-                <p>Selected projects, built around real problems.</p>
+                <span className="hub-v2-eyebrow">FEATURED WORK</span>
+                <h2 id="hub-v2-work-title">A few things I&apos;ve built<span>.</span></h2>
+                <p>Selected work. Real projects.</p>
               </div>
 
               <div className="hub-v2-projects">
@@ -226,35 +230,35 @@ export function HubExperience({
                   <a
                     className="hub-v2-project"
                     key={project.id}
-                    href={project.url}
-                    {...externalProps(project.url)}
+                    href={linkHref(project.url)}
+                    {...externalProps(linkHref(project.url))}
                     onClick={compact ? (event) => event.preventDefault() : undefined}
                   >
                     <ProjectArtwork key={project.image} src={project.image} name={project.name} type={project.id} />
                     <span className="hub-v2-project-info">
                       <strong>{project.name}</strong>
                       <span>{project.description}</span>
-                      <small>EXPLORE CASE STUDY</small>
+                      <small>VIEW PROJECT</small>
                     </span>
                     <ArrowUpRight className="hub-v2-project-arrow" size={18} aria-hidden="true" />
                   </a>
                 ))}
-                <Link className="hub-v2-view-all" href="/projects/" onClick={compact ? (event) => event.preventDefault() : undefined}>
+                <a className="hub-v2-view-all" href="https://nebiyumekonnen.com/projects/" target="_blank" rel="noopener noreferrer" onClick={compact ? (event) => event.preventDefault() : undefined}>
                   <span>View all projects</span>
                   <ArrowRight size={18} aria-hidden="true" />
-                </Link>
+                </a>
               </div>
             </section>
 
             {extraLinks.length > 0 && (
               <section className="hub-v2-extras" aria-label="More ways to connect">
-                <span className="hub-v2-eyebrow">02 / MORE WAYS TO CONNECT</span>
+                <span className="hub-v2-eyebrow">MORE LINKS</span>
                 <div>
                   {extraLinks.map((link) => (
                     <a
                       key={link.id}
-                      href={link.url}
-                      {...externalProps(link.url)}
+                      href={linkHref(link.url)}
+                      {...externalProps(linkHref(link.url))}
                       onClick={compact ? (event) => event.preventDefault() : undefined}
                     >
                       <span><HubIcon name={link.icon} size={19} />{link.label}</span>
@@ -269,7 +273,7 @@ export function HubExperience({
 
         <footer className="hub-v2-footer">
           <span>© {new Date().getFullYear()} {content.profile.name.toUpperCase()}</span>
-          <Link href="/" onClick={compact ? (event) => event.preventDefault() : undefined}>BACK TO PORTFOLIO <ArrowUpRight size={13} aria-hidden="true" /></Link>
+          <a href="https://nebiyumekonnen.com/" target="_blank" rel="noopener noreferrer" onClick={compact ? (event) => event.preventDefault() : undefined}>FULL WEBSITE <ArrowUpRight size={13} aria-hidden="true" /></a>
         </footer>
       </div>
     </div>
