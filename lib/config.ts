@@ -5,8 +5,8 @@
  */
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ??
-  "https://nebiyumekonnen17.github.io/nebiyu-portfolio";
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "/nebiyu-portfolio";
+  "https://nebiyumekonnen.com";
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 export const siteConfig = {
   siteUrl,
