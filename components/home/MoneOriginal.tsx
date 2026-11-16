@@ -208,7 +208,7 @@ function MoneCursor(){
     const cursor=cursorRef.current;
     if(!cursor)return;
     const mouseElements=document.querySelectorAll("a,button,input,textarea,.cursor-link");
-    const onMove=(event:MouseEvent)=>{cursor.style.left=event.pageX+"px";cursor.style.top=event.pageY+"px";};
+    const onMove=(event:MouseEvent)=>{cursor.style.left=event.clientX+"px";cursor.style.top=event.clientY+"px";};
     const onEnter=()=>cursor.classList.add("scale-[5]","opacity-15");
     const onLeave=()=>cursor.classList.remove("scale-[5]","opacity-15");
     document.addEventListener("mousemove",onMove);
@@ -218,7 +218,7 @@ function MoneCursor(){
       mouseElements.forEach(element=>{element.removeEventListener("mouseenter",onEnter);element.removeEventListener("mouseleave",onLeave);});
     };
   },[]);
-  return <div id="cursor" ref={cursorRef} className="hidden lg:inline-block z-[11] absolute -translate-x-1/2 -translate-y-1/2 bg-white w-[10px] h-[10px] rounded-full mix-blend-difference pointer-events-none transition-all ease-linear duration-[80ms]"/>;
+  return <div id="cursor" ref={cursorRef} className="hidden lg:inline-block z-[11] fixed -translate-x-1/2 -translate-y-1/2 bg-white w-[10px] h-[10px] rounded-full mix-blend-difference pointer-events-none transition-all ease-linear duration-[80ms]"/>;
 }
 
 export function MoneSiteFrame({children}:{children:React.ReactNode}){
