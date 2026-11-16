@@ -247,6 +247,25 @@ function MoneScrollToTop(){
   return <button type="button" aria-label="Scroll to top" onClick={()=>window.scrollTo({top:0,behavior:"smooth"})} className={`scrolltotop fixed right-5 bottom-5 xl:right-10 invisible opacity-0 translate-y-5 backdrop-blur transition-all ease-out duration-[120ms] cursor-pointer inline-block group w-[50px] h-[50px] rounded-full bg-white/15 text-white z-[51] overflow-hidden before:content-[''] before:absolute before:-z-[1] before:left-0 before:top-0 before:w-full before:h-full before:bg-themeGradient before:opacity-0 hover:before:opacity-20 before:transition-all before:ease-linear before:duration-100 ${visible?"show":""}`}><i className="bi bi-arrow-up absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"/></button>;
 }
 
+function MoneCursor(){
+  const cursorRef=useRef<HTMLDivElement|null>(null);
+  useEffect(()=>{
+    const cursor=cursorRef.current;
+    if(!cursor)return;
+    const mouseElements=document.querySelectorAll("a,button,input,textarea,.cursor-link");
+    const onMove=(event:MouseEvent)=>{cursor.style.left=event.pageX+"px";cursor.style.top=event.pageY+"px";};
+    const onEnter=()=>cursor.classList.add("scale-[5]","opacity-15");
+    const onLeave=()=>cursor.classList.remove("scale-[5]","opacity-15");
+    document.addEventListener("mousemove",onMove);
+    mouseElements.forEach(element=>{element.addEventListener("mouseenter",onEnter);element.addEventListener("mouseleave",onLeave);});
+    return ()=>{
+      document.removeEventListener("mousemove",onMove);
+      mouseElements.forEach(element=>{element.removeEventListener("mouseenter",onEnter);element.removeEventListener("mouseleave",onLeave);});
+    };
+  },[]);
+  return <div id="cursor" ref={cursorRef} className="hidden lg:inline-block z-[11] absolute -translate-x-1/2 -translate-y-1/2 bg-white w-[10px] h-[10px] rounded-full mix-blend-difference pointer-events-none transition-all ease-linear duration-[80ms]"/>;
+}
+
 export function MoneOriginal(){
   return <div className={`mone-original ${outfit.variable} ${openSans.variable} bg-black text-white font-opensans overflow-x-hidden`}>
     <MoneHeader/>
@@ -260,5 +279,6 @@ export function MoneOriginal(){
     <MoneContact/>
     <footer className="container text-center px-5 py-9 xl:py-10"><p className="text-white/70">&copy; {new Date().getFullYear()} Nebiyu Mekonnen. All rights reserved.</p></footer>
     <MoneScrollToTop/>
+    <MoneCursor/>
   </div>;
 }
