@@ -61,7 +61,7 @@ export function MobileNav({ open, onClose }: { open: boolean; onClose: () => voi
   // otherwise become the containing block for this fixed-position overlay
   // and trap it inside the header's own box instead of the viewport.
   return createPortal(
-    <div id="mobile-navigation" className="fixed inset-0 z-50 lg:hidden" role="dialog" aria-modal="true" aria-label="Site navigation">
+    <div id="mobile-navigation" className="fixed inset-0 z-50 min-[900px]:hidden" role="dialog" aria-modal="true" aria-label="Site navigation">
       <button
         aria-label="Close menu"
         className="absolute inset-0 bg-black/70 cursor-pointer"

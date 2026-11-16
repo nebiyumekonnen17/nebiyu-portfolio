@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function ProjectsPage() {
   return (
-    <main className="work-page">
+    <div className="work-page">
       <header className="work-page-header">
         <Container>
           <div className="work-page-header-inner">
@@ -32,6 +32,6 @@ export default function ProjectsPage() {
           <ProjectFilterGrid projects={projects} />
         </Container>
       </section>
-    </main>
+    </div>
   );
 }

@@ -1,0 +1,160 @@
+/* Mone's visual language for the original, full-length portfolio pages.
+   Content, project filters, case studies, diagrams, certificates and links are not replaced. */
+.mone-content {
+  --color-bg: #000;
+  --color-surface: #121416;
+  --color-surface-elevated: #181a1c;
+  --color-surface-elevated-hover: #25272a;
+  --color-border: rgba(255,255,255,.13);
+  --color-border-strong: rgba(255,255,255,.23);
+  --color-fg: #fff;
+  --color-fg-muted: rgba(255,255,255,.72);
+  --color-fg-subtle: rgba(255,255,255,.47);
+  --color-gold: #ff82f3;
+  --color-gold-hover: #ffbaf9;
+  --color-on-gold: #17101a;
+  --color-ring: #ff82f3;
+  --mone-gradient: linear-gradient(45deg,#ff82f3 0%,#7b13ff 50%,#400d64 100%);
+  background:#000;color:#fff;
+  font-family:var(--mone-opensans),"Open Sans",sans-serif;
+  font-size:15px; min-width:0;
+}
+.mone-content h1,.mone-content h2,.mone-content h3,.mone-content h4,.mone-content h5,
+.mone-content h6,.mone-content button,.mone-content .font-semibold,.mone-content .font-bold {
+  font-family:var(--mone-outfit),"Outfit",sans-serif;
+}
+.mone-content h1 {font-size:clamp(2.5rem,5.5vw,5.2rem);font-weight:500;letter-spacing:-.055em;line-height:1.08;text-wrap:balance;}
+.mone-content h2 {letter-spacing:-.035em;font-weight:500;}
+.mone-content .mone-heading-accent {
+  background:var(--mone-gradient);background-clip:text;-webkit-background-clip:text;
+  color:transparent;-webkit-text-fill-color:transparent;
+}
+.mone-content .bg-surface {background-color:var(--color-surface);}
+.mone-content .bg-surface-elevated {background-color:var(--color-surface-elevated);}
+.mone-content section.border-b {border-color:rgba(255,255,255,.10);}
+.mone-content .rounded-2xl.border.bg-surface-elevated,
+.mone-content .rounded-xl.border.bg-surface-elevated,
+.mone-content .rounded-2xl.border.bg-surface,
+.mone-content .rounded-xl.border.bg-surface {
+  position:relative;isolation:isolate;border-color:rgba(255,255,255,.14);
+  border-radius:14px;box-shadow:0 7px 25px rgba(0,0,0,.13);overflow:hidden;
+}
+.mone-content .rounded-2xl.border.bg-surface-elevated::after,
+.mone-content .rounded-xl.border.bg-surface-elevated::after,
+.mone-content .rounded-2xl.border.bg-surface::after,
+.mone-content .rounded-xl.border.bg-surface::after {
+  content:"";position:absolute;left:0;bottom:0;right:0;height:2px;
+  background:var(--mone-gradient);pointer-events:none;opacity:.85;
+}
+.mone-content a:hover {color:#ffbaf9;}
+.mone-content a.bg-gold:hover {color:#17101a;}
+.mone-content .bg-gold {background-color:#ff82f3;color:#17101a;}
+.mone-content .bg-gold:hover {background-color:#ffbaf9;}
+.mone-content .text-gold {color:#ff82f3;}
+.mone-content .text-aws {color:#ff9900;}
+.mone-content [id] {scroll-margin-top:92px;}
+.mone-content .rounded-3xl {border-radius:20px;}
+/* The original About/AWS/Skills/Credentials/Contact headings now match Mone's scale and typography. */
+.mone-content > div.py-14,
+.mone-content > div.py-20 {padding-block:clamp(68px,8vw,110px);}
+.mone-content > section:first-child.bg-surface {
+  background:linear-gradient(145deg,#181a1c,#0d0e10);
+  padding-block:clamp(68px,8vw,110px);
+}
+.mone-content > div > .mx-auto > .mb-10:first-child h1,
+.mone-content > div > .mx-auto > .mb-16:first-child h1,
+.mone-content > section:first-child h1 {
+  font-family:var(--mone-outfit),"Outfit",sans-serif;
+  font-weight:500;font-size:clamp(2.75rem,5.6vw,5.5rem);
+  letter-spacing:-.055em;line-height:1.045;max-width:980px;
+}
+.mone-content .text-lg.leading-relaxed {line-height:1.85;}
+/* Work: all original featured products, evidence, filters and search remain functional. */
+.mone-content .work-page {--work-accent:#ff82f3;background:#000;color:#fff;}
+.mone-content .work-page-header {
+  padding-block:clamp(67px,8vw,110px) clamp(42px,6vw,75px);
+  border-color:rgba(255,255,255,.13);
+}
+.mone-content .work-page-header h1 {
+  font-family:var(--mone-outfit),"Outfit",sans-serif;
+  font-size:clamp(3.1rem,7.3vw,7rem);font-weight:500;color:#fff;letter-spacing:-.06em;
+}
+.mone-content .work-page-header p {color:rgba(255,255,255,.72);line-height:1.8;}
+.mone-content .work-page-content {padding-top:clamp(55px,7vw,98px);}
+.mone-content .work-section-heading h2 {
+  color:#fff;font-family:var(--mone-outfit),"Outfit",sans-serif;
+  font-weight:500;letter-spacing:-.048em;
+}
+.mone-content .work-section-heading > p,.mone-content .featured-project-number {color:#ff82f3;}
+.mone-content .featured-project-list {border-top:none;display:block;}
+.mone-content .featured-project-row,.mone-content .featured-project-row.is-reversed {
+  position:relative;isolation:isolate;overflow:hidden;
+  border:1px solid rgba(255,255,255,.13);border-radius:20px;
+  background:#181a1c;margin-bottom:22px;padding:clamp(26px,4vw,72px);
+}
+.mone-content .featured-project-row::after {
+  content:"";position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--mone-gradient);
+}
+.mone-content .featured-project-frame {
+  background:#0f1114;border-color:rgba(255,255,255,.16);
+  border-radius:14px;box-shadow:none;
+}
+.mone-content .featured-project-copy h2 {
+  color:white;font-family:var(--mone-outfit),"Outfit",sans-serif;font-weight:500;
+}
+.mone-content .featured-project-tagline {color:#fff;}
+.mone-content .featured-project-summary,.mone-content .featured-project-proof li {color:var(--color-fg-muted);}
+.mone-content .featured-project-proof li::before {background:#ff82f3;box-shadow:0 0 0 4px #ff82f320;}
+.mone-content .featured-project-actions a:first-child {color:#ff82f3;}
+.mone-content .project-archive {border-color:rgba(255,255,255,.17);}
+.mone-content .work-filter-button {border-color:rgba(255,255,255,.24);color:#ddd;}
+.mone-content .work-filter-button.is-active {
+  border-color:#ff82f3aa;color:#fff;background:#7b13ff27;
+}
+.mone-content .work-filter-button:hover {border-color:#ff82f3;}
+.mone-content .work-project-search {border-color:rgba(255,255,255,.32);}
+.mone-content .project-archive-empty button {color:#ff82f3;border-color:#ff82f380;background:#ff82f315;}
+/* All case-study content restored. Sections follow Mone's dark panel + gradient edge language. */
+.mone-content .mone-project-hero {background:#181a1c;border-bottom:1px solid rgba(255,255,255,.13);}
+.mone-content .mone-project-hero > div {padding-block:clamp(53px,7vw,105px);}
+.mone-content .mone-project-hero h1 {font-size:clamp(2.9rem,5.5vw,5.7rem);font-weight:500;}
+.mone-content .mone-case-section {
+  position:relative;background:#181a1c;
+  margin:16px clamp(12px,2.5vw,38px) 0;
+  padding-block:clamp(37px,5vw,75px);
+  border:1px solid rgba(255,255,255,.13);
+  border-radius:17px;overflow:hidden;
+}
+.mone-content .mone-case-section:nth-of-type(even) {background:#111315;}
+.mone-content .mone-case-section::after {
+  content:"";position:absolute;left:0;bottom:0;right:0;height:2px;background:var(--mone-gradient);
+}
+.mone-content .mone-case-section h2 {
+  font-family:var(--mone-outfit),"Outfit",sans-serif;
+  font-size:clamp(1.35rem,2.6vw,2.2rem);font-weight:500;
+}
+.mone-content .mone-case-section p {line-height:1.8;}
+.mone-content .mone-case-section .bg-surface-elevated {background:#222428;}
+.mone-content .mone-case-section .bg-surface {background:#17191c;}
+/* Header follows the provided screenshot: original dark/navy strip and golden CTA. */
+.portfolio-site-header {box-shadow:0 1px 0 rgba(255,255,255,.035);}
+.portfolio-site-header a:focus-visible,.portfolio-site-header button:focus-visible {outline:2px solid #e3a83b;outline-offset:3px;}
+/* Shared footer retains all old links, with a charcoal Mone surface and gradient edge. */
+.portfolio-site-footer {background:#181a1c;border-top:1px solid rgba(255,255,255,.16);color:#fff;margin-top:0;position:relative;}
+.portfolio-site-footer::before {content:"";position:absolute;left:0;right:0;top:0;height:2px;background:linear-gradient(45deg,#ff82f3,#7b13ff,#400d64);}
+.portfolio-site-footer h3 {color:#fff;font-family:var(--mone-outfit),"Outfit",sans-serif;}
+.portfolio-site-footer a:not(.bg-gold):hover {color:#ff82f3;}
+.portfolio-site-footer .text-fg {color:#fff;}
+.portfolio-site-footer .text-fg-muted {color:#bfc1c6;}
+.portfolio-site-footer .text-fg-subtle {color:#909299;}
+@media(max-width:1000px){
+  .mone-content .featured-project-row,.mone-content .featured-project-row.is-reversed {padding:26px;}
+}
+@media(max-width:680px){
+  .mone-content .work-page-header {padding:50px 0 38px;}
+  .mone-content .featured-project-row,.mone-content .featured-project-row.is-reversed {padding:18px;border-radius:14px;}
+  .mone-content .mone-case-section {margin-inline:12px;border-radius:12px;padding-block:32px;}
+  .mone-content .mone-case-section > .mx-auto {padding-inline:18px;}
+  .mone-content h1 {font-size:clamp(2.35rem,9vw,3.8rem);}
+}
+@media(prefers-reduced-motion:reduce){.mone-content .reveal {animation:none;}}

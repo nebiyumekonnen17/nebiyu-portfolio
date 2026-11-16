@@ -9,7 +9,7 @@ export const projects: Project[] = [
     category: ["AWS", "SaaS", "Full Stack"],
     summary:
       "Production event platform with no-account guest uploads, private galleries, moderation, downloads, slideshow, guestbook, analytics, cover artwork, QR sharing, and host operations.",
-    thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH ?? "/nebiyu-portfolio"}/assets/projects/Visual-Tizita-events-poster.png`,
+    thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/assets/projects/Visual-Tizita-events-poster.png`,
     thumbnailAlt: "Visual Tizita event companion for weddings, graduations, baby showers, conferences, and celebrations",
     accent: "violet",
     technologies: [
@@ -123,7 +123,7 @@ export const projects: Project[] = [
     category: ["AI", "Engineering Platform"],
     summary:
       "An early-alpha TypeScript platform and CLI for creating, inspecting, and validating structured engineering workspaces, with a roadmap toward reusable knowledge and provider-independent AI runtimes.",
-    thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH ?? "/nebiyu-portfolio"}/assets/projects/NAEP-thumbnail.png`,
+    thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/assets/projects/NAEP-thumbnail.png`,
     thumbnailAlt: "Concept design for the future NAEP engineering platform dashboard",
     accent: "blue",
     technologies: ["TypeScript", "Node.js", "Commander.js", "npm workspaces"],
@@ -202,7 +202,7 @@ export const projects: Project[] = [
     category: ["AWS", "Enterprise SaaS", "Digital Signage"],
     summary:
       "Development-deployed digital signage platform with tenant-scoped operations, secure media delivery, playlist and campaign publishing, web and desktop players, proof of play, observability, and controlled device releases.",
-    thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH ?? "/nebiyu-portfolio"}/assets/projects/Nehas-Digital-Signage-thumbnail.png`,
+    thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/assets/projects/Nehas-Digital-Signage-thumbnail.png`,
     thumbnailAlt: "Nehas Digital Signage dashboard showing screen status, a world map, and alerts",
     accent: "teal",
     technologies: ["TypeScript", "React", "Vite", "AWS Amplify Gen 2", "Amazon Cognito", "AWS Lambda", "Amazon DynamoDB", "Amazon S3", "Amazon CloudFront", "Amazon API Gateway", "AWS AppConfig", "Amazon SQS", "Amazon CloudWatch", "Electron"],
@@ -313,7 +313,7 @@ export const projects: Project[] = [
     category: ["Business Software", "POS", "Inventory"],
     summary:
       "React and Express point-of-sale system with hardware and mobile barcode scanning, held carts, inventory history, customers, receipts, reporting, label printing, auditing, exports, and role-based operations.",
-    thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH ?? "/nebiyu-portfolio"}/assets/projects/FSSS-Limat-POS-thumbnail.png`,
+    thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/assets/projects/FSSS-Limat-POS-thumbnail.png`,
     thumbnailAlt: "FSSS Limat POS interface showing a new sale screen with cart and payment",
     accent: "green",
     technologies: ["React", "Vite", "Node.js", "Express", "MySQL", "Electron", "PWA", "ZXing", "JsBarcode"],
@@ -402,7 +402,7 @@ export const projects: Project[] = [
     category: ["Telegram", "Commerce", "SaaS"],
     summary:
       "Product and architecture concept for a Telegram-first B2B commerce platform spanning a Mini App storefront and merchant web dashboard.",
-    thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH ?? "/nebiyu-portfolio"}/assets/projects/AradaCart-thumbnail.png`,
+    thumbnail: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/assets/projects/AradaCart-thumbnail.png`,
     thumbnailAlt: "AradaCart Telegram Mini App showing a product catalog and categories",
     accent: "telegram",
     technologies: ["Telegram Mini App", "AWS architecture", "Commerce platform"],

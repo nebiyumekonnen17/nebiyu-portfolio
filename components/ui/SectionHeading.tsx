@@ -15,6 +15,10 @@ export function SectionHeading({
   className?: string;
   action?: React.ReactNode;
 }) {
+  const words = title.trim().split(/\s+/);
+  const emphasized = words.pop() || "";
+  const preceding = words.join(" ");
+
   return (
     <div
       className={cn(
@@ -31,7 +35,7 @@ export function SectionHeading({
           </p>
         )}
         <h2 className="text-[26px] leading-tight md:text-[32px] font-bold text-fg text-balance">
-          {title}
+          {preceding ? `${preceding} ` : ""}<span className="mone-heading-accent">{emphasized}</span>
         </h2>
         {description && (
           <p className="mt-3 text-base text-fg-muted max-w-2xl leading-relaxed">{description}</p>
