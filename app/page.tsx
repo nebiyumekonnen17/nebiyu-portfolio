@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { StoryHome } from "@/components/home/StoryHome";
+import { MoneHome } from "@/components/home/MoneHome";
 import { absoluteUrl } from "@/lib/config";
 
 export const metadata: Metadata = {
@@ -7,5 +7,5 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  return <StoryHome />;
+  return <MoneHome />;
 }
