@@ -1,4 +1,4 @@
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "/nebiyu-portfolio";
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 const heroImages: Record<string, string> = {
   degissnap: `${basePath}/assets/projects/Visual-Tizita-events-poster.png`,
