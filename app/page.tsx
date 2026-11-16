@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
-import { MoneHome } from "@/components/home/MoneHome";
+import { MoneOriginal } from "@/components/home/MoneOriginal";
 import { absoluteUrl } from "@/lib/config";
 
-export const metadata: Metadata = {
-  alternates: { canonical: absoluteUrl() },
-};
+export const metadata: Metadata = { alternates: { canonical: absoluteUrl() } };
 
 export default function Home() {
-  return <MoneHome />;
+  return <MoneOriginal />;
 }
