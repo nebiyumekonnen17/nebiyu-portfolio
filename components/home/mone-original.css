@@ -1,0 +1,35 @@
+/* Scoped copy of Mone's original utility extensions and global interactions.
+   Source: user-supplied Mone Tailwind Next.js template, app/globals.css and tailwind.config.ts.
+   DO NOT recolor the template; its gradient is #ff82f3 -> #7b13ff -> #400d64. */
+@utility bg-themeGradient {
+  background-image: linear-gradient(45deg, #ff82f3 0%, #7b13ff 50%, #400d64 100%);
+}
+@utility bg-darkBg {
+  background-color: #181a1c;
+}
+@utility font-outfit {
+  font-family: var(--mone-outfit), "Outfit", sans-serif;
+}
+@utility font-opensans {
+  font-family: var(--mone-opensans), "Open Sans", sans-serif;
+}
+@utility ease-custom {
+  transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.mone-original {background:#000;color:#fff;font-family:var(--mone-opensans),"Open Sans",sans-serif;min-height:100vh;position:relative;}
+.mone-original h1,.mone-original h2,.mone-original h3,.mone-original h4,.mone-original h5,.mone-original h6 {color:white;}
+.mone-original .stroke-text {
+ color:white;
+ -webkit-text-fill-color: transparent;
+ -webkit-text-stroke-width:1.4px;
+ -webkit-text-stroke-color:white;
+}
+.mone-original .nav-box.show {transform:translateY(0);visibility:visible;opacity:1;}
+.mone-original .scrolltotop.show {transform:translateY(0);visibility:visible;opacity:1;}
+.mone-original .swiper {width:100%;}
+.mone-original button {cursor:pointer;}
+.mone-original a:focus-visible,.mone-original button:focus-visible,.mone-original input:focus-visible,.mone-original textarea:focus-visible {outline:2px solid #ff82f3;outline-offset:3px;}
+.mone-original [id] {scroll-margin-top:85px;}
+@media(prefers-reduced-motion:reduce) {
+ .mone-original *, .mone-original *:before, .mone-original *:after {scroll-behavior:auto!important;transition-duration:.001ms!important;animation-duration:.001ms!important;}
+}
