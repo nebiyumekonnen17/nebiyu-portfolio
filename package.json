@@ -19,7 +19,9 @@
     "react-dom": "19.2.4",
     "tailwind-merge": "^3.6.0",
     "@vercel/blob": "^2.8.1",
-    "qrcode": "^1.5.4"
+    "qrcode": "^1.5.4",
+    "swiper": "^11.1.15",
+    "bootstrap-icons": "^1.11.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
