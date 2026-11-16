@@ -19,7 +19,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
     setIsLinksHostname(window.location.hostname.toLowerCase() === "links.nebiyumekonnen.com");
   }, []);
 
-  if (isLinksHostname || path === "/links" || path.startsWith("/links/")) {
+  if (isLinksHostname || path === "/" || path === "/links" || path.startsWith("/links/")) {
     return <main id="main-content" className="flex-1">{children}</main>;
   }
   return (
