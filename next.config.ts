@@ -1,8 +1,8 @@
 import type { NextConfig } from "next";
 
-// GitHub Pages hosts this site under /nebiyu-portfolio, while Vercel
-// serves it at the root of the custom domain.
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? (process.env.VERCEL ? "" : "/nebiyu-portfolio");
+// The custom domain is served at root on Vercel. GitHub Pages now redirects to it.
+// NEXT_PUBLIC_BASE_PATH remains available for intentional path-prefix deployments.
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 const nextConfig: NextConfig = {
   output: process.env.VERCEL ? undefined : "export",
