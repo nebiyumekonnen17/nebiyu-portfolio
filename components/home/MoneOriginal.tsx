@@ -3,7 +3,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Outfit, Open_Sans } from "next/font/google";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
 import { Pagination } from "swiper/modules";
@@ -16,9 +15,6 @@ import { credentials } from "@/data/credentials";
 import { assetUrl, siteConfig } from "@/lib/config";
 import "./mone-original.css";
 
-const outfit = Outfit({ subsets: ["latin"], variable: "--mone-outfit", display: "swap" });
-const openSans = Open_Sans({ subsets: ["latin"], variable: "--mone-opensans", display: "swap" });
-const colors = { text: "text-white" };
 const portfolioArt: Record<string, string> = {
   degissnap: "/assets/projects/Visual-Tizita-events-poster.png",
   naep: "/assets/projects/NAEP-hero.svg",
@@ -26,15 +22,6 @@ const portfolioArt: Record<string, string> = {
   "fsss-limat-pos": "/assets/projects/FSSS-Limat-POS-hero.svg",
   aradacart: "/assets/projects/AradaCart-hero.svg",
 };
-const navLinks = [
-  {url: "/#about", title: "About"},
-  {url: "/#services", title: "Services"},
-  {url: "/#portfolio", title: "Portfolio"},
-  {url: "/#awards", title: "Credentials"},
-  {url: "/#blog", title: "Case Studies"},
-  {url: "/#contact", title: "Contact"},
-  {url: "/projects", title: "All Work"},
-];
 const skills = ["Full-stack Development", "React & TypeScript", "Cloud Architecture", "AWS", "Product Design"];
 const specialties = [
   {number:"01",bootstrapIcon:"bi bi-brush",title:"Design",description:"Product discovery, user flows, accessible interfaces, and end-to-end product design."},
@@ -42,38 +29,6 @@ const specialties = [
   {number:"03",bootstrapIcon:"bi bi-laptop",title:"Cloud Engineering",description:"AWS deployments, authorization, reliability, and practical cloud operations."},
 ];
 const platforms = ["React", "TypeScript", "Next.js", "AWS", "Node.js", "PostgreSQL"];
-
-function MoneHeader() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement|null>(null);
-  useEffect(()=>{
-    const onOutside=(event:MouseEvent)=>{
-      if (menuRef.current && !menuRef.current.contains(event.target as Node) && !(event.target as HTMLElement).closest("[data-mone-menu]")) setIsMenuOpen(false);
-    };
-    const onEscape=(event:KeyboardEvent)=>{ if(event.key==="Escape") setIsMenuOpen(false); };
-    document.addEventListener("mousedown",onOutside);
-    document.addEventListener("keydown",onEscape);
-    return ()=>{document.removeEventListener("mousedown",onOutside);document.removeEventListener("keydown",onEscape);};
-  },[]);
-  return (
-    <div className="z-50 fixed top-0 left-0 w-full py-5 mone-original-header">
-      <div className="container mx-auto max-w-[1600px] px-5 md:px-10">
-        <div className="flex justify-between relative">
-          <div className="text-3xl font-outfit font-medium text-white"><Link href="/">Nebiyu.</Link></div>
-          <div><ul className="flex space-x-2">
-            <li className="list-none inline-block"><Link className="inline-block relative z-[1] overflow-hidden group px-5 py-2.5 pr-[34px] backdrop-blur bg-white/15 text-white font-outfit rounded-3xl uppercase text-sm font-medium tracking-wider before:content-[''] before:absolute before:-z-[1] before:left-0 before:top-0 before:w-full before:h-full before:bg-themeGradient before:opacity-0 hover:before:opacity-20 before:transition-all before:ease-linear before:duration-100 after:content-[''] after:absolute after:top-1/2 after:right-[20px] after:-translate-y-1/2 after:bg-white after:w-[5px] after:h-[5px] after:rounded-full after:transition-all after:duration-[60ms] hover:after:opacity-40 hover:after:scale-[2.7]" href="/#contact"><span className="block relative text-transparent before:content-[attr(data-text)] before:absolute before:top-0 before:left-0 before:opacity-100 before:text-white before:transition-all before:ease-out before:duration-200 group-hover:before:-top-full group-hover:before:opacity-0 after:content-[attr(data-text)] after:absolute after:top-full after:left-0 after:opacity-0 after:text-white after:transition-all after:ease-out after:duration-200 group-hover:after:top-0 group-hover:after:opacity-100" data-text="Let's Talk">Let&apos;s Talk</span></Link></li>
-            <li className="list-none inline-block"><button data-mone-menu type="button" aria-label="Open navigation menu" aria-expanded={isMenuOpen} onClick={()=>setIsMenuOpen(v=>!v)} className="inline-block relative z-[1] overflow-hidden cursor-pointer group px-5 py-2.5 pr-[34px] bg-white text-black font-outfit rounded-3xl uppercase text-sm font-medium tracking-wider after:content-[''] after:absolute after:top-1/2 after:right-[20px] after:-translate-y-1/2 after:bg-black after:w-[5px] after:h-[5px] after:rounded-full after:transition-all after:duration-[60ms] hover:after:opacity-40 hover:after:scale-[2.7]"><span className="block relative text-transparent before:content-[attr(data-text)] before:absolute before:top-0 before:left-0 before:opacity-100 before:text-black before:transition-all before:ease-out before:duration-200 group-hover:before:-top-full group-hover:before:opacity-0 after:content-[attr(data-text)] after:absolute after:top-full after:left-0 after:opacity-0 after:text-black after:transition-all after:ease-out after:duration-200 group-hover:after:top-0 group-hover:after:opacity-100" data-text="Menu">Menu</span></button></li>
-          </ul></div>
-          <nav ref={menuRef} aria-label="Mone navigation" className={`nav-box absolute overflow-hidden invisible opacity-0 translate-y-[5px] top-[60px] right-0 bg-white/10 px-7 py-6 min-w-[250px] rounded-lg font-outfit text-xl backdrop-blur transition-all ease-linear duration-100 before:content-[''] before:absolute before:-z-[1] before:left-0 before:top-0 before:w-full before:h-full before:bg-themeGradient before:opacity-30 ${isMenuOpen?"show":""}`}>
-            <ul className="space-y-[10px]">
-              {navLinks.map(item=><li key={item.url} className="list-none"><Link href={item.url} onClick={()=>setIsMenuOpen(false)} className="text-white block relative hover:pl-[26px] transition-all ease-out duration-300 group"><i className="bi bi-arrow-right absolute top-1/2 left-0 -translate-y-1/2 opacity-0 invisible transition-all ease-linear duration-100 group-hover:opacity-100 group-hover:visible" />{item.title}</Link></li>)}
-            </ul>
-          </nav>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 function MoneHero(){
   return <div id="about" className="py-24 md:py-28 xl:py-32 text-center"><h1 className="text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-outfit font-bold stroke-text">Nebiyu Mekonnen</h1></div>;
@@ -267,10 +222,8 @@ function MoneCursor(){
 }
 
 export function MoneSiteFrame({children}:{children:React.ReactNode}){
-  return <div className={`mone-original ${outfit.variable} ${openSans.variable} bg-black text-white font-opensans overflow-x-hidden`}>
-    <MoneHeader/>
+  return <div className="mone-original bg-black text-white font-opensans overflow-x-hidden">
     {children}
-    <footer className="container text-center px-5 py-9 xl:py-10"><p className="text-white/70">&copy; {new Date().getFullYear()} Nebiyu Mekonnen. All rights reserved.</p></footer>
     <MoneScrollToTop/>
     <MoneCursor/>
   </div>;

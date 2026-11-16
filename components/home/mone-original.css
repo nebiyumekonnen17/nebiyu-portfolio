@@ -16,7 +16,7 @@
 @utility ease-custom {
   transition-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
 }
-.mone-original {background:#000;color:#fff;font-family:var(--mone-opensans),"Open Sans",sans-serif;min-height:100vh;position:relative;}
+.mone-original {background:#000;color:#fff;font-family:var(--mone-opensans),"Open Sans",sans-serif;min-height:0;position:relative;}
 .mone-original h1,.mone-original h2,.mone-original h3,.mone-original h4,.mone-original h5,.mone-original h6 {color:white;}
 .mone-original .stroke-text {
  color:white;

@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Outfit, Open_Sans } from "next/font/google";
 import "./globals.css";
+import "./mone-interiors.css";
 import { SiteChrome } from "@/components/layout/SiteChrome";
 import { MotionProvider } from "@/components/MotionProvider";
 import { profile } from "@/data/profile";
 import { absoluteUrl, siteConfig } from "@/lib/config";
+
+const outfit = Outfit({ variable: "--mone-outfit", subsets: ["latin"], display: "swap" });
+const openSans = Open_Sans({ variable: "--mone-opensans", subsets: ["latin"], display: "swap" });
 
 const inter = Inter({
   variable: "--font-inter",
@@ -89,7 +93,7 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className={`${inter.variable} h-full antialiased`}>
+    <html lang="en" className={`${inter.variable} ${outfit.variable} ${openSans.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col" id="top">
         <script
           type="application/ld+json"

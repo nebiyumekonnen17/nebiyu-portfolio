@@ -1,35 +1,23 @@
 "use client";
-
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 
-/**
- * The links subdomain is rewritten from "/" to "/links/" by proxy.ts.
- * usePathname() still reads "/" in the visitor's browser, so checking
- * pathname alone incorrectly renders the portfolio header and footer.
- * Keep the portfolio chrome on the main domain, never on the link hub.
- */
+/** Keep the separate links subdomain untouched while sharing the original portfolio navigation. */
 export function SiteChrome({ children }: { children: React.ReactNode }) {
   const path = usePathname() || "";
   const [isLinksHostname, setIsLinksHostname] = useState(false);
-
-  useEffect(() => {
-    setIsLinksHostname(window.location.hostname.toLowerCase() === "links.nebiyumekonnen.com");
-  }, []);
-
+  useEffect(() => { setIsLinksHostname(window.location.hostname.toLowerCase() === "links.nebiyumekonnen.com"); }, []);
   if (isLinksHostname || path === "/links" || path.startsWith("/links/")) {
     return <main id="main-content" className="flex-1">{children}</main>;
-  }
-  if (path === "/" || path === "/projects" || path.startsWith("/projects/")) {
-    // Mone's original page brings its own header, footer and black page shell.
-    return <>{children}</>;
   }
   return (
     <>
       <Header />
-      <main id="main-content" className="flex-1">{children}</main>
+      <main id="main-content" className={path === "/" ? "flex-1 mone-home-main" : "flex-1 mone-content"}>
+        {children}
+      </main>
       <Footer />
     </>
   );
