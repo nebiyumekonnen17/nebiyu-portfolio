@@ -19,8 +19,12 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
     setIsLinksHostname(window.location.hostname.toLowerCase() === "links.nebiyumekonnen.com");
   }, []);
 
-  if (isLinksHostname || path === "/" || path === "/links" || path.startsWith("/links/")) {
+  if (isLinksHostname || path === "/links" || path.startsWith("/links/")) {
     return <main id="main-content" className="flex-1">{children}</main>;
+  }
+  if (path === "/") {
+    // Mone's original page brings its own header, footer and black page shell.
+    return <>{children}</>;
   }
   return (
     <>
