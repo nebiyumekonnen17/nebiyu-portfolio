@@ -129,7 +129,7 @@ function MonePlatforms(){
   </div>;
 }
 
-function MonePortfolio(){
+export function MonePortfolio(){
   const sliderRef=useRef<SwiperType|null>(null);
   return <div id="portfolio" className="px-5 lg:px-10">
     <div className="bg-darkBg rounded-2xl overflow-hidden py-20">
@@ -266,9 +266,18 @@ function MoneCursor(){
   return <div id="cursor" ref={cursorRef} className="hidden lg:inline-block z-[11] absolute -translate-x-1/2 -translate-y-1/2 bg-white w-[10px] h-[10px] rounded-full mix-blend-difference pointer-events-none transition-all ease-linear duration-[80ms]"/>;
 }
 
-export function MoneOriginal(){
+export function MoneSiteFrame({children}:{children:React.ReactNode}){
   return <div className={`mone-original ${outfit.variable} ${openSans.variable} bg-black text-white font-opensans overflow-x-hidden`}>
     <MoneHeader/>
+    {children}
+    <footer className="container text-center px-5 py-9 xl:py-10"><p className="text-white/70">&copy; {new Date().getFullYear()} Nebiyu Mekonnen. All rights reserved.</p></footer>
+    <MoneScrollToTop/>
+    <MoneCursor/>
+  </div>;
+}
+
+export function MoneOriginal(){
+  return <MoneSiteFrame>
     <div className="container mx-auto max-w-[1320px] px-5 md:px-10 xl:px-5">
       <MoneHero/><MoneAbout/><MoneServices/><MonePlatforms/>
     </div>
@@ -277,8 +286,5 @@ export function MoneOriginal(){
     <MoneTestimonial/>
     <MoneJournal/>
     <MoneContact/>
-    <footer className="container text-center px-5 py-9 xl:py-10"><p className="text-white/70">&copy; {new Date().getFullYear()} Nebiyu Mekonnen. All rights reserved.</p></footer>
-    <MoneScrollToTop/>
-    <MoneCursor/>
-  </div>;
+  </MoneSiteFrame>;
 }
