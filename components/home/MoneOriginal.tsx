@@ -6,7 +6,9 @@ import Link from "next/link";
 import { Outfit, Open_Sans } from "next/font/google";
 import { Swiper, SwiperSlide } from "swiper/react";
 import type { Swiper as SwiperType } from "swiper";
+import { Pagination } from "swiper/modules";
 import "swiper/css";
+import "swiper/css/pagination";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import { profile } from "@/data/profile";
 import { projects } from "@/data/projects";
@@ -171,6 +173,23 @@ function MoneAwards(){
   </div>;
 }
 
+function MoneTestimonial(){
+  return <div id="testimonial" className="container max-w-[1320px] mx-auto px-5 md:px-10 xl:px-5 py-24 xl:py-28">
+    <Swiper slidesPerView={1} spaceBetween={40} pagination={{el:".swiper-testimonial-pagination",type:"progressbar"}} modules={[Pagination]} className="testimonial-slider relative pb-5 lg:pb-0">
+      <SwiperSlide><div className="lg:flex lg:items-center lg:space-x-12 text-center lg:text-left relative">
+        <div className="inline-block mb-3 lg:mb-0 w-[200px] min-w-[200px] md:w-[240px] md:min-w-[240px] lg:w-[260px] lg:min-w-[260px] xl:w-[280px] xl:min-w-[280px]">
+          <Image src={assetUrl("/assets/profile/nebiyu_primary_portrait.png")} alt="Nebiyu Mekonnen" width={280} height={280} className="w-[200px] h-[200px] md:w-[240px] md:h-[240px] lg:w-[260px] lg:h-[260px] xl:w-[280px] xl:h-[280px] object-cover rounded-full"/>
+        </div>
+        <div><div className="mb-3"><h3 className="font-outfit font-medium text-2xl xl:text-3xl text-white mb-2">{profile.name}</h3><span className="block font-outfit font-medium uppercase text-sm tracking-wider text-white">Engineering philosophy</span></div>
+          <p className="text-xl xl:text-2xl italic text-white/70 leading-normal">{profile.intro}</p>
+        </div>
+        <div className="absolute top-0 right-0 opacity-20 text-white text-7xl xl:text-8xl"><i className="bi bi-quote"/></div>
+      </div></SwiperSlide>
+      <div className="swiper-testimonial-pagination"></div>
+    </Swiper>
+  </div>;
+}
+
 function MoneJournal(){
   const sliderRef=useRef<SwiperType|null>(null);
   return <div id="blog" className="px-5 lg:px-10 mt-24 xl:mt-28">
@@ -236,6 +255,7 @@ export function MoneOriginal(){
     </div>
     <MonePortfolio/>
     <MoneAwards/>
+    <MoneTestimonial/>
     <MoneJournal/>
     <MoneContact/>
     <footer className="container text-center px-5 py-9 xl:py-10"><p className="text-white/70">&copy; {new Date().getFullYear()} Nebiyu Mekonnen. All rights reserved.</p></footer>
