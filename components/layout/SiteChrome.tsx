@@ -22,7 +22,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
   if (isLinksHostname || path === "/links" || path.startsWith("/links/")) {
     return <main id="main-content" className="flex-1">{children}</main>;
   }
-  if (path === "/") {
+  if (path === "/" || path === "/projects" || path.startsWith("/projects/")) {
     // Mone's original page brings its own header, footer and black page shell.
     return <>{children}</>;
   }
