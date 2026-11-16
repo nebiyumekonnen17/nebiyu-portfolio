@@ -17,7 +17,7 @@ export function ProjectHero({ project }: { project: Project }) {
   const preserveArtwork = preserveFullProjectArtwork(project.slug);
 
   return (
-    <section className="border-b border-border bg-surface">
+    <section className="mone-project-hero border-b border-border bg-surface">
       <Container className="py-10 md:py-14">
         <Link
           href="/projects"
